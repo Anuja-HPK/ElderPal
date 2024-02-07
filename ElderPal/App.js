@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, SafeAreaView, Platform, Button } from 'react-native';
-import LogInScreen from './app/screens/LogInScreeen';
+
+import LogInScreen from "./app/screens/LogInScreeen";
+import ChooseRoleScreen from "./app/screens/ChooseRoleScreen";
 
 export default function App() {
   return (
-   <LogInScreen/>
+    <>
+      <ChooseRoleScreen />
+    </>
   );
 }
-
-
