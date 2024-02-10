@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#29CF9D',
     borderRadius: 45, // curving edges
-    paddingVertical: 22, // height increase
+    paddingVertical: 20, // height increase
     paddingHorizontal: 70, // length increase
     marginBottom: 15, // gap between buttons
   },

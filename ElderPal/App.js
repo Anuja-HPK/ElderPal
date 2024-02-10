@@ -5,7 +5,7 @@ import ChooseRoleScreen from "./app/screens/ChooseRoleScreen";
 export default function App() {
   return (
     <>
-      <ChooseRoleScreen />
+      <LogInScreen />
     </>
   );
 }
