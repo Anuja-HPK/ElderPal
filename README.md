@@ -34,21 +34,20 @@
   <li><strong>Speech Emotion Recognition:</strong> Uses Convolutional Neural Networks (CNNs) and Recurrent Neural Networks (RNNs) to analyze vocal patterns and infer emotional states from the elder's speech.</li>
 </ul>
 
-<h2>Dataset Information 📊</h2>
+<h2>Overview of Dataset Information 📊</h2>
 <h3>Overview</h3>
-<p>To power the speech emotion recognition feature within ElderPal, we leverage a comprehensive dataset designed to capture a wide range of human emotions through speech. This dataset plays a critical role in training our machine learning models, ensuring accurate and nuanced emotion detection.</p>
+<p>In order to enable ElderPal's voice emotion identification function, we utilise an extensive dataset that is intended to capture a broad spectrum of human emotions through speech. Our machine learning algorithms rely heavily on this dataset for accurate and sophisticated emotion detection during training.</p>
 
 <h3>Composition</h3>
-<p>The dataset consists of recordings from two female actors, aged 26 and 64 years, who spoke a set of 200 target words in the carrier phrase "Say the word _." Each actor portrayed seven different emotions: anger, disgust, fear, happiness, pleasant surprise, sadness, and neutral. In total, the dataset comprises 2800 audio files, offering a robust foundation for analyzing and understanding emotional speech.</p>
+<p>Two female actors, ages 26 and 64, recorded their speech using a set of 200 target words in the carrier phrase "Say the word _." Seven distinct emotions were depicted by each actor: neutral, pleasant surprise, anger, contempt, fear, and pleasure. The collection, which includes 2800 audio recordings in total, provides a solid basis for analysing and comprehending emotional speech.</p>
 
 <h3>Structure</h3>
 <ul>
-  <li>Actors: Two female actors.</li>
   <li>Emotions: Anger, Disgust, Fear, Happiness, Pleasant Surprise, Sadness, Neutral.</li>
   <li>Data Points: 2800 audio files.</li>
   <li>Format: WAV format for high-quality audio analysis.</li>
 </ul>
-<p>The dataset is meticulously organized to facilitate ease of access and processing. Each actor's recordings are stored in dedicated folders, categorized by emotion. Within these emotion-specific folders, you can find the 200 target words audio files for each emotion portrayed.</p>
+<p>The dataset has been carefully arranged to make accessing and processing it easier. All of the actor's recordings are kept in specific files labelled with their respective emotions. You may locate the audio recordings containing the 200 target words for each displayed emotion in these folders dedicated to distinct emotions.</p>
 
 <h2>Neural Network Architecture</h2>
-<p>Our speech emotion recognition system is built on a Long Short-Term Memory (LSTM) Network. The LSTM architecture is chosen for its proficiency in handling sequential data and its ability to remember information for long periods, making it ideal for speech analysis.</p>
+<p>A Long Short-Term Memory (LSTM) Network serves as the foundation for our speech emotion identification system. The LSTM architecture is selected because it is effective at processing sequential input and has a long retention time, which makes it perfect for speech analysis.</p>
