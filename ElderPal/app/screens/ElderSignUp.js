@@ -7,7 +7,6 @@ const SignUpScreen = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [elderId, setElderId] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleSignUp = () => {
@@ -109,17 +108,6 @@ const SignUpScreen = () => {
         </View>
       </View>
 
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Elder ID</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={elderId}
-            onChangeText={setElderId}
-          />
-        </View>
-      </View>
-
       <TouchableOpacity style={styles.button} onPress={handleSignUp}>
       <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
@@ -144,17 +132,19 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     padding: 20,
+    justifyContent: 'center',
+    flexGrow: 1,
   },
 
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 10,
+    padding: 20,
     backgroundColor: 'rgba(0,0,0,0.6)',
   },
 
   title: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: 'bold',
     marginBottom: 20,
     color:  '#fff',
