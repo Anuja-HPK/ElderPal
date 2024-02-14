@@ -8,7 +8,7 @@ import CommonDBDoctor from "./app/screens/CommonDBDoctor";
 export default function App() {
   return (
     <>
-      <CommonDBDoctor />
+      <ChooseRoleScreen />
     </>
   );
 }
