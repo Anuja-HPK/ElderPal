@@ -9,7 +9,6 @@ import {
   Image,
 } from "react-native";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-
 const SignInScreen = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -19,6 +18,7 @@ const SignInScreen = () => {
 
   return (
     <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+
       <View style={styles.overlay}>
         <Image source={require("../assets/Logo.png")} style={styles.logo} />
         <Text style={styles.title}>Sign In</Text>
@@ -59,10 +59,44 @@ const SignInScreen = () => {
               name={passwordVisible ? "eye-off" : "eye"}
               size={24}
               color="#00b33c"
-            />
-          </TouchableOpacity>
-        </View>
 
+            />
+          </View>
+  
+          <Text style={styles.label}>Password</Text>
+          <View style={styles.inputContainer}>
+            <TextInput
+              style={[styles.input, styles.passwordInput]}
+              placeholder="Enter Your Password"
+              value={password}
+              onChangeText={setPassword}
+              secureTextEntry={!passwordVisible}
+              placeholderTextColor="#fff"
+            />
+  
+            <TouchableOpacity
+              style={styles.eyeIcon}
+              onPress={() => setPasswordVisible(!passwordVisible)}
+            >
+              <MaterialCommunityIcons
+                name={passwordVisible ? 'eye-off' : 'eye'}
+                size={24}
+                color="#00b33c"
+              />
+            </TouchableOpacity>
+          </View>
+  
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>Sign In</Text>
+          </TouchableOpacity>
+  
+          <View style={styles.signupContainer}>
+            <Text style={styles.signupText}>Don't have an account?</Text>
+            <TouchableOpacity onPress={() => {/* Navigate to Sign Up */}}>
+              <Text style={styles.signupButton}> Sign Up Here</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
@@ -78,6 +112,7 @@ const SignInScreen = () => {
           </TouchableOpacity>
         </View>
       </View>
+
     </ImageBackground>
   );
 };
@@ -127,7 +162,9 @@ const styles = StyleSheet.create({
     margin: 12,
     borderWidth: 2,
     borderRadius: 20,
-    borderColor: "#000000",
+
+    borderColor: '#ffffff',
+
   },
 
   icon: {
@@ -155,9 +192,11 @@ const styles = StyleSheet.create({
   },
 
   button: {
+
     width: "60%",
     alignItems: "center",
     backgroundColor: "#00b33c",
+
     padding: 15,
     borderRadius: 30,
     marginTop: 20,
@@ -183,9 +222,11 @@ const styles = StyleSheet.create({
   },
 
   signupButton: {
+
     fontSize: 18,
     color: "#4dff88",
     fontWeight: "bold",
+
   },
 });
 

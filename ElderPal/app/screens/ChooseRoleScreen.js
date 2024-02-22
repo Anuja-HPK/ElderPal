@@ -1,20 +1,19 @@
-import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView, ImageBackground } from "react-native";
 import React from "react";
 
 export default function ChooseRoleScreen() {
   return (
-    <ScrollView
-      contentContainerStyle={{ flexGrow: 1 }}
-      style={{ backgroundColor: "#199BC3" }}
-    >
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+
+    <ImageBackground source={require("../assets/roleimage.jpg")} style={{width:"100%", height: "100%" }}>
+      <ScrollView>
+      <View style={{alignItems: "center", justifyContent: "center" }}>
         <Image
           source={require("../assets/Logo.png")}
-          style={{ width: 170, height: 165 }}
+          style={{ width: 170, height: 165, marginVertical:30 }}
         />
       </View>
-      <View style={{ alignItems: "center", marginBottom: 20 }}>
-        <Text style={{ fontSize: 32, fontWeight: "600", color: "#ffffff" }}>
+      <View style={{marginBottom: 20, marginLeft:20 }}>
+        <Text style={{ fontSize: 32, fontWeight: "600", color: "black" }}>
           I am,
         </Text>
       </View>
@@ -43,6 +42,7 @@ export default function ChooseRoleScreen() {
         </TouchableOpacity>
       </View>
     </ScrollView>
+    </ImageBackground>
   );
 }
 

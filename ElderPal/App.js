@@ -3,11 +3,13 @@ import ChooseRoleScreen from "./app/screens/ChooseRoleScreen";
 import SignInScreen from  "./app/screens/SignInScreen";
 import ElderSignUp from  "./app/screens/ElderSignUp";
 import TodoList from "./app/screens/TodoList";
+import CommonDBDoctor from "./app/screens/CommonDBDoctor";
+
 
 export default function App() {
   return (
     <>
-      <TodoList />
+      <ChooseRoleScreen />
     </>
   );
 }
