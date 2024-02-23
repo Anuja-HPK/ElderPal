@@ -62,6 +62,7 @@ const SignInScreen = () => {
 
             />
           </View>
+          <TouchableOpacity/>
   
           <Text style={styles.label}>Password</Text>
           <View style={styles.inputContainer}>
