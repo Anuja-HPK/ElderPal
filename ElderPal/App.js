@@ -4,12 +4,13 @@ import SignInScreen from  "./app/screens/SignInScreen";
 import ElderSignUp from  "./app/screens/ElderSignUp";
 import TodoList from "./app/screens/TodoList";
 import CommonDBDoctor from "./app/screens/CommonDBDoctor";
+import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 
 export default function App() {
   return (
     <>
-      <ChooseRoleScreen />
+      <WelcomeScreen />
     </>
   );
 }
