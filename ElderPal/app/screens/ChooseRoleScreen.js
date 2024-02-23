@@ -3,6 +3,7 @@ import React from "react";
 
 export default function ChooseRoleScreen() {
   return (
+
     <ImageBackground source={require("../assets/roleimage.jpg")} style={{width:"100%", height: "100%" }}>
       <ScrollView>
       <View style={{alignItems: "center", justifyContent: "center" }}>
@@ -42,7 +43,6 @@ export default function ChooseRoleScreen() {
       </View>
     </ScrollView>
     </ImageBackground>
-    
   );
 }
 
@@ -54,7 +54,7 @@ const roleStyles = {
   button: {
     alignItems: "center",
     borderRadius: 40,
-    padding: 15,
+    padding: 20,
     backgroundColor: "#fff",
   },
   text: {
