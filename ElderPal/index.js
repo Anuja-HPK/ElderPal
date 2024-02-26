@@ -6,13 +6,15 @@ import ElderSignUp from  "./app/screens/ElderSignUp";
 import TodoList from "./app/screens/TodoList";
 import CommonDBDoctor from "./app/screens/CommonDBDoctor";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+import CommonDBCaretaker from './app/screens/CommonDBCaretaker';
+import CommonDBFamilyMem from './app/screens/CommonDBFamilyMem';
 
 
 AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <>
-      <CommonDBDoctor />
+      <CommonDBCaretaker />
     </>
   );
 }
