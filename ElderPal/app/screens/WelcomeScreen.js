@@ -1,96 +1,86 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Animated, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, Animated } from 'react-native';
 
 const WelcomeScreen = ({ navigation }) => {
-  const [fadeAnim] = useState(new Animated.Value(0)); // Initial value for opacity: 0
+  const [fadeAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
     Animated.timing(
       fadeAnim,
       {
-        toValue: 1, // Fade in to full opacity
-        duration: 4000, // Duration of the animation
-        useNativeDriver: true, // Use native driver for better performance
+        toValue: 1,
+        duration: 3000,
+        useNativeDriver: true,
       }
     ).start();
 
     const timer = setTimeout(() => {
-      /*navigation.navigate('SignInScreen'); */// Make sure this matches the name you've given the SignInScreen in your navigation stack
+      //navigation.navigate('SignInScreen'); // Make sure this matches the name you've given the SignInScreen in your navigation stack
     }, 3000); // Navigate after 3 seconds
 
     return () => clearTimeout(timer);
   }, [fadeAnim, navigation]);
 
   return (
-    <ImageBackground 
-      source={require('../assets/welcome screen image.jpg')} 
-      style={styles.backgroundImage}
-    >
-      <View style={styles.container}>
-        <Animated.View style={{...styles.logoContainer, opacity: fadeAnim}}>
-          <Image
-            source={require('../assets/Logo.png')}
-            style={styles.logo}
-          />
-        </Animated.View>
-        <Animated.View style={{opacity: fadeAnim}}>
-          <Text style={styles.title}>Welcome to ElderPal</Text>
-          <Text style={styles.description}>
+    <View style={styles.container}>
+      <View style={styles.upperHalfBackground}></View>
+      <Animated.View style={{...styles.logoContainer, opacity: fadeAnim}}>
+        <Image
+          source={require('../assets/Logo.png')}
+          style={styles.logo}
+        />
+      </Animated.View>
+      <Animated.View style={{opacity: fadeAnim}}>
+        <Text style={styles.title}>Welcome to ElderPal</Text>
+        <Text style={styles.description}>
           Stay connected, supported, and informed with all your elder care needs in one place.
-          </Text>
-        </Animated.View>
-      </View>
-    </ImageBackground>
+        </Text>
+      </Animated.View>
+    </View>
   );
 };
 
-
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
-      // Remove backgroundColor from container since the background image will cover it
-    },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logoContainer: {
+    alignItems: 'center',
+    marginBottom: 30,
+  },
+  logo: {
+    width: 180,
+    height: 180,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#000',
+    textAlign: 'center',
+    marginBottom: 40,
+  },
+  description: {
+    fontSize: 16,
+    color: '#000',
+    textAlign: 'center',
+    paddingHorizontal: 20,
+    fontWeight: 'bold',
+  },
 
-    backgroundImage: {
-      flex: 1,
-      width: '100%',
-      height: '100%',
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-
-    logo: {
-      width: 160,
-      height: 160,
-      marginBottom: 100,
-    },
-
-    logoContainer: {
-      alignItems: 'center',
-      marginBottom: 30,
-    },
-
-    title: {
-        fontSize: 40,
-        fontWeight: 'bold',
-        color: 'black',
-        textAlign: 'center',
-        marginBottom: 10,
-    },
-    
-    description: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: 'black',
-        textAlign: 'center',
-        lineHeight: 24,
-        marginTop: 30,
-        marginBottom: 50,
-        paddingHorizontal: 20,
-    }
+  upperHalfBackground: {
+    backgroundColor: '#258e25',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '55%',
+    borderBottomRightRadius: 200,
+    borderBottomLeftRadius: 200,
+    zIndex: -1,
+  },
 });
-  
-  
+
 export default WelcomeScreen;
