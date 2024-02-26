@@ -11,8 +11,8 @@ const App = () => {
               <Image source={require('../assets/doc.png')} style={styles.profileImage} />
             </TouchableOpacity>
             <View style={styles.userInfo}>
-              <Text style={styles.userName}>Dr. John Doe</Text>
-              <Text style={styles.userRole}>Neurologist</Text>
+              <Text style={styles.userName}>Steve Doe</Text>
+              <Text style={styles.userRole}>Family</Text>
             </View>
           </View>
           {/* content for the blue section */}
@@ -59,9 +59,6 @@ const App = () => {
           </View>
           {/* to Add more notes  */}
         </ScrollView>
-        <TouchableOpacity style={styles.cornerButton}>
-          <Image source={require('../assets/editIcon.png')} style={styles.buttonImage} />
-        </TouchableOpacity>
       </View>
     </ScrollView>
     );
