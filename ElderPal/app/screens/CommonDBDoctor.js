@@ -22,7 +22,7 @@ const App = () => {
           {/* Circular Buttons */}
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             <TouchableOpacity style={styles.circularButton}>
-              <Image source={require('../assets/VidCall.png')} style={styles.buttonImage} />
+              <Image source={require('../assets/VidCall.png')} style={styles.buttonImage1} />
             </TouchableOpacity>
             <TouchableOpacity style={styles.circularButton}>
               <Image source={require('../assets/msg.png')} style={styles.buttonImage} />
@@ -120,9 +120,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonImage: {
-    width: 30,
+  buttonImage1:{
+    width: 50,
     height: 30,
+  },
+  buttonImage: {
+    width: 50,
+    height: 50,
   },
   graySection: {
     marginTop: 10,
