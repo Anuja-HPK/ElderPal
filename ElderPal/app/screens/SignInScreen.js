@@ -1,233 +1,214 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
-  ImageBackground,
-  Image,
-} from "react-native";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-const SignInScreen = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordVisible, setPasswordVisible] = useState(false);
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
-  const backgroundImage = require("../assets/Elder care person.jpg");
+const SignInScreen = ({ navigation }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+
+  const handleSignIn = () => {
+    let error = false;
+    // Reset errors
+    setUsernameError('');
+    setPasswordError('');
+
+    if (!username.trim()) {
+      setUsernameError('Email/username is required');
+      error = true;
+    }
+    if (!password.trim()) {
+      setPasswordError('Password is required');
+      error = true;
+    }
+
+    if (!error) {
+      // Handle sign in
+    }
+  };
 
   return (
-    <ImageBackground source={backgroundImage} style={styles.backgroundImage}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
+        <View style={styles.upperHalfBackground}></View>
 
-      <View style={styles.overlay}>
-        <Image source={require("../assets/Logo.png")} style={styles.logo} />
-        <Text style={styles.title}>Sign In</Text>
-
-        <Text style={styles.label}>Username</Text>
-        <View style={styles.inputContainer}>
-          <MaterialCommunityIcons
-            name="account"
-            size={30}
-            color="#fff"
-            style={styles.icon}
-          />
-          <TextInput
-            style={[styles.input]}
-            placeholder="Enter Your Username"
-            value={username}
-            onChangeText={setUsername}
-            placeholderTextColor="#fff"
-          />
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Sign In</Text>
         </View>
 
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={[styles.input, styles.passwordInput]}
-            placeholder="Enter Your Password"
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!passwordVisible}
-            placeholderTextColor="#fff"
-          />
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email/username"
+          value={username}
+          onChangeText={text => {
+            setUsername(text);
+            if (text.trim()) setUsernameError('');
+          }}
+        />
+        {usernameError ? <Text style={styles.errorText}>{usernameError}</Text> : null}
 
-          <TouchableOpacity
-            style={styles.eyeIcon}
-            onPress={() => setPasswordVisible(!passwordVisible)}
-          >
-            <MaterialCommunityIcons
-              name={passwordVisible ? "eye-off" : "eye"}
-              size={24}
-              color="#00b33c"
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your password"
+          value={password}
+          secureTextEntry={true}
+          onChangeText={text => {
+            setPassword(text);
+            if (text.trim()) setPasswordError('');
+          }}
+        />
+        {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
-            />
-          </View>
-          <TouchableOpacity/>
-  
-          <Text style={styles.label}>Password</Text>
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={[styles.input, styles.passwordInput]}
-              placeholder="Enter Your Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry={!passwordVisible}
-              placeholderTextColor="#fff"
-            />
-  
-            <TouchableOpacity
-              style={styles.eyeIcon}
-              onPress={() => setPasswordVisible(!passwordVisible)}
-            >
-              <MaterialCommunityIcons
-                name={passwordVisible ? 'eye-off' : 'eye'}
-                size={24}
-                color="#00b33c"
-              />
-            </TouchableOpacity>
-          </View>
-  
-          <TouchableOpacity style={styles.button}>
-            <Text style={styles.buttonText}>Sign In</Text>
-          </TouchableOpacity>
-  
-          <View style={styles.signupContainer}>
-            <Text style={styles.signupText}>Don't have an account?</Text>
-            <TouchableOpacity onPress={() => {/* Navigate to Sign Up */}}>
-              <Text style={styles.signupButton}> Sign Up Here</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={() => {/* Handle forgot password */}} style={{ width: '90%', alignItems: 'flex-end' }}>
+          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
 
-        <View style={styles.signupContainer}>
-          <Text style={styles.signupText}>Don't have an account?</Text>
-          <TouchableOpacity
-            onPress={() => {
-              /* Navigate to Sign Up */
-            }}
-          >
-            <Text style={styles.signupButton}> Sign Up Here</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+        <Text style={styles.signupText}>
+          Don't have an account?{' '}
+          <Text style={styles.signupButton} onPress={() => {/* Navigate to sign up */}}>
+            Sign Up
+          </Text>
+        </Text>
 
-    </ImageBackground>
+        <Text style={styles.orText}>-----------------------------OR-----------------------------</Text>
+
+        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Google sign-in */}}>
+          <MaterialCommunityIcons name="google" size={20} color="#DB4437" />
+          <Text style={styles.socialButtonText}>Sign in with Google</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Apple sign-in */}}>
+          <MaterialCommunityIcons name="apple" size={20} color="#000" />
+          <Text style={styles.socialButtonText}>Sign in with Apple</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Facebook sign-in */}}>
+          <MaterialCommunityIcons name="facebook" size={20} color="#3b5998" />
+          <Text style={styles.socialButtonText}>Sign in with Facebook</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
   );
 };
 
+
 const styles = StyleSheet.create({
-  logo: {
-    width: 100,
-    height: 100,
-    alignSelf: "center",
-    borderWidth: 2,
-    borderColor: "#00b33c",
-    borderRadius: 90,
-  },
-
-  backgroundImage: {
+  container: {
     flex: 1,
-    width: "100%",
-    height: "100%",
+    backgroundColor: '#ffffff',
   },
 
-  overlay: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  scrollViewContent: {
+    alignItems: 'center',
+    paddingTop: 20,
   },
 
-  title: {
+  upperHalfBackground: {
+    backgroundColor: '#258e25',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '60%',
+    width: '100%',
+    borderBottomRightRadius: 500,
+  },
+
+  errorText: {
+    color: 'red',
+    width: '90%',
+    textAlign: 'left',
+  },
+
+  headerContainer: {
+    width: '100%',
+    alignItems: 'center',
+  },
+
+  headerTitle: {
     fontSize: 60,
-    fontWeight: "bold",
-    marginBottom: 20,
-    color: "#fff",
-  },
-
-  label: {
-    alignSelf: "flex-start",
-    marginLeft: "5%",
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#4dff88",
-  },
-
-  inputContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: "90%",
-    margin: 12,
-    borderWidth: 2,
-    borderRadius: 20,
-
-    borderColor: '#ffffff',
-
-  },
-
-  icon: {
-    position: "absolute",
-    right: 10,
-    color: "#00b33c",
+    fontWeight: 'bold',
+    color: '#ffffff',
+    textAlign: 'center',
+    marginTop: 20,
+    marginBottom: 60,
   },
 
   input: {
-    width: "90%",
     height: 50,
-    padding: 10,
-    color: "#fff",
-  },
-
-  passwordInput: {
-    flex: 1,
-    marginRight: 44,
-    color: "#fff",
-  },
-
-  eyeIcon: {
-    position: "absolute",
-    right: 10,
-  },
-
-  button: {
-
-    width: "60%",
-    alignItems: "center",
-    backgroundColor: "#00b33c",
-
-    padding: 15,
-    borderRadius: 30,
     marginTop: 20,
+    borderWidth: 1,
+    borderColor: '#258e25',
+    padding: 10,
+    borderRadius: 15,
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    paddingHorizontal: 20,
+    width: '90%',
+  },
+  
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#258e25',
+    padding: 10,
+    borderRadius: 15,
+    marginTop: 12,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+    marginHorizontal: 20,
+    width: '90%',
   },
 
   buttonText: {
-    color: "#ffffff",
-    fontSize: 18,
-    fontWeight: "bold",
+    color: '#ffffff',
   },
 
-  signupContainer: {
-    flexDirection: "row",
-    marginTop: 15,
-    alignItems: "center",
-    justifyContent: "center",
+  forgotPasswordText: {
+    color: '#49d049',
+    alignSelf: 'flex-end',
+    marginBottom: 12,
+    fontWeight: 'bold',
   },
 
   signupText: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#fff",
+    marginTop: 12,
+    textAlign: 'center',
+    color: '#000000',
   },
 
   signupButton: {
+    color: '#49d049',
+    fontWeight: 'bold',
+  },
 
-    fontSize: 18,
-    color: "#4dff88",
-    fontWeight: "bold",
+  orText: {
+    textAlign: 'center',
+    marginVertical: 12,
+    color: '#000000',
+    fontWeight: 'bold',
+  },
 
+  socialButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    padding: 10,
+    borderRadius: 15,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#258e25',
+    width: '90%',
+  },
+
+  socialButtonText: {
+    marginLeft: 10,
+    color: '#000000',
   },
 });
 
