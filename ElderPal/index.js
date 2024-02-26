@@ -5,6 +5,8 @@ import ChooseRoleScreen from "./app/screens/ChooseRoleScreen";
 import TodoList from "./app/screens/TodoList";
 import CommonDBDoctor from "./app/screens/CommonDBDoctor";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
+import VideoCallScreen from "./app/screens/VideoCallScreen";
+import ElderDashboardScreen from "./app/screens/ElderDashboardScreen";
 
 import SignInScreen from "./app/screens/SignInScreen";
 import SignUpScreen from "./app/screens/ElderSignUp";
@@ -30,7 +32,7 @@ AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <>
-      <CommonDBCaretaker />
+      <ElderDashboardScreen />
     </>
   );
 }
