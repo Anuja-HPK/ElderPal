@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, ImageBackground, Alert, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const SignUpScreen = () => {
   const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
 
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
+
   const handleSignUp = () => {
+    // Checking if the terms and conditions checkbox is ticked
+    if (!agreeToTerms) {
+      Alert.alert("Error", "You must agree to the terms and conditions to sign up.");
+      return;
+    }
     // Basic empty checks
     if (!name.trim() || !username.trim() || !password || !confirmPassword || !elderId.trim()) {
       Alert.alert("Error", "Please fill in all fields.");
@@ -31,11 +38,6 @@ const SignUpScreen = () => {
       return;
     }
   
-    if (!/^\d{6,}$/.test(elderId)) {
-      Alert.alert("Error", "Invalid Elder ID. Please enter a valid ID.");
-      return;
-    }
-  
     console.log(name, username, password, elderId);
     // Ideally, send this data to your backend server
   
@@ -43,195 +45,206 @@ const SignUpScreen = () => {
   };
   
   return (
-    <ImageBackground
-      source={require('../assets/Elder SignUp.jpg')}
-      style={styles.backgroundImage}
-    >
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
-      <View style={styles.container}>
-      <Text style={styles.title}>Create Account as Elder</Text>
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Your Name</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={name}
-            onChangeText={setName}
-          />
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
+        
+      <View style={styles.upperHalfBackground}></View>
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Create Account as Elder</Text>
         </View>
-      </View>
+  
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your name"
+          value={name}
+          onChangeText={setName} // Assuming you have a setName function to handle this
+        />
+  
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email"
+          value={email}
+          onChangeText={setEmail} // Assuming you have a setEmail function to handle this
+        />
+  
+        <TextInput
+          style={styles.input}
+          placeholder="Create password"
+          value={password}
+          secureTextEntry={true}
+          onChangeText={setPassword} // Assuming you have a setPassword function to handle this
+        />
+  
+        <TextInput
+          style={styles.input}
+          placeholder="Confirm password"
+          value={confirmPassword}
+          secureTextEntry={true}
+          onChangeText={setConfirmPassword} // Assuming you have a setConfirmPassword function to handle this
+        />
 
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Username</Text>
-        <View style={styles.inputContainer}>
-        <MaterialCommunityIcons name="account" size={30} color="#00b33c" style={styles.icon} />
-          <TextInput
-            style={styles.input}
-            value={username}
-            onChangeText={setUsername}
-            autoCapitalize="none"
-          />
-        </View>
-      </View>
-
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Password</Text>
-        <View style={styles.inputContainerWithIcon}>
-          <TextInput
-            style={[styles.input, styles.passwordInput]}
-            value={password}
-            onChangeText={setPassword}
-            secureTextEntry={!passwordVisible}
-          />
+        <View style={styles.checkboxContainer}>
           <TouchableOpacity
-            onPress={() => setPasswordVisible(!passwordVisible)}
-            style={styles.visibilityToggle}
-          >
-            <MaterialCommunityIcons
-              name={passwordVisible ? "eye-off" : "eye"}
-              size={24}
-              color="#00b33c"
-            />
+            style={[styles.checkbox, agreeToTerms ? styles.checkboxChecked : null]}
+            onPress={() => setAgreeToTerms(!agreeToTerms)}>
+            {agreeToTerms && <MaterialCommunityIcons name="check" size={20} color="#fff" />}
           </TouchableOpacity>
+          <Text style={styles.checkboxLabel} onPress={() => setAgreeToTerms(!agreeToTerms)}>I agree to the Terms and Conditions</Text>
         </View>
-      </View>
 
-      <View style={styles.inputGroup}>
-        <Text style={styles.label}>Confirm Password</Text>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={confirmPassword}
-            onChangeText={setConfirmPassword}
-            secureTextEntry={true}
-          />
-        </View>
-      </View>
-
-      <TouchableOpacity style={styles.button} onPress={handleSignUp}>
-      <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-
-      <View style={styles.signInPrompt}>
-        <Text style={styles.signInText}>Already have an account?</Text>
-        <TouchableOpacity onPress={() => {/* Navigate to Sign Up */}}>
-          <Text style={styles.signInButtonText}> Sign In</Text>
+        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
-      </View>
-    </View>
+  
+        <Text style={styles.signupText}>
+          Already have an account?{' '}
+          {/* Uncomment and implement navigation logic within onPress when ready */}
+          <Text style={styles.signupButton} onPress={() => {/* navigateToSignIn() */}}>
+            Sign In
+          </Text>
+        </Text>
+  
       </ScrollView>
-    </ImageBackground>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundImage: {
-    width: '100%',
-    height: '100%',
+  container: {
+    flex: 1,
+    backgroundColor: '#ffffff',
   },
 
   scrollViewContent: {
-    padding: 20,
-    justifyContent: 'center',
-    flexGrow: 1,
+    alignItems: 'center',
+    paddingTop: 20,
   },
 
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: 'rgba(0,0,0,0.6)',
+  upperHalfBackground: {
+    backgroundColor: '#258e25',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: '60%',
+    width: '100%',
+    borderBottomRightRadius: 500,
   },
 
-  title: {
-    fontSize: 25,
-    fontWeight: 'bold',
-    marginBottom: 20,
-    color:  '#fff',
-  },
-
-  inputGroup: {
-    marginBottom: 15,
-  },
-
-  inputContainer: {
-    flexDirection: 'row',
-    borderWidth: 3,
-    borderColor: '#ffffff',
-    borderRadius: 15,
-    padding: 10,
+  headerContainer: {
+    width: '100%',
     alignItems: 'center',
   },
 
-  inputContainerWithIcon: {
-    flexDirection: 'row',
-    borderWidth: 3,
-    borderColor: '#ffffff',
-    borderRadius: 15,
-    padding: 10,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-
-  label: {
-    alignSelf: 'flex-start',
-    fontSize: 20,
+  headerTitle: {
+    fontSize: 30,
     fontWeight: 'bold',
-    color:  '#4dff88',
+    color: '#ffffff',
+    textAlign: 'center',
+    marginTop: 40,
+    marginBottom: 60,
   },
 
   input: {
-    flex: 1,
-    fontSize: 18,
-    color: '#fff',
-  },
-
-  icon: {
-    position: 'absolute',
-    right: 10,
-  },
-
-  passwordInput: {
-    paddingRight: 40,
-  },
-
-  visibilityToggle: {
-    marginLeft: 10,
-  },
-
-  button: {
-    width: '40%',
-    alignItems: 'center',
-    alignSelf: 'center',
-    backgroundColor: '#00b33c',
+    height: 50,
+    marginTop: 60,
+    borderWidth: 1,
+    borderColor: '#258e25',
     padding: 10,
-    borderRadius: 30,
-    marginTop: 20,
+    borderRadius: 15,
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    paddingHorizontal: 20,
+    width: '90%',
+  },
+  
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#258e25',
+    padding: 10,
+    borderRadius: 15,
+    marginTop: 12,
+    borderWidth: 2,
+    borderColor: '#ffffff',
+    marginHorizontal: 20,
+    width: '90%',
+    marginTop: 50,
   },
 
   buttonText: {
     color: '#ffffff',
-    fontSize: 18,
-    fontWeight: 'bold'
   },
 
-  signInPrompt: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  errorText: {
+    color: 'red',
+    alignSelf: 'flex-start', // Align to the start of the text input fields
+    marginLeft: '5%', // Assuming the input fields have a 5% margin from the sides
+    marginTop: 5,
+  },
+
+  signupText: {
     marginTop: 20,
+    fontSize: 16,
   },
 
-  signInText: {
-    color: '#ffffff',
-    fontSize: 18,
+  signupButton: {
     fontWeight: 'bold',
+    color: '#258e25',
   },
 
-  signInButtonText: {
-    color: '#4dff88',
-    fontSize: 18,
-    fontWeight: 'bold',
+  // If you plan to use a toggle for showing/hiding password, you might need styles for that as well:
+  togglePasswordVisibility: {
+    position: 'absolute',
+    right: 35,
+    height: 50,
+    width: 30,
+    top: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
+
+  // Adjusted styles for input to accommodate the visibility toggle icon
+  input: {
+    height: 50,
+    marginTop: 12,
+    borderWidth: 1,
+    borderColor: '#258e25',
+    padding: 10,
+    borderRadius: 15,
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    paddingHorizontal: 20,
+    width: '90%',
+    paddingRight: 50, // Make room for the visibility toggle icon
+  },
+
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 20,
+    width: '75%',
+  },
+  
+  checkbox: {
+    height: 24,
+    width: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderColor: '#258e25',
+    borderRadius: 5,
+    marginRight: 10,
+  },
+  
+  checkboxChecked: {
+    backgroundColor: '#258e25',
+  },
+  
+  checkboxLabel: {
+    flex: 1, // Ensure label takes up the remaining space
+    fontSize: 16,
+  },
+
 });
 
 export default SignUpScreen;
