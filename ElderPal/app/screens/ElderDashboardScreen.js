@@ -61,7 +61,7 @@ const El_dashboard = {
   },
   pic: {
     width: 90,
-    height: 85,
+    height: 90,
     marginVertical: 40,
     marginLeft: 20,
   },
