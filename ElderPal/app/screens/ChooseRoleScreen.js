@@ -1,7 +1,7 @@
 import { View, Text, Image, TouchableOpacity, ScrollView, ImageBackground } from "react-native";
 import React from "react";
 
-export default function ChooseRoleScreen() {
+export default function ChooseRoleScreen({ navigation }) {
   return (
 
     <ImageBackground source={require("../assets/roleimage.jpg")} style={{width:"100%", height: "100%" }}>
@@ -19,25 +19,25 @@ export default function ChooseRoleScreen() {
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpElder")}>
           <Text style={roleStyles.text}>Elderly Person</Text>
         </TouchableOpacity>
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpOther")}>
           <Text style={roleStyles.text}>Doctor</Text>
         </TouchableOpacity>
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpOther")}>
           <Text style={roleStyles.text}>Caregiver</Text>
         </TouchableOpacity>
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpOther")}>
           <Text style={roleStyles.text}>Family Member</Text>
         </TouchableOpacity>
       </View>
