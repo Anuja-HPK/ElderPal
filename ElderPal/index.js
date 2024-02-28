@@ -31,6 +31,7 @@ import OthersSignUpScreen from "./app/screens/OthersSignUpScreen";
 
 import AssistantScreen from "./app/screens/AssistantScreen";
 import CallingUIScreen from "./app/screens/CallingUIScreen";
+import VideoCall from "./app/screens/VideoCall";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
