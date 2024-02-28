@@ -31,13 +31,21 @@ import SignUpMessage from "./app/screens/Messages/SignUpMessage";
 import AssistantScreen from "./app/screens/AssistantScreen";
 import CallingUIScreen from "./app/screens/CallingUIScreen";
 
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
+
 
 
 AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
-    <>
-      <FamilyEditScreen/>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="signUp">
+        <Stack.Screen name = "SignIn" component={SignInScreen} />
+        <Stack.Screen name = "ChooseRole" component={ChooseRoleScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
