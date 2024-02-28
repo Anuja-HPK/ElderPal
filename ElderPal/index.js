@@ -2,8 +2,11 @@ import { AppRegistry  } from "react-native";
 import { name as appName } from './app.json';
 import LogInScreen from "./app/screens/LogInScreeen";
 import ChooseRoleScreen from "./app/screens/ChooseRoleScreen";
+import ElderSignUp from  "./app/screens/ElderSignUp";
 import TodoList from "./app/screens/TodoList";
 import CommonDBDoctor from "./app/screens/CommonDBDoctor";
+import CommonDBCaretaker from './app/screens/CommonDBCaretaker';
+import CommonDBFamilyMem from './app/screens/CommonDBFamilyMem';
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
 import ElderDashboardScreen from "./app/screens/ElderDashboardScreen";
@@ -24,8 +27,7 @@ import { ThemeProvider } from "./app/screens/Settings/ThemeContext";
 import Logout from "./app/screens/Messages/Logout";
 import SignInMessage from "./app/screens/Messages/SignInMessage";
 import SignUpMessage from "./app/screens/Messages/SignUpMessage";
-import CommonDBCaretaker from './app/screens/CommonDBCaretaker';
-import CommonDBFamilyMem from './app/screens/CommonDBFamilyMem';
+
 import AssistantScreen from "./app/screens/AssistantScreen";
 import CallingUIScreen from "./app/screens/CallingUIScreen";
 
@@ -35,7 +37,7 @@ AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <>
-      <CallingUIScreen />
+      <ElderEditScreen/>
     </>
   );
 }
