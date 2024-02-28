@@ -9,8 +9,6 @@ import CommonDBCaretaker from './app/screens/CommonDBCaretaker';
 import CommonDBFamilyMem from './app/screens/CommonDBFamilyMem';
 import WelcomeScreen from "./app/screens/WelcomeScreen";
 
-<<<<<<< Updated upstream
-=======
 import ElderDashboardScreen from "./app/screens/ElderDashboardScreen";
 import CallContacts from "./app/screens/CallContacts";
 
@@ -34,17 +32,12 @@ import AssistantScreen from "./app/screens/AssistantScreen";
 import CallingUIScreen from "./app/screens/CallingUIScreen";
 
 
->>>>>>> Stashed changes
 
 AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <>
-<<<<<<< Updated upstream
-      <CommonDBDoctor />
-=======
       <ElderEditScreen/>
->>>>>>> Stashed changes
     </>
   );
 }

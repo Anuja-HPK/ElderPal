@@ -3,7 +3,7 @@ import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, Styl
 // import DateTimePicker from '@react-native-community/datetimepicker';
 // import { Picker } from '@react-native-picker/picker';
 
-const DoctorEditScreen = () => {
+const FamilyEditScreen = () => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [age, setAge] = useState('');
@@ -96,11 +96,6 @@ const DoctorEditScreen = () => {
         <TextInput style={styles.input} placeholder="Address 2" placeholderTextColor="#999" />
         <TextInput style={styles.input} placeholder="City" placeholderTextColor="#999" />
         <TextInput style={styles.input} placeholder="Country" placeholderTextColor="#999" />
-
-        {/* Medical Information Section */}
-        <Text style={styles.sectionTitle}>Professional Information</Text>
-        <TextInput style={styles.input} placeholder="Specialization" placeholderTextColor="#999" />
-        
 
         {/* Save Button */}
         <TouchableOpacity style={styles.button}>
@@ -210,4 +205,4 @@ const styles = StyleSheet.create({
     },
   });
   
-export default DoctorEditScreen;
+export default FamilyEditScreen;

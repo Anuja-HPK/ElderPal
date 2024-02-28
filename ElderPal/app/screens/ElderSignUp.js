@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: '60%',
     width: '100%',
-    borderBottomRightRadius: 500,
+    borderBottomRightRadius: 600,
   },
 
   headerContainer: {
