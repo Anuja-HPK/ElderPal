@@ -37,7 +37,7 @@ AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <>
-      <ElderEditScreen/>
+      <FamilyEditScreen/>
     </>
   );
 }
