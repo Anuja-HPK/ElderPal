@@ -27,17 +27,28 @@ import { ThemeProvider } from "./app/screens/Settings/ThemeContext";
 import Logout from "./app/screens/Messages/Logout";
 import SignInMessage from "./app/screens/Messages/SignInMessage";
 import SignUpMessage from "./app/screens/Messages/SignUpMessage";
+import OthersSignUpScreen from "./app/screens/OthersSignUpScreen";
 
 import AssistantScreen from "./app/screens/AssistantScreen";
 import CallingUIScreen from "./app/screens/CallingUIScreen";
+
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
+const Stack = createNativeStackNavigator();
 
 
 
 AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
-    <>
-      <FamilyEditScreen/>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="signUp">
+        <Stack.Screen name = "SignIn" component={SignInScreen} />
+        <Stack.Screen name = "ChooseRole" component={ChooseRoleScreen} />
+        <Stack.Screen name = "SignUpElder" component={ElderSignUp} />
+        <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
