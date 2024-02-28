@@ -5,8 +5,9 @@ import ChooseRoleScreen from "./app/screens/ChooseRoleScreen";
 import TodoList from "./app/screens/TodoList";
 import CommonDBDoctor from "./app/screens/CommonDBDoctor";
 import WelcomeScreen from "./app/screens/WelcomeScreen";
-import VideoCallScreen from "./app/screens/VideoCallScreen";
+
 import ElderDashboardScreen from "./app/screens/ElderDashboardScreen";
+import CallContacts from "./app/screens/CallContacts";
 
 import SignInScreen from "./app/screens/SignInScreen";
 import SignUpScreen from "./app/screens/ElderSignUp";
@@ -25,6 +26,8 @@ import SignInMessage from "./app/screens/Messages/SignInMessage";
 import SignUpMessage from "./app/screens/Messages/SignUpMessage";
 import CommonDBCaretaker from './app/screens/CommonDBCaretaker';
 import CommonDBFamilyMem from './app/screens/CommonDBFamilyMem';
+import AssistantScreen from "./app/screens/AssistantScreen";
+import CallingUIScreen from "./app/screens/CallingUIScreen";
 
 
 
@@ -32,7 +35,7 @@ AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <>
-      <ElderDashboardScreen />
+      <CallingUIScreen />
     </>
   );
 }
