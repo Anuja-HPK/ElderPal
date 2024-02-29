@@ -42,13 +42,6 @@ const Stack = createNativeStackNavigator();
 AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="signUp">
-        <Stack.Screen name = "SignIn" component={SignInScreen} />
-        <Stack.Screen name = "ChooseRole" component={ChooseRoleScreen} />
-        <Stack.Screen name = "SignUpElder" component={ElderSignUp} />
-        <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+<CallingUIScreen/>
   );
 }
