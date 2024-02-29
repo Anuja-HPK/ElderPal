@@ -7,7 +7,7 @@ const App = () => {
         <View style={styles.blueSection}>
           
           <View style={styles.userInfoContainer}>
-            <TouchableOpacity style={styles.userProfileButton}>
+            <TouchableOpacity style={styles.userProfileButton} onPress={() => navigation.navigate("FamPF")}>
               <Image source={require('../assets/doc.png')} style={styles.profileImage} />
             </TouchableOpacity>
             <View style={styles.userInfo}>

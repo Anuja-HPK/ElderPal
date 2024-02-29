@@ -56,14 +56,14 @@ export default function App() {
       <Stack.Screen name = "Call" component={CallContacts} />
       <Stack.Screen name = "ToDo" component={TodoList} /> */}
 
-      <Stack.Screen name = "DocDB" component={CommonDBDoctor} />
+      {/* <Stack.Screen name = "DocDB" component={CommonDBDoctor} />
       <Stack.Screen name = "DocPF" component={DoctorProfileScreen} />
 
       <Stack.Screen name = "CareDB" component={CommonDBCaretaker} />
       <Stack.Screen name = "CarePF" component={CareTakerProfileScreen} />
 
       <Stack.Screen name = "FamDB" component={CommonDBCaretaker} />
-      <Stack.Screen name = "FamPF" component={FamilyMemberProfileScreen} />
+      <Stack.Screen name = "FamPF" component={FamilyMemberProfileScreen} /> */}
 
       
 
