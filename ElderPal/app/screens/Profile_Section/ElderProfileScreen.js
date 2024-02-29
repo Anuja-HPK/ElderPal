@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 
-const ElderProfileScreen = () => {
+const ElderProfileScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}>

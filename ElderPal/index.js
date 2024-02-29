@@ -51,9 +51,11 @@ export default function App() {
         <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} /> */}
 
       <Stack.Screen name = "ElderDB" component={ElderDashboardScreen} />
+      <Stack.Screen name = "ElderPF" component={ElderProfileScreen} />
       <Stack.Screen name = "AIassistant" component={AssistantScreen} />
       <Stack.Screen name = "Call" component={CallContacts} />
       <Stack.Screen name = "ToDo" component={TodoList} />
+      
 
 
 

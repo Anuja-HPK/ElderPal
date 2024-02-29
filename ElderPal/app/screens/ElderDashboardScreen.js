@@ -9,7 +9,7 @@ export default function ElderDashboardScreen( {navigation} ) {
       </TouchableOpacity>
 
       <TouchableOpacity>
-        <View style={El_dashboard.profTextStyle}>
+        <View style={El_dashboard.profTextStyle} onPress={() => navigation.navigate("ElderPF")}  >
           <Image
             source={require('../assets/profImage.png')} // add prof image
             style={El_dashboard.pic}
