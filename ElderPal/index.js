@@ -50,11 +50,21 @@ export default function App() {
         <Stack.Screen name = "SignUpElder" component={ElderSignUp} />
         <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} /> */}
 
-      <Stack.Screen name = "ElderDB" component={ElderDashboardScreen} />
+      {/* <Stack.Screen name = "ElderDB" component={ElderDashboardScreen} />
       <Stack.Screen name = "ElderPF" component={ElderProfileScreen} />
       <Stack.Screen name = "AIassistant" component={AssistantScreen} />
       <Stack.Screen name = "Call" component={CallContacts} />
-      <Stack.Screen name = "ToDo" component={TodoList} />
+      <Stack.Screen name = "ToDo" component={TodoList} /> */}
+
+      <Stack.Screen name = "DocDB" component={CommonDBDoctor} />
+      <Stack.Screen name = "DocPF" component={DoctorProfileScreen} />
+
+      <Stack.Screen name = "CareDB" component={CommonDBCaretaker} />
+      <Stack.Screen name = "CarePF" component={CareTakerProfileScreen} />
+
+      <Stack.Screen name = "FamDB" component={CommonDBCaretaker} />
+      <Stack.Screen name = "FamPF" component={FamilyMemberProfileScreen} />
+
       
 
 
