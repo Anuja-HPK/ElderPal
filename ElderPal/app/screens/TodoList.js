@@ -9,10 +9,6 @@ import React from "react";
 
 export default function TodoList() {
   return (
-    <ImageBackground
-      source={require("../assets/todo_home.jpg")} //background image
-      style={{ width: "100%", height: "100%" }}
-    >
       <ScrollView>
         <View
           style={{
@@ -71,6 +67,6 @@ export default function TodoList() {
           </TouchableOpacity>
         </View>
       </ScrollView>
-    </ImageBackground>
+
   );
 }

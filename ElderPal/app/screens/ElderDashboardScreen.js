@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 
-export default function ElderDashboardScreen() {
+export default function ElderDashboardScreen( {navigation} ) {
   return (
     <View style={El_dashboard.viewStyle}>
       <TouchableOpacity>
@@ -15,25 +15,25 @@ export default function ElderDashboardScreen() {
             style={El_dashboard.pic}
           />
           {/* name tag */}
-          <Text style={El_dashboard.profText}>Welcome! john aiya</Text>
+          <Text style={El_dashboard.profText }>Welcome! john aiya</Text>
         </View>
       </TouchableOpacity>
 
       {/* action buttons */}
       <View style={El_dashboard.container}>
-        <TouchableOpacity style={El_dashboard.button}>
-          <Text style={El_dashboard.text}>AI Assistant</Text>
+        <TouchableOpacity style={El_dashboard.button }  onPress={() => navigation.navigate("AIassistant")}>
+          <Text style={El_dashboard.text }>AI Assistant</Text>
         </TouchableOpacity>
       </View>
 
       <View style={El_dashboard.container}>
-        <TouchableOpacity style={El_dashboard.button}>
+        <TouchableOpacity style={El_dashboard.button } onPress={() => navigation.navigate("Call")}>
           <Text style={El_dashboard.text}>Call</Text>
         </TouchableOpacity>
       </View>
 
       <View style={El_dashboard.container}>
-        <TouchableOpacity style={El_dashboard.button}>
+        <TouchableOpacity style={El_dashboard.button} onPress={() => navigation.navigate("ToDo")}>
           <Text style={El_dashboard.text}>To-Do List</Text>
         </TouchableOpacity>
       </View>

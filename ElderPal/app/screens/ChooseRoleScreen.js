@@ -3,8 +3,6 @@ import React from "react";
 
 export default function ChooseRoleScreen({ navigation }) {
   return (
-
-    <ImageBackground source={require("../assets/roleimage.jpg")} style={{width:"100%", height: "100%" }}>
       <ScrollView>
       <View style={{alignItems: "center", justifyContent: "center" }}>
         <Image
@@ -42,7 +40,6 @@ export default function ChooseRoleScreen({ navigation }) {
         </TouchableOpacity>
       </View>
     </ScrollView>
-    </ImageBackground>
   );
 }
 

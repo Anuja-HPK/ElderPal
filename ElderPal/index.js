@@ -43,11 +43,19 @@ AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="signUp">
-        <Stack.Screen name = "SignIn" component={SignInScreen} />
+      <Stack.Navigator initialRouteName="SignUp">
+      {/*<Stack.Screen name = "Welcome" component={WelcomeScreen} />      
+       <Stack.Screen name = "SignIn" component={SignInScreen} />
         <Stack.Screen name = "ChooseRole" component={ChooseRoleScreen} />
         <Stack.Screen name = "SignUpElder" component={ElderSignUp} />
-        <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} />
+        <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} /> */}
+
+      <Stack.Screen name = "ElderDB" component={ElderDashboardScreen} />
+      <Stack.Screen name = "AIassistant" component={AssistantScreen} />
+      <Stack.Screen name = "Call" component={CallContacts} />
+      <Stack.Screen name = "ToDo" component={TodoList} />
+
+
       </Stack.Navigator>
     </NavigationContainer>
   );
