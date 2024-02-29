@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native';
 
 const SignInScreen = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -70,26 +69,39 @@ const SignInScreen = ({ navigation }) => {
 
         <Text style={styles.signupText}>
           Don't have an account?{' '}
+<<<<<<< Updated upstream
           <Text style={styles.signupButton} onPress={() => {/* Navigate to sign up */}}>
+=======
+          <Text style={styles.signupButton} onPress={() => {navigation.navigate('ElderSignUp')}}>
+>>>>>>> Stashed changes
             Sign Up
           </Text>
         </Text>
 
         <Text style={styles.orText}>-----------------------------OR-----------------------------</Text>
 
-        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Google sign-in */}}>
-          <MaterialCommunityIcons name="google" size={20} color="#DB4437" />
-          <Text style={styles.socialButtonText}>Sign in with Google</Text>
+         <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Google sign-in */}}>
+          <Image
+            source={require('../assets/GoogleIcon.jpg')}
+            style={{width: 20, height: 20, marginRight: 8}}
+          />
+          <Text style={styles.socialButtonText}>SignIn with Google</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Apple sign-in */}}>
-          <MaterialCommunityIcons name="apple" size={20} color="#000" />
-          <Text style={styles.socialButtonText}>Sign in with Apple</Text>
+          <Image
+            source={require('../assets/Instagram.jpg')}
+            style={{width: 20, height: 20, marginRight: 8}}
+          />
+          <Text style={styles.socialButtonText}>SignIn with Instagram</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Facebook sign-in */}}>
-          <MaterialCommunityIcons name="facebook" size={20} color="#3b5998" />
-          <Text style={styles.socialButtonText}>Sign in with Facebook</Text>
+          <Image
+            source={require('../assets/facebook.jpg')}
+            style={{width: 25, height: 20, marginRight: 8}}
+          />
+          <Text style={styles.socialButtonText}>SignIn with Facebook</Text>
         </TouchableOpacity>
       </ScrollView>
     </View>
@@ -198,7 +210,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
-    padding: 10,
+    padding: 15,
     borderRadius: 15,
     marginBottom: 10,
     borderWidth: 1,
