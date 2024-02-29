@@ -11,8 +11,8 @@ const App = () => {
               <Image source={require('../assets/doc.png')} style={styles.profileImage} />
             </TouchableOpacity>
             <View style={styles.userInfo}>
-              <Text style={styles.userName}>Dr. John Doe</Text>
-              <Text style={styles.userRole}>Neurologist</Text>
+              <Text style={styles.userName}>Jane Doe</Text>
+              <Text style={styles.userRole}>Caretaker</Text>
             </View>
           </View>
           {/* content for the blue section */}

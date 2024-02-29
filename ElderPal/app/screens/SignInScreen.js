@@ -69,11 +69,9 @@ const SignInScreen = ({ navigation }) => {
 
         <Text style={styles.signupText}>
           Don't have an account?{' '}
-<<<<<<< Updated upstream
-          <Text style={styles.signupButton} onPress={() => {/* Navigate to sign up */}}>
-=======
-          <Text style={styles.signupButton} onPress={() => {navigation.navigate('ElderSignUp')}}>
->>>>>>> Stashed changes
+
+          <Text style={styles.signupButton} onPress={() => navigation.navigate("ChooseRole")}>
+
             Sign Up
           </Text>
         </Text>
