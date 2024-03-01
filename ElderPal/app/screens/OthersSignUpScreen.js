@@ -44,10 +44,7 @@ const SignUpScreen = () => {
   };
   
   return (
-    <ImageBackground
-      source={require('../assets/Elder SignUp.jpg')}
-      style={styles.backgroundImage}
-    >
+    
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
       <View style={styles.container}>
       <Text style={styles.title}>Create An Account </Text>
@@ -132,7 +129,6 @@ const SignUpScreen = () => {
       </View>
     </View>
       </ScrollView>
-    </ImageBackground>
   );
 };
 
