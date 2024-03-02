@@ -1,3 +1,4 @@
+import React from "react";
 import { AppRegistry  } from "react-native";
 import { name as appName } from './app.json';
 import LogInScreen from "./app/screens/LogInScreeen";
@@ -7,7 +8,7 @@ import TodoList from "./app/screens/TodoList";
 import CommonDBDoctor from "./app/screens/CommonDBDoctor";
 import CommonDBCaretaker from './app/screens/CommonDBCaretaker';
 import CommonDBFamilyMem from './app/screens/CommonDBFamilyMem';
-import WelcomeScreen from "./app/screens/WelcomeScreen";
+import WelcomeScreenMain from "./app/screens/WelcomeScreenMain";
 
 import ElderDashboardScreen from "./app/screens/ElderDashboardScreen";
 import CallContacts from "./app/screens/CallContacts";
@@ -32,8 +33,13 @@ import OthersSignUpScreen from "./app/screens/OthersSignUpScreen";
 import AssistantScreen from "./app/screens/AssistantScreen";
 import CallingUIScreen from "./app/screens/CallingUIScreen";
 
+import { WelcomeScreen } from "./app/screens/WelcomeScreen";
+import { ChatWithVoiceScreen } from "./app/screens/ChatWithVoiceScreen";
+import { AppNavigation } from "./app/navigation/AppNavigation";
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -42,13 +48,6 @@ const Stack = createNativeStackNavigator();
 AppRegistry.registerComponent(appName, () => App)
 export default function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="signUp">
-        <Stack.Screen name = "SignIn" component={SignInScreen} />
-        <Stack.Screen name = "ChooseRole" component={ChooseRoleScreen} />
-        <Stack.Screen name = "SignUpElder" component={ElderSignUp} />
-        <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+ <AppNavigation/>
   );
 }

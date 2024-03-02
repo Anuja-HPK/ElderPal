@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, Animated } from 'react-native';
 
-const WelcomeScreen = ({ navigation }) => {
+const WelcomeScreenMain = ({ navigation }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default WelcomeScreen;
+export default WelcomeScreenMain;

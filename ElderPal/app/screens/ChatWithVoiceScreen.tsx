@@ -9,7 +9,6 @@ import {
   Send,
 } from 'react-native-gifted-chat'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { TypingAnimation } from 'react-native-typing-animation';
 import { useSelector } from 'react-redux';
 import Tts from 'react-native-tts';
 import { initTts, readText } from '../utils/ttsUtils';
@@ -28,7 +27,7 @@ const initialMessages: IMessage[] =
 
 
 
-const ChatWithVoiceScreen = () => {
+const ChatWithVoiceScreen = () =>{ 
   const [recording, setRecording] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [messages, setMessages] = useState(initialMessages);
@@ -249,6 +248,20 @@ const ChatWithVoiceScreen = () => {
       color: '#FFF',
       fontSize: 18,
     },
+    buttonSend: {
+
+    },
+    buttonMicStyle: {
+
+    },
+    buttonRecordingOff: {
+
+    },
+    buttonRecordingOn: {
+
+    },
+
+
   });
 
 
@@ -280,7 +293,7 @@ const ChatWithVoiceScreen = () => {
       </View>
     </SafeAreaView>
   );
- 
+  }
   
 
 

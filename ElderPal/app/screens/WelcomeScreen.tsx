@@ -5,10 +5,11 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+
 const WelcomeScreen = () => {
 
   const navigation = useNavigation<NavigationProp<ParamListBase>>();
-  const handleNext = () => {
+  const HandleNext = () => {
     navigation.navigate('ChatWithVoiceScreen');
   };
 
@@ -23,7 +24,7 @@ const WelcomeScreen = () => {
           style={{ marginBottom: 10, marginRight: 10, color: '#10a37f' }}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleNext}>
+        <TouchableOpacity style={styles.button} onPress={HandleNext}>
           <Text style={styles.buttonText}>Start Chat</Text>
         </TouchableOpacity>
       </View>
