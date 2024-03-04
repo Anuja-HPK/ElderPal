@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import ChooseRoleScreen from './ChooseRoleScreen';
+import auth from '@react-native-firebase/auth';
 
 const SignUpScreen = () => {
   const [name, setName] = useState('');
@@ -11,37 +13,26 @@ const SignUpScreen = () => {
 
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
-  const handleSignUp = () => {
-    // Checking if the terms and conditions checkbox is ticked
-    if (!agreeToTerms) {
-      Alert.alert("Error", "You must agree to the terms and conditions to sign up.");
-      return;
-    }
-    // Basic empty checks
-    if (!name.trim() || !username.trim() || !password || !confirmPassword || !elderId.trim()) {
-      Alert.alert("Error", "Please fill in all fields.");
-      return;
-    }
-  
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-      Alert.alert("Error", "Username must only contain letters, numbers, and underscores.");
-      return;
-    }
+  const createUser = ()=> {
+        auth()
+        .createUserWithEmailAndPassword(
+          email, 
+          password,
+          )
+        .then(() => {
+          console.log('User account created & signed in!');
+        })
+        .catch(error => {
+          if (error.code === 'auth/email-already-in-use') {
+            console.log('That email address is already in use!');
+          }
 
-    if (password.length < 8) {
-      Alert.alert("Error", "Password must be at least 8 characters long.");
-      return;
-    }
-  
-    if (password !== confirmPassword) {
-      Alert.alert("Error", "Passwords do not match.");
-      return;
-    }
-  
-    console.log(name, username, password, elderId);
-    // Ideally, send this data to your backend server
-  
-    Alert.alert("Success", "Registration successful!");
+          if (error.code === 'auth/invalid-email') {
+            console.log('That email address is invalid!');
+          }
+
+          console.error(error);
+      });
   };
   
   return (
@@ -57,14 +48,14 @@ const SignUpScreen = () => {
           style={styles.input}
           placeholder="Enter your name"
           value={name}
-          onChangeText={setName} // Assuming you have a setName function to handle this
+          onChangeText={txt =>  setName(txt)}
         />
   
         <TextInput
           style={styles.input}
           placeholder="Enter your email"
           value={email}
-          onChangeText={setEmail} // Assuming you have a setEmail function to handle this
+          onChangeText={txt =>  setEmail(txt)} // Assuming you have a setEmail function to handle this
         />
   
         <TextInput
@@ -72,7 +63,7 @@ const SignUpScreen = () => {
           placeholder="Create password"
           value={password}
           secureTextEntry={true}
-          onChangeText={setPassword} // Assuming you have a setPassword function to handle this
+          onChangeText={txt =>  setPassword(txt)}
         />
   
         <TextInput
@@ -80,7 +71,7 @@ const SignUpScreen = () => {
           placeholder="Confirm password"
           value={confirmPassword}
           secureTextEntry={true}
-          onChangeText={setConfirmPassword} // Assuming you have a setConfirmPassword function to handle this
+          onChangeText={txt =>  setConfirmPassword(txt)}
         />
 
         <View style={styles.checkboxContainer}>
@@ -92,13 +83,14 @@ const SignUpScreen = () => {
           <Text style={styles.checkboxLabel} onPress={() => setAgreeToTerms(!agreeToTerms)}>I agree to the Terms and Conditions</Text>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={handleSignUp}>
+        <TouchableOpacity style={styles.button} onPress={() => {
+          createUser();
+        }}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
   
         <Text style={styles.signupText}>
           Already have an account?{' '}
-          {/* Uncomment and implement navigation logic within onPress when ready */}
           <Text style={styles.signupButton} onPress={() => {/* navigateToSignIn() */}}>
             Sign In
           </Text>
