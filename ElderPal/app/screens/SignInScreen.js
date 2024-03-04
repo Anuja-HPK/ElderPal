@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import auth from '@react-native-firebase/auth';
 
 const SignInScreen = ({ navigation }) => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
 
-  const handleSignIn = () => {
-    let error = false;
-    // Reset errors
-    setUsernameError('');
-    setPasswordError('');
-
-    if (!username.trim()) {
-      setUsernameError('Email/username is required');
-      error = true;
-    }
-    if (!password.trim()) {
-      setPasswordError('Password is required');
-      error = true;
-    }
-
-    if (!error) {
-      // Handle sign in
-    }
+  const userSignIn = ()=> {
+    auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(res =>{
+      console.log(JSON.stringify(res));
+      //Alert.alert("User Logged In" + JSON.stringify(res));
+      navigation.navigate('SignInMessage');
+    }).catch(error => {
+      console.log(error);
+    });
   };
 
   return (
@@ -39,9 +32,9 @@ const SignInScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your email/username"
-          value={username}
+          value={email}
           onChangeText={text => {
-            setUsername(text);
+            setEmail(text);
             if (text.trim()) setUsernameError('');
           }}
         />
@@ -63,7 +56,7 @@ const SignInScreen = ({ navigation }) => {
           <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+        <TouchableOpacity style={styles.button} onPress={userSignIn}>
           <Text style={styles.buttonText}>Sign In</Text>
         </TouchableOpacity>
 
@@ -71,7 +64,6 @@ const SignInScreen = ({ navigation }) => {
           Don't have an account?{' '}
 
           <Text style={styles.signupButton} onPress={() => navigation.navigate("ChooseRole")}>
-
             Sign Up
           </Text>
         </Text>

@@ -44,7 +44,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="signUp">
+        <Stack.Screen name = "Welcome" component={WelcomeScreen} />
         <Stack.Screen name = "SignIn" component={SignInScreen} />
+        <Stack.Screen name="SignInMessage" component={SignInMessage} />
         <Stack.Screen name = "ChooseRole" component={ChooseRoleScreen} />
         <Stack.Screen name = "SignUpElder" component={ElderSignUp} />
         <Stack.Screen name = "SignUpOther" component={OthersSignUpScreen} />
