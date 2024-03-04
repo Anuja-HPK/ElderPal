@@ -15,15 +15,7 @@ const WelcomeScreen = ({ navigation }) => {
     ).start();
 
     const timer = setTimeout(() => {
-<<<<<<< Updated upstream
-      //navigation.navigate('SignInScreen'); // Make sure this matches the name you've given the SignInScreen in your navigation stack
-=======
-<<<<<<< Updated upstream
-      navigation.navigate("SignIn"); // Make sure this matches the name you've given the SignInScreen in your navigation stack
-=======
       navigation.navigate('SignIn'); // Make sure this matches the name you've given the SignInScreen in your navigation stack
->>>>>>> Stashed changes
->>>>>>> Stashed changes
     }, 3000); // Navigate after 3 seconds
 
     return () => clearTimeout(timer);
