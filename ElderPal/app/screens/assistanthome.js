@@ -60,6 +60,11 @@ const HomeScreen = () => {
   //console.log('result: ', result);
 
   return (
+          <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.imageContainer}>
+          <Image source={require('../../assets/images/bot.png')} style={styles.image} />
+        </View>
     
         {/* features and messages */}
         {messages.length > 0 ? (
