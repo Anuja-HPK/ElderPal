@@ -358,7 +358,16 @@ const styles = StyleSheet.create({
                     position: 'absolute',
                     left: wp(10),
                   },
+                  buttonText: {
+                    color: 'white',
+                    fontWeight: 'bold',
+                  },
+                  buttonText: {
+                    color: 'white',
+                    fontWeight: 'bold',
+                  },
+                });
+                
+                export default HomeScreen;
           
-});
 
-export default HomeScreen;
