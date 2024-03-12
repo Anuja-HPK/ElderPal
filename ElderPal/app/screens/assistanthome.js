@@ -208,6 +208,12 @@ const stopSpeaking = () => {
           <Features />
         )}
         {/* 3 buttons for recording, clear, and stop */}
+        <View style={styles.container}>
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.imageContainer}>
+          <Image source={require('../../assets/images/bot.png')} style={styles.image} />
+        </View>
+        
         <View style={styles.buttonsContainer}>
           {
             loading ? (
