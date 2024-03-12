@@ -10,6 +10,12 @@ import Tts from 'react-native-tts';
 const HomeScreen = () => {
   const [messages, setMessages] = useState([]);
   const [recording, setRecording] = useState(false);
+
+  const speechStartHandler = () => {
+          console.log('speech start handler');
+        };
+      
+        const speechEndHandler
   const stopSpeaking = () => {
           Tts.stop();
           setSpeaking(false);
