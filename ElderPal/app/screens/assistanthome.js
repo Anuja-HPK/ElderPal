@@ -266,6 +266,28 @@ const styles = StyleSheet.create({
                     justifyContent: 'center',
                     marginTop: hp(7),
                   },
+                  image: {
+                    height: hp(15),
+                    width: hp(15),
+                  },
+                  messageContainer: {
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  },
+                  messageTitle: {
+                    fontSize: wp(5),
+                    color: 'gray',
+                    fontWeight: 'bold',
+                    marginLeft: wp(1),
+                  },
+                  messageContent: {
+                    height: hp(58),
+                    backgroundColor: '#F3F4F6',
+                    borderRadius: wp(4),
+                    padding: wp(4),
+                    marginBottom: hp(10),
+                  },
           
 });
 
