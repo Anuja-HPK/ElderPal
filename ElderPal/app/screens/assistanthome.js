@@ -252,6 +252,20 @@ const stopSpeaking = () => {
 };
 
 const styles = StyleSheet.create({
+          container: {
+                    flex: 1,
+                    backgroundColor: 'white',
+                  },
+                  safeArea: {
+                    flex: 1,
+                    flexDirection: 'column',
+                    marginHorizontal: wp(5),
+                  },
+                  imageContainer: {
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    marginTop: hp(7),
+                  },
           
 });
 
