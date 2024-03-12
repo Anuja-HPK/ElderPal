@@ -24,6 +24,12 @@ const HomeScreen = () => {
         }
       
       
+const updateScrollView = () => {
+          setTimeout(() => {
+            ScrollViewRef?.current?.scrollToEnd({ animated: true })
+          }, 200)
+        }
+      
 
   
 const stopSpeaking = () => {
