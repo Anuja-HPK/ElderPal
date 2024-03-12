@@ -22,6 +22,26 @@ const HomeScreen = () => {
             });
           }
         }
+        const fetchResponse = () => {
+          if (result.trim().length > 0) {
+      
+            let newMessages = [...messages];
+            newMessages.push({ role: 'user', content: result.trim() });
+            setMessages([...newMessages]);
+            updateScrollView();
+            setLoading(true);
+      
+            apiCall(result.trim(), newMessages).then(res => {
+              //console.log('Got API Data:', res);
+              setLoading(false);
+              if (res.success) {
+                setMessages([...res.data]);
+                updateScrollView();
+                setResult('');
+                startTextToSpeech(res.data[res.data.length - 1]);
+              } else {
+                Alert.alert('Error', res.msg);
+              }
         
 const stopRecording = async () => {
           try {
