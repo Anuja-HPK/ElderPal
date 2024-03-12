@@ -22,6 +22,14 @@ const HomeScreen = () => {
             });
           }
         }
+        
+
+const clear = () => {
+          setMessages([]);
+          Tts.stop();
+      
+        };
+      
         const fetchResponse = () => {
           if (result.trim().length > 0) {
       
@@ -41,8 +49,7 @@ const HomeScreen = () => {
                 startTextToSpeech(res.data[res.data.length - 1]);
               } else {
                 Alert.alert('Error', res.msg);
-              }
-        
+              }        
 const stopRecording = async () => {
           try {
             await Voice.stop();
