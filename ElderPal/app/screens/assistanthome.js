@@ -10,6 +10,20 @@ import Tts from 'react-native-tts';
 const HomeScreen = () => {
   const [messages, setMessages] = useState([]);
   const [recording, setRecording] = useState(false);
+  const startTextToSpeech = message => {
+          if (!message.content.includes('https')) {
+            setSpeaking(true);
+            Tts.speak(message.content, {
+              androidParams: {
+                KEY_PARAM_PAN: -1,
+                KEY_PARAM_VOLUME: 0.5,
+                KEY_PARAM_STREAM: 'STREAM_MUSIC',
+              },
+            });
+          }
+        }
+      
+      
 
   
 const stopSpeaking = () => {
