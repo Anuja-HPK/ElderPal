@@ -10,100 +10,16 @@ import Tts from 'react-native-tts';
 const HomeScreen = () => {
   const [messages, setMessages] = useState([]);
   const [recording, setRecording] = useState(false);
-  const startTextToSpeech = message => {
-          if (!message.content.includes('https')) {
-            setSpeaking(true);
-            Tts.speak(message.content, {
-              androidParams: {
-                KEY_PARAM_PAN: -1,
-                KEY_PARAM_VOLUME: 0.5,
-                KEY_PARAM_STREAM: 'STREAM_MUSIC',
-              },
-            });
-          }
-        }
-        useEffect(() => {
-          // voice handler events
-          Voice.onSpeechStart = speechStartHandler;
-          Voice.onSpeechEnd = speechEndHandler;
-          Voice.onSpeechResults = speechResultsHandler;
-          Voice.onSpeechError = speechErrorHandler;
-      
-          //tts handlers
-          Tts.addEventListener('tts-start', (event) => console.log("start", event));
-          Tts.addEventListener('tts-progress', (event) => console.log("progress", event));
-          Tts.addEventListener('tts-finish', (event) => { console.log("finish", event); setSpeaking(false) });
-          Tts.addEventListener('tts-cancel', (event) => console.log("cancel", event));
-      
-          return () => {
-            // voice instant remover
-            Voice.destroy().then(Voice.removeAllListeners);
-          };
-        }, []);
+  const [speaking, setSpeaking] = useState(false);
+  const [result, setResult] = useState('');
+  const [loading, setLoading] = useState(false);
+  const ScrollViewRef = useRef();
 
-const clear = () => {
-          setMessages([]);
-          Tts.stop();
-      
-        };
-      
-        const fetchResponse = () => {
-          if (result.trim().length > 0) {
-      
-            let newMessages = [...messages];
-            newMessages.push({ role: 'user', content: result.trim() });
-            setMessages([...newMessages]);
-            updateScrollView();
-            setLoading(true);
-      
-            apiCall(result.trim(), newMessages).then(res => {
-              //console.log('Got API Data:', res);
-              setLoading(false);
-              if (res.success) {
-                setMessages([...res.data]);
-                updateScrollView();
-                setResult('');
-                startTextToSpeech(res.data[res.data.length - 1]);
-              } else {
-                Alert.alert('Error', res.msg);
-              }        
-const stopRecording = async () => {
-          try {
-            await Voice.stop();
-            setRecording(false);
-            // Fetch response after stopping recording
-            fetchResponse();
-          } catch (e) {
-            console.log('Recording Stop Error:', e);
-            // Handle error appropriately, e.g., show an error message.
-          }
-        };
-      
-      
-      
-const updateScrollView = () => {
-          setTimeout(() => {
-            ScrollViewRef?.current?.scrollToEnd({ animated: true })
-          }, 200)
-        }
-      
-
-  
-const stopSpeaking = () => {
-          Tts.stop();
-          setSpeaking(false);
-        };
   const speechStartHandler = () => {
-          console.log('speech start handler');
-        };
-      
-        const speechEndHandler
-  const stopSpeaking = () => {
-          Tts.stop();
-          setSpeaking(false);
-        };
+    console.log('speech start handler');
+  };
 
-   = () => {
+  const speechEndHandler = () => {
     setRecording(false);
     console.log('speech end handler');
   };
@@ -128,9 +44,38 @@ const stopSpeaking = () => {
     }
   };
 
-  
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+      setRecording(false);
+      // Fetch response after stopping recording
+      fetchResponse();
+    } catch (e) {
+      console.log('Recording Stop Error:', e);
+      // Handle error appropriately, e.g., show an error message.
+    }
+  };
 
-  
+  const fetchResponse = () => {
+    if (result.trim().length > 0) {
+
+      let newMessages = [...messages];
+      newMessages.push({ role: 'user', content: result.trim() });
+      setMessages([...newMessages]);
+      updateScrollView();
+      setLoading(true);
+
+      apiCall(result.trim(), newMessages).then(res => {
+        //console.log('Got API Data:', res);
+        setLoading(false);
+        if (res.success) {
+          setMessages([...res.data]);
+          updateScrollView();
+          setResult('');
+          startTextToSpeech(res.data[res.data.length - 1]);
+        } else {
+          Alert.alert('Error', res.msg);
+        }
 
       });
     } else {
@@ -138,25 +83,63 @@ const stopSpeaking = () => {
     }
   };
 
+  const startTextToSpeech = message => {
+    if (!message.content.includes('https')) {
+      setSpeaking(true);
+      Tts.speak(message.content, {
+        androidParams: {
+          KEY_PARAM_PAN: -1,
+          KEY_PARAM_VOLUME: 0.5,
+          KEY_PARAM_STREAM: 'STREAM_MUSIC',
+        },
+      });
+    }
+  }
 
+  const updateScrollView = () => {
+    setTimeout(() => {
+      ScrollViewRef?.current?.scrollToEnd({ animated: true })
+    }, 200)
+  }
 
-  
+  const clear = () => {
+    setMessages([]);
+    Tts.stop();
 
-  
+  };
 
-  
+  const stopSpeaking = () => {
+    Tts.stop();
+    setSpeaking(false);
+  };
 
-  
+  useEffect(() => {
+    // voice handler events
+    Voice.onSpeechStart = speechStartHandler;
+    Voice.onSpeechEnd = speechEndHandler;
+    Voice.onSpeechResults = speechResultsHandler;
+    Voice.onSpeechError = speechErrorHandler;
+
+    //tts handlers
+    Tts.addEventListener('tts-start', (event) => console.log("start", event));
+    Tts.addEventListener('tts-progress', (event) => console.log("progress", event));
+    Tts.addEventListener('tts-finish', (event) => { console.log("finish", event); setSpeaking(false) });
+    Tts.addEventListener('tts-cancel', (event) => console.log("cancel", event));
+
+    return () => {
+      // voice instant remover
+      Voice.destroy().then(Voice.removeAllListeners);
+    };
+  }, []);
 
   //console.log('result: ', result);
 
   return (
-          <View style={styles.container}>
+    <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.imageContainer}>
           <Image source={require('../../assets/images/bot.png')} style={styles.image} />
         </View>
-    
         {/* features and messages */}
         {messages.length > 0 ? (
           <View style={styles.messageContainer}>
@@ -208,12 +191,6 @@ const stopSpeaking = () => {
           <Features />
         )}
         {/* 3 buttons for recording, clear, and stop */}
-        <View style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.imageContainer}>
-          <Image source={require('../../assets/images/bot.png')} style={styles.image} />
-        </View>
-        
         <View style={styles.buttonsContainer}>
           {
             loading ? (
@@ -252,122 +229,116 @@ const stopSpeaking = () => {
 };
 
 const styles = StyleSheet.create({
-          container: {
-                    flex: 1,
-                    backgroundColor: 'white',
-                  },
-                  safeArea: {
-                    flex: 1,
-                    flexDirection: 'column',
-                    marginHorizontal: wp(5),
-                  },
-                  imageContainer: {
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    marginTop: hp(7),
-                  },
-                  image: {
-                    height: hp(15),
-                    width: hp(15),
-                  },
-                  messageContainer: {
-                    flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  },
-                  messageTitle: {
-                    fontSize: wp(5),
-                    color: 'gray',
-                    fontWeight: 'bold',
-                    marginLeft: wp(1),
-                  },
-                  messageContent: {
-                    height: hp(58),
-                    backgroundColor: '#F3F4F6',
-                    borderRadius: wp(4),
-                    padding: wp(4),
-                    marginBottom: hp(10),
-                  },
-                  scrollView: {
-                    flex: 1,
-                    marginVertical: wp(1),
-                  },
-                  assistantMessage: {
-                    marginBottom: hp(1),
-                  },
-                  userInput: {
-                    flexDirection: 'row',
-                    justifyContent: 'flex-end',
-                    marginTop: hp(1),
-                  },
-                  userInputBox: {
-                    width: wp(70),
-                    backgroundColor: '#D1FAE5',
-                    borderRadius: wp(4),
-                    padding: wp(2),
-                    marginTop: hp(1.5),
-                  },
-                  assistantMsgBox: {
-                    width: wp(70),
-                    backgroundColor: 'white',
-                    borderRadius: wp(4),
-                    padding: wp(2),
-                    marginTop: hp(1.5),
-                  },
-                  imgResBox: {     // for dalle image response 
-                    flexDirection: 'row',
-                    justifyContent: 'start',
-                  },
-                  imgResContainer: { // for dalle image response 
-                    marginTop: hp(1),
-                    padding: 0,
-                    backgroundColor: 'white',
-                    borderRadius: 20,
-                  },
-                  imgResStyle: {  // for dalle  image response 
-                    borderRadius: 20,
-                    height: wp(60),
-                    width: wp(60),
-                  },
-                  loadingImage: {
-                    width: hp(10),
-                    height: hp(10),
-                  },
-                  buttonsContainer: {
-                    marginTop: 5,
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                  },
-                  buttonImage: {
-                    height: hp(10),
-                    width: hp(10),
-                    borderRadius: hp(5),
-                  },
-                  clearButton: {
-                    backgroundColor: '#8B5CF6',
-                    borderRadius: wp(8),
-                    padding: wp(2),
-                    position: 'absolute',
-                    right: wp(10),
-                  },
-                  stopButton: {
-                    backgroundColor: '#EF4444',
-                    borderRadius: wp(8),
-                    padding: wp(2),
-                    position: 'absolute',
-                    left: wp(10),
-                  },
-                  buttonText: {
-                    color: 'white',
-                    fontWeight: 'bold',
-                  },
-                  buttonText: {
-                    color: 'white',
-                    fontWeight: 'bold',
-                  },
-                });
-                
-                export default HomeScreen;
-          
+  container: {
+    flex: 1,
+    backgroundColor: 'white',
+  },
+  safeArea: {
+    flex: 1,
+    flexDirection: 'column',
+    marginHorizontal: wp(5),
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: hp(7),
+  },
+  image: {
+    height: hp(15),
+    width: hp(15),
+  },
+  messageContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  messageTitle: {
+    fontSize: wp(5),
+    color: 'gray',
+    fontWeight: 'bold',
+    marginLeft: wp(1),
+  },
+  messageContent: {
+    height: hp(58),
+    backgroundColor: '#F3F4F6',
+    borderRadius: wp(4),
+    padding: wp(4),
+    marginBottom: hp(10),
+  },
+  scrollView: {
+    flex: 1,
+    marginVertical: wp(1),
+  },
+  assistantMessage: {
+    marginBottom: hp(1),
+  },
+  userInput: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginTop: hp(1),
+  },
+  userInputBox: {
+    width: wp(70),
+    backgroundColor: '#D1FAE5',
+    borderRadius: wp(4),
+    padding: wp(2),
+    marginTop: hp(1.5),
+  },
+  assistantMsgBox: {
+    width: wp(70),
+    backgroundColor: 'white',
+    borderRadius: wp(4),
+    padding: wp(2),
+    marginTop: hp(1.5),
+  },
+  imgResBox: {     // for dalle image response 
+    flexDirection: 'row',
+    justifyContent: 'start',
+  },
+  imgResContainer: { // for dalle image response 
+    marginTop: hp(1),
+    padding: 0,
+    backgroundColor: 'white',
+    borderRadius: 20,
+  },
+  imgResStyle: {  // for dalle  image response 
+    borderRadius: 20,
+    height: wp(60),
+    width: wp(60),
+  },
+  loadingImage: {
+    width: hp(10),
+    height: hp(10),
+  },
+  buttonsContainer: {
+    marginTop: 5,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonImage: {
+    height: hp(10),
+    width: hp(10),
+    borderRadius: hp(5),
+  },
+  clearButton: {
+    backgroundColor: '#8B5CF6',
+    borderRadius: wp(8),
+    padding: wp(2),
+    position: 'absolute',
+    right: wp(10),
+  },
+  stopButton: {
+    backgroundColor: '#EF4444',
+    borderRadius: wp(8),
+    padding: wp(2),
+    position: 'absolute',
+    left: wp(10),
+  },
+  buttonText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 
+export default HomeScreen;
