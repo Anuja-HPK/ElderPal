@@ -22,7 +22,24 @@ const HomeScreen = () => {
             });
           }
         }
-        
+        useEffect(() => {
+          // voice handler events
+          Voice.onSpeechStart = speechStartHandler;
+          Voice.onSpeechEnd = speechEndHandler;
+          Voice.onSpeechResults = speechResultsHandler;
+          Voice.onSpeechError = speechErrorHandler;
+      
+          //tts handlers
+          Tts.addEventListener('tts-start', (event) => console.log("start", event));
+          Tts.addEventListener('tts-progress', (event) => console.log("progress", event));
+          Tts.addEventListener('tts-finish', (event) => { console.log("finish", event); setSpeaking(false) });
+          Tts.addEventListener('tts-cancel', (event) => console.log("cancel", event));
+      
+          return () => {
+            // voice instant remover
+            Voice.destroy().then(Voice.removeAllListeners);
+          };
+        }, []);
 
 const clear = () => {
           setMessages([]);
