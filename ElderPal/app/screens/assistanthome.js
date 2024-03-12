@@ -22,6 +22,19 @@ const HomeScreen = () => {
             });
           }
         }
+        
+const stopRecording = async () => {
+          try {
+            await Voice.stop();
+            setRecording(false);
+            // Fetch response after stopping recording
+            fetchResponse();
+          } catch (e) {
+            console.log('Recording Stop Error:', e);
+            // Handle error appropriately, e.g., show an error message.
+          }
+        };
+      
       
       
 const updateScrollView = () => {
