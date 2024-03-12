@@ -11,6 +11,11 @@ const HomeScreen = () => {
   const [messages, setMessages] = useState([]);
   const [recording, setRecording] = useState(false);
 
+  
+const stopSpeaking = () => {
+          Tts.stop();
+          setSpeaking(false);
+        };
   const speechStartHandler = () => {
           console.log('speech start handler');
         };
