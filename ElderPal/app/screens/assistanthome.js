@@ -307,6 +307,57 @@ const styles = StyleSheet.create({
                     padding: wp(2),
                     marginTop: hp(1.5),
                   },
+                  assistantMsgBox: {
+                    width: wp(70),
+                    backgroundColor: 'white',
+                    borderRadius: wp(4),
+                    padding: wp(2),
+                    marginTop: hp(1.5),
+                  },
+                  imgResBox: {     // for dalle image response 
+                    flexDirection: 'row',
+                    justifyContent: 'start',
+                  },
+                  imgResContainer: { // for dalle image response 
+                    marginTop: hp(1),
+                    padding: 0,
+                    backgroundColor: 'white',
+                    borderRadius: 20,
+                  },
+                  imgResStyle: {  // for dalle  image response 
+                    borderRadius: 20,
+                    height: wp(60),
+                    width: wp(60),
+                  },
+                  loadingImage: {
+                    width: hp(10),
+                    height: hp(10),
+                  },
+                  buttonsContainer: {
+                    marginTop: 5,
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  },
+                  buttonImage: {
+                    height: hp(10),
+                    width: hp(10),
+                    borderRadius: hp(5),
+                  },
+                  clearButton: {
+                    backgroundColor: '#8B5CF6',
+                    borderRadius: wp(8),
+                    padding: wp(2),
+                    position: 'absolute',
+                    right: wp(10),
+                  },
+                  stopButton: {
+                    backgroundColor: '#EF4444',
+                    borderRadius: wp(8),
+                    padding: wp(2),
+                    position: 'absolute',
+                    left: wp(10),
+                  },
           
 });
 
