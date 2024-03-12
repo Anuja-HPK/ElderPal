@@ -288,6 +288,25 @@ const styles = StyleSheet.create({
                     padding: wp(4),
                     marginBottom: hp(10),
                   },
+                  scrollView: {
+                    flex: 1,
+                    marginVertical: wp(1),
+                  },
+                  assistantMessage: {
+                    marginBottom: hp(1),
+                  },
+                  userInput: {
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                    marginTop: hp(1),
+                  },
+                  userInputBox: {
+                    width: wp(70),
+                    backgroundColor: '#D1FAE5',
+                    borderRadius: wp(4),
+                    padding: wp(2),
+                    marginTop: hp(1.5),
+                  },
           
 });
 
