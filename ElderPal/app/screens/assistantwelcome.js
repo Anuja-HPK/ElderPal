@@ -17,5 +17,49 @@ const assistantwelcome = () =>{
     </View>
 
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-around',
+    backgroundColor: 'white',
+  },
+  textContainer: {
+    marginBottom: hp(2),
+  },
+  title: {
+    fontSize: wp(10),
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'gray',
+  },
+  subtitle: {
+    fontSize: wp(4),
+    textAlign: 'center',
+    fontWeight: '500',
+    letterSpacing: 1,
+    color: 'gray',
+  },
+  imageContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
+  image: {
+    width: wp(75),
+    height: wp(75),
+  },
+  button: {
+    backgroundColor: '#059669',
+    marginHorizontal: wp(5),
+    padding: hp(2),
+    borderRadius: wp(2),
+  },
+  buttonText: {
+    fontSize: wp(6),
+    textAlign: 'center',
+    fontWeight: 'bold',
+    color: 'white',
+  },
+});
+
 
 export default WelcomeScreen;
