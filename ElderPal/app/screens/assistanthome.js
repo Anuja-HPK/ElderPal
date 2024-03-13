@@ -195,7 +195,7 @@ const HomeScreen = () => {
           {
             loading ? (
               <Image
-                source={require('../../assets/images/loading.gif')}
+                source={require('../../app/assets/images/loading.gif')}
                 style={styles.loadingImage} />
 
             ) :
