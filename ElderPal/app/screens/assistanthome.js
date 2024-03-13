@@ -138,7 +138,7 @@ const HomeScreen = () => {
     <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.imageContainer}>
-          <Image source={require('../../assets/images/bot.png')} style={styles.image} />
+          <Image source={require('../../app/assets/vaimages/bot.png')} style={styles.image} />
         </View>
         {/* features and messages */}
         {messages.length > 0 ? (
