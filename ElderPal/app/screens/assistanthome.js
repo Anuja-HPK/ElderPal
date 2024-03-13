@@ -205,7 +205,7 @@ const HomeScreen = () => {
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity onPress={startRecording}>
-                  <Image source={require('../../assets/images/recordingIcon.png')} style={styles.buttonImage} />
+                  <Image source={require('../../app/assets/images/recordingIcon.png')} style={styles.buttonImage} />
                 </TouchableOpacity>
               )
 
