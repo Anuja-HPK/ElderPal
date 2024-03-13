@@ -34,6 +34,7 @@ import CallingUIScreen from "./app/screens/CallingUIScreen";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import assistanthome from "./app/screens/assistanthome";
 
 const Stack = createNativeStackNavigator();
 
