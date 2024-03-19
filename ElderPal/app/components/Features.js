@@ -5,12 +5,12 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 const Features = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Features</Text>
+      <Text style={styles.title}>What's on your mind?</Text>
 
       <View style={styles.featureContainer1}>
         <View style={styles.featureItem}>
           <Image
-            source={require('../../assets/images/chatgptIcon.png')}
+            source={require('../assets/vaimages/chatgptIcon.png')}
             style={styles.featureIcon}
           />
           <Text style={styles.featureText}>ChatGPT</Text>
@@ -23,7 +23,7 @@ const Features = () => {
       <View style={styles.featureContainer2}>
         <View style={styles.featureItem}>
           <Image
-            source={require('../../assets/images/dalleIcon.png')}
+            source={require('../assets/vaimages/dalleIcon.png')}
             style={styles.featureIcon}
           />
           <Text style={styles.featureText}>DALL-E</Text>
@@ -36,7 +36,7 @@ const Features = () => {
       <View style={styles.featureContainer3}>
         <View style={styles.featureItem}>
           <Image
-            source={require('../../assets/images/smartaiIcon.png')}
+            source={require('../assets/vaimages/smartaiIcon.png')}
             style={styles.featureIcon}
           />
           <Text style={styles.featureText}>SMART AI</Text>

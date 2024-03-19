@@ -7,7 +7,7 @@ import Voice from '@react-native-community/voice';
 import { apiCall } from '../api/openAI';
 import Tts from 'react-native-tts';
 
-const HomeScreen = () => {
+const AssistantHome = () => {
   const [messages, setMessages] = useState([]);
   const [recording, setRecording] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -195,17 +195,17 @@ const HomeScreen = () => {
           {
             loading ? (
               <Image
-                source={require('../../app/assets/images/loading.gif')}
+                source={require('../../app/assets/vaimages/loading.gif')}
                 style={styles.loadingImage} />
 
             ) :
               recording ? (
                 <TouchableOpacity onPress={stopRecording}>
-                  <Image source={require('../../app/assets/images/voiceLoading.gif')} style={styles.buttonImage} />
+                  <Image source={require('../../app/assets/vaimages/voiceLoading.gif')} style={styles.buttonImage} />
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity onPress={startRecording}>
-                  <Image source={require('../../app/assets/images/recordingIcon.png')} style={styles.buttonImage} />
+                  <Image source={require('../../app/assets/vaimages/recordingIcon.png')} style={styles.buttonImage} />
                 </TouchableOpacity>
               )
 
@@ -341,4 +341,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default AssistantHome;
