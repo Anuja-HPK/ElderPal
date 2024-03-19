@@ -1,7 +1,7 @@
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import React from 'react';
 
-export default function ElderDashboardScreen() {
+export default function ElderDashboardScreen({ navigation }) {
   return (
     <View style={El_dashboard.viewStyle}>
       <TouchableOpacity>
@@ -9,7 +9,7 @@ export default function ElderDashboardScreen() {
       </TouchableOpacity>
 
       <TouchableOpacity>
-        <View style={El_dashboard.profTextStyle}>
+        <View style={El_dashboard.profTextStyle} onPress={() => navigation.navigate("ElderPF")}  >
           <Image
             source={require('../assets/profImage.png')} // add prof image
             style={El_dashboard.pic}
@@ -21,19 +21,19 @@ export default function ElderDashboardScreen() {
 
       {/* action buttons */}
       <View style={El_dashboard.container}>
-        <TouchableOpacity style={El_dashboard.button}>
+        <TouchableOpacity style={El_dashboard.button} onPress={() => navigation.navigate("AIassistant")}>
           <Text style={El_dashboard.text}>AI Assistant</Text>
         </TouchableOpacity>
       </View>
 
       <View style={El_dashboard.container}>
-        <TouchableOpacity style={El_dashboard.button}>
+        <TouchableOpacity style={El_dashboard.button} onPress={() => navigation.navigate("Call")}>
           <Text style={El_dashboard.text}>Call</Text>
         </TouchableOpacity>
       </View>
 
       <View style={El_dashboard.container}>
-        <TouchableOpacity style={El_dashboard.button}>
+        <TouchableOpacity style={El_dashboard.button} onPress={() => navigation.navigate("ToDo")}>
           <Text style={El_dashboard.text}>To-Do List</Text>
         </TouchableOpacity>
       </View>
@@ -69,17 +69,17 @@ const El_dashboard = {
     fontSize: 24,
     marginLeft: 10,
     fontWeight: 600,
-    color:'black',
+    color: 'black',
   },
   backButton: {
     fontSize: 24,
     marginLeft: 20,
     marginTop: 20,
-    color:'black',
+    color: 'black',
   },
   viewStyle: {
     flex: 1,
-    
+
   },
   profTextStyle: {
     flexDirection: 'row',
