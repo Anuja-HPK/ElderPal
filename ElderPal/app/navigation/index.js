@@ -27,7 +27,7 @@ import Logout from "../../app/screens/Messages/Logout";
 import SignInMessage from "../../app/screens/Messages/SignInMessage";
 import SignUpMessage from "../../app/screens/Messages/SignUpMessage";
 import OthersSignUpScreen from "../../app/screens/OthersSignUpScreen";
-import AssistantHome from "../../app/screens/AssistantHome";
+import AssistantHome from "../screens/AssistantHome";
 import CallingUIScreen from "../../app/screens/CallingUIScreen";
 
 import { NavigationContainer } from '@react-navigation/native';
