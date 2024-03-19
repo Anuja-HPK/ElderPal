@@ -52,7 +52,7 @@ export default function App() {
     // </NavigationContainer>
 
     <>
-    <TodoList/>
+    <CallContacts/>
     </>
   );
 }
