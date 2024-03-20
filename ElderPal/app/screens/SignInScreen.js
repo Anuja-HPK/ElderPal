@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image} from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
 import { auth } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 
@@ -15,152 +15,152 @@ const SignInScreen = ({ navigation }) => {
     setPasswordError('');
 
     if (!username.trim()) {
-        setUsernameError('Email/username is required');
-        return;
+      setUsernameError('Email/username is required');
+      return;
     }
     if (!password.trim()) {
-        setPasswordError('Password is required');
-        return;
+      setPasswordError('Password is required');
+      return;
     }
 
     auth()
-        .signInWithEmailAndPassword(username, password)
-        .then(async(userCredential) => {
-            // Get user data from firestore based on their UID
-            const userData = await firestore().collection('users').doc(userCredential.user.uid).get();
-            const role = userData.data().role;
-            const userEmail = userData.data().email;
+      .signInWithEmailAndPassword(username, password)
+      .then(async (userCredential) => {
+        // Get user data from firestore based on their UID
+        const userData = await firestore().collection('users').doc(userCredential.user.uid).get();
+        const role = userData.data().role;
+        const userEmail = userData.data().email;
 
-            //compare user role and email
-            if (role === 'elder' && userEmail === username) {
-              // Navigate to ElderHomeScreen
-              //navigation.navigate('ElderHomeScreen');
-              console.log("Successfully signed in as an elder!");
-              Alert.alert('User logged in');
+        //compare user role and email
+        if (role === 'elder' && userEmail === username) {
+          // Navigate to ElderHomeScreen
+          navigation.navigate('ElderDB');
+          console.log("Successfully signed in as an elder!");
+          Alert.alert('User logged in');
 
-          } else if (role === 'doctor' && userEmail === username) {
-              // Navigate to DoctorHomeScreen
-              //navigation.navigate('DoctorHomeScreen');
-              console.log("Successfully signed in as a doctor!");
-              Alert.alert('User logged in');
+        } else if (role === 'doctor' && userEmail === username) {
+          // Navigate to DoctorHomeScreen
+          navigation.navigate('DoctorDB');
+          console.log("Successfully signed in as a doctor!");
+          Alert.alert('User logged in');
 
-          } else if (role === 'familyMember' && userEmail === username) {
-              // Navigate to FamilyMemberHomeScreen
-              //navigation.navigate('FamilyMemberHomeScreen');
-              console.log("Successfully signed in as a family member!");
-              Alert.alert('User logged in');
+        } else if (role === 'familyMember' && userEmail === username) {
+          // Navigate to FamilyMemberHomeScreen
+          navigation.navigate('FamilyMemberDB');
+          console.log("Successfully signed in as a family member!");
+          Alert.alert('User logged in');
 
-          } else if (role === 'caretaker' && userEmail === username) {
-              // Navigate to CaretakerHomeScreen
-              //navigation.navigate('CaretakerHomeScreen');
-              console.log("Successfully signed in as a caretaker!");
-              Alert.alert('User logged in');
+        } else if (role === 'caretaker' && userEmail === username) {
+          // Navigate to CaretakerHomeScreen
+          navigation.navigate('CaretakerDB');
+          console.log("Successfully signed in as a caretaker!");
+          Alert.alert('User logged in');
 
-          } else {
-              // Navigate to a default screen if role or email doesn't match
-              //navigation.navigate('DefaultHomeScreen');
-              console.log("Unknown user role or invalid email!");
-              Alert.alert('Error', 'Unknown user role or invalid email');
-          }
-        })
-        
-        .catch(error => {
-            console.log(error.code);
-            switch (error.code) {
-                case 'auth/user-not-found':
-                case 'auth/wrong-password':
-                    // Handle incorrect username/email or password
-                    setUsernameError('Invalid username/email or password');
-                    setPasswordError('Invalid username/email or password');
-                    break;
-                case 'auth/invalid-email':
-                    // Handle invalid email
-                    setUsernameError('Invalid email');
-                    break;
-                default:
-                    // Handle other errors
-                    Alert.alert('Error', 'An error occurred. Please try again later.');
-                    console.error(error);
-              }
-          });
-    };
+        } else {
+          // Navigate to a default screen if role or email doesn't match
+          navigation.navigate('SignIn');
+          console.log("Unknown user role or invalid email!");
+          Alert.alert('Error', 'Unknown user role or invalid email');
+        }
+      })
 
-    return (
-      <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
-          <View style={styles.upperHalfBackground}></View>
-  
-          <View style={styles.headerContainer}>
-            <Text style={styles.headerTitle}>Sign In</Text>
-          </View>
-  
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your email/username"
-            value={email}
-            onChangeText={text => {
-              setEmail(text);
-              if (text.trim()) setUsernameError('');
-            }}
-          />
-          {usernameError ? <Text style={styles.errorText}>{usernameError}</Text> : null}
-  
-          <TextInput
-            style={styles.input}
-            placeholder="Enter your password"
-            value={password}
-            secureTextEntry={true}
-            onChangeText={text => {
-              setPassword(text);
-              if (text.trim()) setPasswordError('');
-            }}
-          />
-          {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
-  
-          <TouchableOpacity onPress={() => {/* Handle forgot password */}} style={{ width: '90%', alignItems: 'flex-end' }}>
-            <Text style={styles.forgotPasswordText}>Forgot password?</Text>
-          </TouchableOpacity>
-  
-          <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-            <Text style={styles.buttonText}>Sign In</Text>
-          </TouchableOpacity>
-  
-          <Text style={styles.signupText}>
-            Don't have an account?{' '}
-  
-            <Text style={styles.signupButton} onPress={() => navigation.navigate("ChooseRole")}>
-              Sign Up
-            </Text>
+      .catch(error => {
+        console.log(error.code);
+        switch (error.code) {
+          case 'auth/user-not-found':
+          case 'auth/wrong-password':
+            // Handle incorrect username/email or password
+            setUsernameError('Invalid username/email or password');
+            setPasswordError('Invalid username/email or password');
+            break;
+          case 'auth/invalid-email':
+            // Handle invalid email
+            setUsernameError('Invalid email');
+            break;
+          default:
+            // Handle other errors
+            Alert.alert('Error', 'An error occurred. Please try again later.');
+            console.error(error);
+        }
+      });
+  };
+
+  return (
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
+        <View style={styles.upperHalfBackground}></View>
+
+        <View style={styles.headerContainer}>
+          <Text style={styles.headerTitle}>Sign In</Text>
+        </View>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your email/username"
+          value={email}
+          onChangeText={text => {
+            setEmail(text);
+            if (text.trim()) setUsernameError('');
+          }}
+        />
+        {usernameError ? <Text style={styles.errorText}>{usernameError}</Text> : null}
+
+        <TextInput
+          style={styles.input}
+          placeholder="Enter your password"
+          value={password}
+          secureTextEntry={true}
+          onChangeText={text => {
+            setPassword(text);
+            if (text.trim()) setPasswordError('');
+          }}
+        />
+        {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
+
+        <TouchableOpacity onPress={() => {/* Handle forgot password */ }} style={{ width: '90%', alignItems: 'flex-end' }}>
+          <Text style={styles.forgotPasswordText}>Forgot password?</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.button} onPress={handleSignIn}>
+          <Text style={styles.buttonText}>Sign In</Text>
+        </TouchableOpacity>
+
+        <Text style={styles.signupText}>
+          Don't have an account?{' '}
+
+          <Text style={styles.signupButton} onPress={() => navigation.navigate("ChooseRole")}>
+            Sign Up
           </Text>
-  
-          <Text style={styles.orText}>-----------------------------OR-----------------------------</Text>
-  
-           <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Google sign-in */}}>
-            <Image
-              source={require('../assets/GoogleIcon.jpg')}
-              style={{width: 20, height: 20, marginRight: 8}}
-            />
-            <Text style={styles.socialButtonText}>SignIn with Google</Text>
-          </TouchableOpacity>
-  
-          <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Apple sign-in */}}>
-            <Image
-              source={require('../assets/Instagram.jpg')}
-              style={{width: 20, height: 20, marginRight: 8}}
-            />
-            <Text style={styles.socialButtonText}>SignIn with Instagram</Text>
-          </TouchableOpacity>
-  
-          <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Facebook sign-in */}}>
-            <Image
-              source={require('../assets/facebook.jpg')}
-              style={{width: 25, height: 20, marginRight: 8}}
-            />
-            <Text style={styles.socialButtonText}>SignIn with Facebook</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-    );
+        </Text>
+
+        <Text style={styles.orText}>-----------------------------OR-----------------------------</Text>
+
+        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Google sign-in */ }}>
+          <Image
+            source={require('../assets/GoogleIcon.jpg')}
+            style={{ width: 20, height: 20, marginRight: 8 }}
+          />
+          <Text style={styles.socialButtonText}>SignIn with Google</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Apple sign-in */ }}>
+          <Image
+            source={require('../assets/Instagram.jpg')}
+            style={{ width: 20, height: 20, marginRight: 8 }}
+          />
+          <Text style={styles.socialButtonText}>SignIn with Instagram</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Facebook sign-in */ }}>
+          <Image
+            source={require('../assets/facebook.jpg')}
+            style={{ width: 25, height: 20, marginRight: 8 }}
+          />
+          <Text style={styles.socialButtonText}>SignIn with Facebook</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+  );
 };
 
 
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: '90%',
   },
-  
+
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',

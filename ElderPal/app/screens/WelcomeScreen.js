@@ -15,7 +15,7 @@ const WelcomeScreen = ({ navigation }) => {
     ).start();
 
     const timer = setTimeout(() => {
-      //navigation.navigate('SignInScreen'); // Make sure this matches the name you've given the SignInScreen in your navigation stack
+      navigation.navigate('SignIn'); // Make sure this matches the name you've given the SignInScreen in your navigation stack
     }, 3000); // Navigate after 3 seconds
 
     return () => clearTimeout(timer);
@@ -24,13 +24,13 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}></View>
-      <Animated.View style={{...styles.logoContainer, opacity: fadeAnim}}>
+      <Animated.View style={{ ...styles.logoContainer, opacity: fadeAnim }}>
         <Image
           source={require('../assets/Logo.png')}
           style={styles.logo}
         />
       </Animated.View>
-      <Animated.View style={{opacity: fadeAnim}}>
+      <Animated.View style={{ opacity: fadeAnim }}>
         <Text style={styles.title}>Welcome to ElderPal</Text>
         <Text style={styles.description}>
           Stay connected, supported, and informed with all your elder care needs in one place.

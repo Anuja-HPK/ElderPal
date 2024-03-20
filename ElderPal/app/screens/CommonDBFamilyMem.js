@@ -2,41 +2,41 @@ import React from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 
 const App = () => {
-    return (
-      <ScrollView contentContainerStyle={styles.container}>
-        <View style={styles.blueSection}>
-          
-          <View style={styles.userInfoContainer}>
-            <TouchableOpacity style={styles.userProfileButton}>
-              <Image source={require('../assets/doc.png')} style={styles.profileImage} />
-            </TouchableOpacity>
-            <View style={styles.userInfo}>
-              <Text style={styles.userName}>Steve Doe</Text>
-              <Text style={styles.userRole}>Family</Text>
-            </View>
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.blueSection}>
+
+        <View style={styles.userInfoContainer}>
+          <TouchableOpacity style={styles.userProfileButton} onPress={() => navigation.navigate("FamilyMemberPF")}>
+            <Image source={require('../assets/doc.png')} style={styles.profileImage} />
+          </TouchableOpacity>
+          <View style={styles.userInfo}>
+            <Text style={styles.userName}>Steve Doe</Text>
+            <Text style={styles.userRole}>Family</Text>
           </View>
-          {/* content for the blue section */}
         </View>
-  
-        <View style={styles.whiteSection}>
-          {/* Circular Buttons */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <TouchableOpacity style={styles.circularButton}>
-              <Image source={require('../assets/VidCall.png')} style={styles.buttonImage1} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.circularButton}>
-              <Image source={require('../assets/msg.png')} style={styles.buttonImage} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.circularButton}>
-              <Image source={require('../assets/docNotes.png')} style={styles.buttonImage} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.circularButton}>
-              <Image source={require('../assets/careNote.png')} style={styles.buttonImage} />
-            </TouchableOpacity>
-          </ScrollView>
-  
-          {/* Gray Section for  Notes */}
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.graySection}>
+        {/* content for the blue section */}
+      </View>
+
+      <View style={styles.whiteSection}>
+        {/* Circular Buttons */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          <TouchableOpacity style={styles.circularButton}>
+            <Image source={require('../assets/VidCall.png')} style={styles.buttonImage1} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.circularButton}>
+            <Image source={require('../assets/msg.png')} style={styles.buttonImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.circularButton}>
+            <Image source={require('../assets/docNotes.png')} style={styles.buttonImage} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.circularButton}>
+            <Image source={require('../assets/careNote.png')} style={styles.buttonImage} />
+          </TouchableOpacity>
+        </ScrollView>
+
+        {/* Gray Section for  Notes */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.graySection}>
           {/* Note 1 */}
           <View style={styles.noteContainer}>
             <Text style={styles.noteText}>
@@ -61,8 +61,8 @@ const App = () => {
         </ScrollView>
       </View>
     </ScrollView>
-    );
-  };
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  buttonImage1:{
+  buttonImage1: {
     width: 50,
     height: 30,
   },

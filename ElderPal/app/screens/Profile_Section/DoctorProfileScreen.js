@@ -61,7 +61,7 @@ const DoctorProfileScreen = () => {
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}>
 
-      <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
+        <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
 
@@ -80,17 +80,17 @@ const DoctorProfileScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("DoctorEdit")}>
           <Text style={styles.buttonText}>Edit Profile</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => { }}>
           <Text style={styles.buttonText}>Appointments</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("settings")}>
           <Text style={styles.buttonText}>Settings</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
-  
+
   logoutButton: {
     backgroundColor: '#49d049',
   },

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import auth  from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
@@ -14,64 +14,64 @@ const DoctorSignUpScreen = () => {
 
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
-  const handleSignUp = async() => {
+  const handleSignUp = async () => {
     // Checking if the terms and conditions checkbox is ticked
     if (!agreeToTerms) {
-        Alert.alert("Error", "You must agree to the terms and conditions to sign up.");
-        return;
+      Alert.alert("Error", "You must agree to the terms and conditions to sign up.");
+      return;
     }
 
     // Basic empty checks
     if (!name.trim() || !email.trim() || !password || !confirmPassword) {
-        Alert.alert("Error", "Please fill in all fields.");
-        return;
+      Alert.alert("Error", "Please fill in all fields.");
+      return;
     }
 
     // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        Alert.alert("Error", "Please enter a valid email address.");
-        return;
+      Alert.alert("Error", "Please enter a valid email address.");
+      return;
     }
 
     // Password length check
     if (password.length < 8) {
-        Alert.alert("Error", "Password must be at least 8 characters long.");
-        return;
+      Alert.alert("Error", "Password must be at least 8 characters long.");
+      return;
     }
 
     // Passwords match check
     if (password !== confirmPassword) {
-        Alert.alert("Error", "Passwords do not match.");
-        return;
+      Alert.alert("Error", "Passwords do not match.");
+      return;
     }
 
     try {
       const userSnapshot = await firestore().collection('users').where('email', '==', email).get();
       if (!userSnapshot.empty) {
-          userSnapshot.forEach(doc => {
-              const userData = doc.data();
-              const userRole = userData.role;
-              if (userRole !== 'doctor') { // Change 'elder' to the appropriate role you're signing up for
-                  throw new Error(`Email address is already associated with a ${userRole} account.`);
-              }
-          });
+        userSnapshot.forEach(doc => {
+          const userData = doc.data();
+          const userRole = userData.role;
+          if (userRole !== 'doctor') { // Change 'elder' to the appropriate role you're signing up for
+            throw new Error(`Email address is already associated with a ${userRole} account.`);
+          }
+        });
       }
-  } catch (error) {
+    } catch (error) {
       Alert.alert("Error", error.message);
       return;
-  }
+    }
 
     try {
       // Create user in Firebase authentication
       const userCredential = await auth().createUserWithEmailAndPassword(email, password);
-      
+
       // Save additional user data to Firestore
       await firestore().collection('users').doc(userCredential.user.uid).set({
         uid: userCredential.user.uid,
         name: name,
         email: email,
-        role: 'doctor' 
+        role: 'doctor'
         // Add more fields if needed
       });
 
@@ -84,7 +84,7 @@ const DoctorSignUpScreen = () => {
 
       console.log('User account created & signed in!');
 
-      //navigation.navigate('DoctorDashBoard');
+      navigation.navigate('DoctorDB');
 
       // Handle navigation to the appropriate screen here
     } catch (error) {
@@ -108,26 +108,26 @@ const DoctorSignUpScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
-        
-      <View style={styles.upperHalfBackground}></View>
+
+        <View style={styles.upperHalfBackground}></View>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>Create Account as Doctor</Text>
         </View>
-  
+
         <TextInput
           style={styles.input}
           placeholder="Enter your name"
           value={name}
           onChangeText={txt => setName(txt)} // Assuming you have a setName function to handle this
         />
-  
+
         <TextInput
           style={styles.input}
           placeholder="Enter your email"
           value={email}
           onChangeText={txt => setEmail(txt)} // Assuming you have a setEmail function to handle this
         />
-  
+
         <TextInput
           style={styles.input}
           placeholder="Create password"
@@ -135,13 +135,13 @@ const DoctorSignUpScreen = () => {
           secureTextEntry={true}
           onChangeText={txt => setPassword(txt)} // Assuming you have a setPassword function to handle this
         />
-  
+
         <TextInput
           style={styles.input}
           placeholder="Confirm password"
           value={confirmPassword}
           secureTextEntry={true}
-          onChangeText={txt =>setConfirmPassword(txt)} // Assuming you have a setConfirmPassword function to handle this
+          onChangeText={txt => setConfirmPassword(txt)} // Assuming you have a setConfirmPassword function to handle this
         />
 
         <View style={styles.checkboxContainer}>
@@ -156,15 +156,15 @@ const DoctorSignUpScreen = () => {
         <TouchableOpacity style={styles.button} onPress={handleSignUp}>
           <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
-  
+
         <Text style={styles.signupText}>
           Already have an account?{' '}
           {/* Uncomment and implement navigation logic within onPress when ready */}
-          <Text style={styles.signupButton} onPress={() => {/* navigateToSignIn() */}}>
+          <Text style={styles.signupButton} onPress={() => {/* navigateToSignIn() */ }}>
             Sign In
           </Text>
         </Text>
-  
+
       </ScrollView>
     </View>
   );
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     width: '90%',
   },
-  
+
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
@@ -285,7 +285,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: '75%',
   },
-  
+
   checkbox: {
     height: 24,
     width: 24,
@@ -296,11 +296,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginRight: 10,
   },
-  
+
   checkboxChecked: {
     backgroundColor: '#258e25',
   },
-  
+
   checkboxLabel: {
     flex: 1, // Ensure label takes up the remaining space
     fontSize: 16,

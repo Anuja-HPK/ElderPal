@@ -56,13 +56,13 @@ const FamilyMemberProfileScreen = () => {
       Alert.alert('Logout Failed', 'An error occurred while logging out. Please try again.');
     }
   };
-  
+
 
   return (
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}>
 
-      <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
+        <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
 
@@ -74,19 +74,19 @@ const FamilyMemberProfileScreen = () => {
         />
       </View>
 
-       <View style={styles.infoContainer}>
+      <View style={styles.infoContainer}>
         <Text style={styles.infoText}>{name}</Text>
         <Text style={styles.infoText}>{email}</Text>
         <Text style={styles.infoText}>UID: {uid}</Text>
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("FamilyMemberEdit")}>
           <Text style={styles.buttonText}>Edit Profile</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("settings")}>
           <Text style={styles.buttonText}>Settings</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     top: 80,
   },
 
-avatar: {
+  avatar: {
     width: 150,
     height: 150,
     borderRadius: 75,
@@ -153,7 +153,7 @@ avatar: {
     shadowOpacity: 0.5,
     shadowRadius: 8,
   },
-  
+
 
   infoContainer: {
     marginTop: 85, // Adjust based on avatar size and desired spacing
@@ -189,7 +189,7 @@ avatar: {
     shadowRadius: 3.84,
     elevation: 5,
   },
-  
+
 
   buttonText: {
     color: '#fff',
@@ -202,7 +202,7 @@ avatar: {
     fontWeight: 'bold',
     fontSize: 20,
   },
-  
+
   logoutButton: {
     backgroundColor: '#49d049',
   },

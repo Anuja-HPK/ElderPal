@@ -80,23 +80,23 @@ const ElderProfileScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('EditProfile')} // Navigate to EditProfileScreen
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ElderEdit')} // Navigate to EditProfileScreen
         >
           <Text style={styles.buttonText}>Edit Profile</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => { }}>
           <Text style={styles.buttonText}>Appointments</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => { }}>
           <Text style={styles.buttonText}>Emergency Contact</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("settings")}>
           <Text style={styles.buttonText}>Settings</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 8,
   },
-  
+
   infoContainer: {
     marginTop: 85, // Adjust based on avatar size and desired spacing
     alignItems: 'center', // This centers the text vertically in the container
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20,
   },
-  
+
   logoutButton: {
     backgroundColor: '#49d049',
   },
