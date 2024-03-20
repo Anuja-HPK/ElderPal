@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
 
-const App = () => {
+
+const App = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.blueSection}>
