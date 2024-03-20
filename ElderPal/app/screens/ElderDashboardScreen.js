@@ -8,8 +8,8 @@ export default function ElderDashboardScreen({ navigation }) {
         <Text style={El_dashboard.backButton}>&lt; Back</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
-        <View style={El_dashboard.profTextStyle} onPress={() => navigation.navigate("ElderPF")}>
+      <TouchableOpacity onPress={() => navigation.navigate("ElderPF")}>
+        <View style={El_dashboard.profTextStyle}>
           <Image
             source={require('../assets/profImage.png')} // add prof image
             style={El_dashboard.pic}
