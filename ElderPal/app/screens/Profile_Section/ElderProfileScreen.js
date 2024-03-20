@@ -1,17 +1,72 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import auth from '@react-native-firebase/auth';
 
 const ElderProfileScreen = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [uid, setUid] = useState('');
+  const navigation = useNavigation(); // Get navigation object
+
+  // Inside useEffect hook in ElderProfileScreen
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        // Retrieve the unique key for the current user (e.g., using email)
+        const userKey = `elder_${userCredential.user.uid}`;
+
+        // Retrieve user details using the unique key
+        const elderName = await AsyncStorage.getItem(`${userKey}_name`);
+        const elderEmail = await AsyncStorage.getItem(`${userKey}_email`);
+        const elderUid = await AsyncStorage.getItem(`${userKey}_uid`);
+
+        if (elderName !== null && elderEmail !== null) {
+          setName(elderName);
+          setEmail(elderEmail);
+          setUid(elderUid);
+        } else {
+          console.log('Elder details not found in AsyncStorage');
+        }
+      } catch (error) {
+        console.error('Error retrieving elder data from AsyncStorage:', error.message);
+      }
+    };
+
+    getData();
+  }, []);
+
+
+  const handleLogout = async () => {
+    try {
+      // Proceed with sign out
+      await auth().signOut();
+
+      // Clear user details only upon explicit sign-out
+      // (Do not clear user details here if you want them to persist across sessions)
+      // await AsyncStorage.removeItem(`${userKey}_name`);
+      // await AsyncStorage.removeItem(`${userKey}_email`);
+      // await AsyncStorage.removeItem(`${userKey}_uid`);
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'SignInScreen' }],
+      });
+    } catch (error) {
+      console.error('Logout Error:', error);
+      Alert.alert('Logout Failed', 'An error occurred while logging out. Please try again.');
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}>
-
-      <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
+        <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
-
         <Text style={styles.title}>Elder Profile</Text>
-
         <Image
           source={{ uri: 'https://via.placeholder.com/150' }}
           style={styles.avatar}
@@ -19,12 +74,14 @@ const ElderProfileScreen = () => {
       </View>
 
       <View style={styles.infoContainer}>
-        <Text style={styles.infoText}>John Doe</Text>
-        <Text style={styles.infoText}>john.doe@example.com</Text>
+        <Text style={styles.infoText}>{name}</Text>
+        <Text style={styles.infoText}>{email}</Text>
+        <Text style={styles.infoText}>UID: {uid}</Text>
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('EditProfile')} // Navigate to EditProfileScreen
+        >
           <Text style={styles.buttonText}>Edit Profile</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
@@ -44,12 +101,11 @@ const ElderProfileScreen = () => {
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={() => {}}>
+        <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={handleLogout}>
           <Text style={[styles.buttonText, styles.logoutButtonText]}>Logout</Text>
           <Text style={[styles.buttonArrow, styles.logoutButtonText]}>→</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1076237621104",
+    "project_id": "fir-auth-9c1f6",
+    "storage_bucket": "fir-auth-9c1f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076237621104:android:11f40fefe89a05097a21b5",
+        "android_client_info": {
+          "package_name": "com.elderpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUgyuBycdZLGuqcikZr3MUUtM-9fZk0nU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

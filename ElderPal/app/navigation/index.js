@@ -29,13 +29,22 @@ import SignUpMessage from "../../app/screens/Messages/SignUpMessage";
 import OthersSignUpScreen from "../../app/screens/OthersSignUpScreen";
 import AssistantHome from "../../app/screens/assistanthome";
 import CallingUIScreen from "../../app/screens/CallingUIScreen";
+import DoctorSignUp from "../../app/screens/DoctorSignUp";
+import FamilyMemberSignUp from '../../app/screens/FamilyMemberSignUp';
+import CareTakerSignUp from "../../app/screens/CareTakerSignUp";
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const Stack = createNativeStackNavigator();
 
 function AppNavigation() {
+    // Initialize Firebase Firestore and Firebase Auth
+    firestore();
+    auth();
+    
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="EldersDB">

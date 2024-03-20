@@ -5,12 +5,12 @@ import auth  from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
-const ElderSignUpScreen = () => {
+const FamilyMemberSignUpScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState('');
 
   const [agreeToTerms, setAgreeToTerms] = useState(false);
 
@@ -46,22 +46,21 @@ const ElderSignUpScreen = () => {
         return;
     }
 
-      // Check if the email is already associated with a user account in Firestore
-      try {
-        const userSnapshot = await firestore().collection('users').where('email', '==', email).get();
-        if (!userSnapshot.empty) {
-            userSnapshot.forEach(doc => {
-                const userData = doc.data();
-                const userRole = userData.role;
-                if (userRole !== 'elder') { // Change 'elder' to the appropriate role you're signing up for
-                    throw new Error(`Email address is already associated with a ${userRole} account.`);
-                }
-            });
-        }
-    } catch (error) {
-        Alert.alert("Error", error.message);
-        return;
-    }
+    try {
+      const userSnapshot = await firestore().collection('users').where('email', '==', email).get();
+      if (!userSnapshot.empty) {
+          userSnapshot.forEach(doc => {
+              const userData = doc.data();
+              const userRole = userData.role;
+              if (userRole !== 'family member') { // Change 'elder' to the appropriate role you're signing up for
+                  throw new Error(`Email address is already associated with a ${userRole} account.`);
+              }
+          });
+      }
+  } catch (error) {
+      Alert.alert("Error", error.message);
+      return;
+  }
 
     // Firebase authentication
     try {
@@ -73,12 +72,12 @@ const ElderSignUpScreen = () => {
         uid: userCredential.user.uid,
         name: name,
         email: email,
-        role: 'elder' 
+        role: 'familyMember' 
         // Add more fields if needed
       });
 
       // Generate a unique key using the Firebase user ID
-      const userKey = `elder_${userCredential.user.uid}`;
+      const userKey = `familyMember_${userCredential.user.uid}`;
 
       // Save user details using the generated unique key
       await AsyncStorage.setItem(`${userKey}_name`, name);
@@ -86,7 +85,7 @@ const ElderSignUpScreen = () => {
 
       console.log('User account created & signed in!');
 
-      //navigation.navigate('ElderDashBoard');
+      //navigation.navigate('familymember DashBoard');
 
       // Handle navigation to the appropriate screen here
     } catch (error) {
@@ -113,21 +112,21 @@ const ElderSignUpScreen = () => {
         
       <View style={styles.upperHalfBackground}></View>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Create Account as Elder</Text>
+          <Text style={styles.headerTitle}>Create Account as Family Member</Text>
         </View>
   
         <TextInput
           style={styles.input}
           placeholder="Enter your name"
           value={name}
-          onChangeText={txt => setName(txt)}
+          onChangeText={txt => setName(txt)} // Assuming you have a setName function to handle this
         />
   
         <TextInput
           style={styles.input}
           placeholder="Enter your email"
           value={email}
-          onChangeText={txt => setEmail(txt)}
+          onChangeText={txt => setEmail(txt)} // Assuming you have a setEmail function to handle this
         />
   
         <TextInput
@@ -135,7 +134,7 @@ const ElderSignUpScreen = () => {
           placeholder="Create password"
           value={password}
           secureTextEntry={true}
-          onChangeText={txt => setPassword(txt)}
+          onChangeText={txt => setPassword(txt)} // Assuming you have a setPassword function to handle this
         />
   
         <TextInput
@@ -143,7 +142,7 @@ const ElderSignUpScreen = () => {
           placeholder="Confirm password"
           value={confirmPassword}
           secureTextEntry={true}
-          onChangeText={txt =>setConfirmPassword(txt)}
+          onChangeText={txt =>setConfirmPassword(txt)} // Assuming you have a setConfirmPassword function to handle this
         />
 
         <View style={styles.checkboxContainer}>
@@ -310,4 +309,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ElderSignUpScreen;
+export default FamilyMemberSignUpScreen;
