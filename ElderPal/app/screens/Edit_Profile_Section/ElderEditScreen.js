@@ -1,18 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
-// import DateTimePicker from '@react-native-community/datetimepicker';
-// import { Picker } from '@react-native-picker/picker';
-//import { useNavigation } from '@react-navigation/native';
+import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet, Alert } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
 
 const EditProfileScreen = () => {
-  //const navigation =  useNavigation();
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('unknown');
   const [age, setAge] = useState('');
   const [ageError, setAgeError] = useState('');
-  const [selectedGender, setSelectedGender] = useState();
+  const [selectedGender, setSelectedGender] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [allergies, setAllergies] = useState('');
+  const [uid, setUid] = useState('');
+
+  useEffect(() => {
+    // Fetch elder's profile data when component mounts
+    fetchProfileData();
+    // Fetch user's UID
+    fetchUserUid();
+  }, []);
+
+  const fetchProfileData = async () => {
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const userId = user.uid;
+        const userProfile = await firestore().collection('users').doc(userId).get();
+        const data = userProfile.data();
+        if (data) {
+          setFirstName(data.firstName);
+          setLastName(data.lastName);
+          setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
+          setAge(data.age);
+          setSelectedGender(data.gender);
+          setSelectedBloodGroup(data.bloodGroup);
+          setAllergies(data.allergies);
+          setAddress1(data.address1);
+          setAddress2(data.address2);
+          setCity(data.city);
+          setCountry(data.country);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching elder profile:', error);
+      Alert.alert('Error', 'Failed to fetch elder profile data. Please try again.');
+    }
+  };
+
+  const fetchUserUid = async () => {
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const userId = user.uid;
+        setUid(userId);
+      }
+    } catch (error) {
+      console.error('Error fetching user UID:', error);
+    }
+  };
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -37,6 +86,34 @@ const EditProfileScreen = () => {
     setAge(filteredText);
   };
 
+  const saveChanges = async () => {
+    try {
+      const user = auth().currentUser;
+      if (user) {
+        const userId = user.uid;
+        await firestore().collection('users').doc(userId).update({
+          firstName,
+          lastName,
+          dateOfBirth: date.toISOString(), // Convert date to ISO string format
+          age,
+          gender: selectedGender,
+          bloodGroup: selectedBloodGroup,
+          allergies,
+          address1,
+          address2,
+          city,
+          country,
+        });
+        Alert.alert('Success', 'Profile updated successfully!');
+      } else {
+        Alert.alert('Error', 'User not found. Please login again.');
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      Alert.alert('Error', 'Failed to update profile. Please try again.');
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1}}>
         <View style={styles.upperHalfBackground}></View>
@@ -46,9 +123,11 @@ const EditProfileScreen = () => {
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
 
-        <Text style={styles.title}>Edit Profile</Text>
+        <Text style={styles.title}>Elder Edit Profile</Text>
 
         {/* Personal Information Section */}
+        <Text style={styles.userInfoText}>User ID: {uid}</Text>
+
         <Text style={styles.sectionTitle}>Personal Information</Text>
         <TextInput style={styles.input} placeholder="First Name" placeholderTextColor="#999" />
         <TextInput style={styles.input} placeholder="Last Name" placeholderTextColor="#999" />
@@ -125,8 +204,8 @@ const EditProfileScreen = () => {
         <TextInput style={styles.input} placeholder="Allergies" placeholderTextColor="#999" />
 
         {/* Save Button */}
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Save Changes</Text>
+        <TouchableOpacity style={styles.button} onPress={saveChanges}>
+        <Text style={styles.buttonText}>Save Changes</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
