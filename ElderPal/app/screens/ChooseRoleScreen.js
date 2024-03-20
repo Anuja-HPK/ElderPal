@@ -31,7 +31,7 @@ export default function ChooseRoleScreen({ navigation }) {
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpCaregiver")}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpCareTaker")}>
           <Text style={roleStyles.text}>Caregiver</Text>
         </TouchableOpacity>
       </View>

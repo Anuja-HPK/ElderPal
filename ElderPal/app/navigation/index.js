@@ -37,6 +37,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
 import { useState } from 'react';
+import React, { useEffect } from 'react';
 
 const Stack = createNativeStackNavigator();
 
@@ -63,7 +64,7 @@ function AppNavigation() {
                         setInitialRouteName('FamilyMemberDB');
                         break;
                     case 'caretaker':
-                        setInitialRouteName('CaretakerDB');
+                        setInitialRouteName('CareTakerDB');
                         break;
                     default:
                         setInitialRouteName('SignIn'); // Default route

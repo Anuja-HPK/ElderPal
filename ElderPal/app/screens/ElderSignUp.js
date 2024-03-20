@@ -4,8 +4,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 
 const ElderSignUpScreen = () => {
+  const navigation = useNavigation();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

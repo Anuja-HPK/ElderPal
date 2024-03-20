@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { auth } from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 
-const SignInScreen = ({ navigation }) => {
+const SignInScreen = ({  }) => {
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [usernameError, setUsernameError] = useState('');
@@ -97,9 +99,9 @@ const SignInScreen = ({ navigation }) => {
         <TextInput
           style={styles.input}
           placeholder="Enter your email/username"
-          value={email}
+          value={username}
           onChangeText={text => {
-            setEmail(text);
+            setUsername(text);
             if (text.trim()) setUsernameError('');
           }}
         />
