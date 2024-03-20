@@ -80,44 +80,46 @@ function AppNavigation() {
     }, []);
 
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName={initialRouteName}>
+        // <NavigationContainer>
+        //     <Stack.Navigator initialRouteName={initialRouteName}>
 
-                <Stack.Screen name="Welcome" component={WelcomeScreen} />
-                <Stack.Screen name="SignIn" component={SignInScreen} />
-                <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
+        //         <Stack.Screen name="Welcome" component={WelcomeScreen} />
+        //         <Stack.Screen name="SignIn" component={SignInScreen} />
+        //         <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
 
-                <Stack.Screen name="SignUpElder" component={ElderSignUp} />
-                <Stack.Screen name="SignUpDoctor" component={DoctorSignUp} />
-                <Stack.Screen name="SignUpCareTaker" component={CareTakerSignUp} />
-                <Stack.Screen name="SignUpFamilyMember" component={FamilyMemberSignUp} />
+        //         <Stack.Screen name="SignUpElder" component={ElderSignUp} />
+        //         <Stack.Screen name="SignUpDoctor" component={DoctorSignUp} />
+        //         <Stack.Screen name="SignUpCareTaker" component={CareTakerSignUp} />
+        //         <Stack.Screen name="SignUpFamilyMember" component={FamilyMemberSignUp} />
 
-                <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
-                <Stack.Screen name="DoctorDB" component={CommonDBDoctor} />
-                <Stack.Screen name="CareTakerDB" component={CommonDBCaretaker} />
-                <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} />
-
-
-                {/* elder dashboard buttons */}
-                <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
-                <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
-                <Stack.Screen name="AIassistant" component={AssistantHome} />
-                <Stack.Screen name="Call" component={CallContacts} />
-                <Stack.Screen name="ToDo" component={TodoList} />
+        //         <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
+        //         <Stack.Screen name="DoctorDB" component={CommonDBDoctor} />
+        //         <Stack.Screen name="CareTakerDB" component={CommonDBCaretaker} />
+        //         <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} />
 
 
-                <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
-                <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
+        //         {/* elder dashboard buttons */}
+        //         <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
+        //         <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
+        //         <Stack.Screen name="AIassistant" component={AssistantHome} />
+        //         <Stack.Screen name="Call" component={CallContacts} />
+        //         <Stack.Screen name="ToDo" component={TodoList} />
 
-                <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} />
-                <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} />
 
-                <Stack.Screen name="FamilyMemberPF" component={FamilyMemberProfileScreen} />
-                <Stack.Screen name="FamilyMemberEdit" component={FamilyEditScreen} />
+        //         <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
+        //         <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
-                <Stack.Screen name="Settings" component={SettingScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        //         <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} />
+        //         <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} />
+
+        //         <Stack.Screen name="FamilyMemberPF" component={FamilyMemberProfileScreen} />
+        //         <Stack.Screen name="FamilyMemberEdit" component={FamilyEditScreen} />
+
+        //         <Stack.Screen name="Settings" component={SettingScreen} />
+        //     </Stack.Navigator>
+        // </NavigationContainer>
+
+        <LogInScreen/>
     );
 }
 export default AppNavigation;
