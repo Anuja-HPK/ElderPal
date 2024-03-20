@@ -5,7 +5,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
 
-const CareTakerSignUpScreen = () => {
+const CareTakerSignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -161,7 +161,7 @@ const CareTakerSignUpScreen = () => {
         <Text style={styles.signupText}>
           Already have an account?{' '}
           {/* Uncomment and implement navigation logic within onPress when ready */}
-          <Text style={styles.signupButton} onPress={() => {/* navigateToSignIn() */ }}>
+          <Text style={styles.signupButton} onPress={() => navigation.navigate("SignIn")}>
             Sign In
           </Text>
         </Text>

@@ -79,9 +79,8 @@ function AppNavigation() {
         <NavigationContainer>
             <Stack.Navigator initialRouteName={initialRouteName}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
-                <Stack.Screen name="SignIn" component={SignInScreen} />
+                <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
-                <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
 
                 {/* Conditional rendering of signup screens based on the chosen role */}
                 <Stack.Screen name="ElderSignUp" component={ElderSignUp} options={{ headerShown: false }} />
@@ -116,6 +115,7 @@ function AppNavigation() {
                 <Stack.Screen name="SignUpMessage" component={SignUpMessage} />
                 <Stack.Screen name="AssistantHome" component={AssistantHome} />
                 <Stack.Screen name="CallingUIScreen" component={CallingUIScreen} />
+
             </Stack.Navigator>
         </NavigationContainer>
     );

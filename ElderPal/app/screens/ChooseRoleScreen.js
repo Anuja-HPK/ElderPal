@@ -19,25 +19,25 @@ export default function ChooseRoleScreen({ navigation }) {
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpElder")}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("ElderSignUp")}>
           <Text style={roleStyles.text}>Elderly Person</Text>
         </TouchableOpacity>
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpDoctor")}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("DoctorSignUp")}>
           <Text style={roleStyles.text}>Doctor</Text>
         </TouchableOpacity>
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpCareTaker")}>
-          <Text style={roleStyles.text}>Caregiver</Text>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("CareTakerSignUp")}>
+          <Text style={roleStyles.text}>Caretaker</Text>
         </TouchableOpacity>
       </View>
 
       <View style={roleStyles.container}>
-        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("SignUpFamilyMember")}>
+        <TouchableOpacity style={roleStyles.button} onPress={() => navigation.navigate("FamilyMemberSignUp")}>
           <Text style={roleStyles.text}>Family Member</Text>
         </TouchableOpacity>
       </View>

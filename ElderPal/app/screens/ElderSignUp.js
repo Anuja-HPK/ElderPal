@@ -164,7 +164,7 @@ const ElderSignUpScreen = () => {
         <Text style={styles.signupText}>
           Already have an account?{' '}
           {/* Uncomment and implement navigation logic within onPress when ready */}
-          <Text style={styles.signupButton} onPress={() => {/* navigateToSignIn() */ }}>
+          <Text style={styles.signupButton} onPress={() => navigation.navigate("SignIn")}>
             Sign In
           </Text>
         </Text>
