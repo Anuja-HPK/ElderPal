@@ -14,7 +14,7 @@ import CareTakerSignUp from "../../app/screens/CareTakerSignUp";
 import FamilyMemberSignUp from "../../app/screens/FamilyMemberSignUp";
 import TodoList from "../../app/screens/TodoList";
 import { CommonDBDoctor, NotesUpdate } from '../../app/screens/CommonDBDoctor';
-import CommonDBCaretaker from '../../app/screens/CommonDBCaretaker';
+import { CommonDBDCaretaker, CTNotesUpdate } from '../../app/screens/CommonDBCaretaker';
 import CommonDBFamilyMem from '../../app/screens/CommonDBFamilyMem';
 import WelcomeScreen from "../../app/screens/WelcomeScreen";
 import ElderDashboardScreen from "../../app/screens/ElderDashboardScreen";
@@ -90,10 +90,11 @@ function AppNavigation() {
 
                 <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
                 <Stack.Screen name="DoctorDB" component={CommonDBDoctor} />
-                <Stack.Screen name="CareTakerDB" component={CommonDBCaretaker} />
+                <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} />
+                <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
                 <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} />
 
-                {/* Other screens */}
+                {/* Other screens  */}
                 <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
                 <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
                 <Stack.Screen name="AIassistant" component={AssistantHome} />
