@@ -79,6 +79,7 @@ function AppNavigation() {
         <NavigationContainer>
             <Stack.Navigator initialRouteName={initialRouteName}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="login" component={LogInScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
 

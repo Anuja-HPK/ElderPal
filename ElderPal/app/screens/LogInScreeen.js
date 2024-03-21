@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const App = () => {
+const App = ({ navigation }) => {
   const [isButtonPressed, setIsButtonPressed] = useState(false);
 
   const handleButtonPressIn = () => {
@@ -9,6 +9,7 @@ const App = () => {
   };
 
   const handleButtonPressOut = () => {
+
     setIsButtonPressed(false);
   };
 
@@ -18,31 +19,31 @@ const App = () => {
       <Text style={styles.appName}>ElderPal</Text>
       <View style={styles.logoContainer}>
         <Image
-          source={require('../assets/Logo.png')} 
+          source={require('../assets/Logo.png')}
           style={styles.logo}
         />
       </View>
-      
+
       <View style={styles.buttonContainer}>
-        <TouchableOpacity 
+        <TouchableOpacity
           style={[styles.button, isButtonPressed && styles.buttonPressed]}
           onPressIn={handleButtonPressIn}
           onPressOut={handleButtonPressOut}
           onPress={() => {
             console.log('Login Pressed');
-            //navigation.navigate('SignIn');
+            navigation.navigate('SignIn');
           }} // Navigate to signin screen
         >
           <Text style={styles.buttonTextin}>Log In</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity 
+        <TouchableOpacity
           style={[styles.button, isButtonPressed && styles.buttonPressed]}
           onPressIn={handleButtonPressIn}
           onPressOut={handleButtonPressOut}
           onPress={() => {
             console.log('SignUp Pressed');
-            //navigation.navigate('SignUp');
+            navigation.navigate('ChooseRole');
           }} // Navigate to SignUp screen
         >
           <Text style={styles.buttonTextup}>Sign Up</Text>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
-  
+
   upperHalfBackground: {
     backgroundColor: '#258e25',
     position: 'absolute',
@@ -90,14 +91,14 @@ const styles = StyleSheet.create({
   },
 
   logo: {
-    width: 220, 
-    height: 220, 
+    width: 220,
+    height: 220,
     resizeMode: 'contain',
   },
 
   buttonContainer: {
     marginTop: 50,
-    flexDirection: 'column', 
+    flexDirection: 'column',
     zIndex: 1,
   },
 
