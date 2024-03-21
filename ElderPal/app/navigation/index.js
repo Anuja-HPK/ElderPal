@@ -106,12 +106,6 @@ function AppNavigation() {
                 <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
                 <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
-                <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} />
-                <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} />
-
-                <Stack.Screen name="FamilyMemberPF" component={FamilyMemberProfileScreen} />
-                <Stack.Screen name="FamilyMemberEdit" component={FamilyEditScreen} />
-
                 <Stack.Screen name="Settings" component={SettingScreen} />
                 <Stack.Screen name="Logout" component={Logout} />
                 <Stack.Screen name="SignInMessage" component={SignInMessage} />
@@ -121,6 +115,7 @@ function AppNavigation() {
 
             </Stack.Navigator>
         </NavigationContainer>
+
     );
 }
 export default AppNavigation;
