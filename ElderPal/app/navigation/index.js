@@ -89,10 +89,10 @@ function AppNavigation() {
                 <Stack.Screen name="FamilyMemberSignUp" component={FamilyMemberSignUp} options={{ headerShown: false }} />
 
                 <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
-                <Stack.Screen name="DoctorDB" component={CommonDBDoctor} />
-                <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} />
+                <Stack.Screen name="DoctorDB" component={CommonDBDoctor} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} options={{ headerShown: false }} />
                 <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
-                <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} />
+                <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} options={{ headerShown: false }} />
 
                 {/* Other screens  */}
                 <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
