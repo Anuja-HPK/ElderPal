@@ -13,7 +13,7 @@ import DoctorSignUp from "../../app/screens/DoctorSignUp";
 import CareTakerSignUp from "../../app/screens/CareTakerSignUp";
 import FamilyMemberSignUp from "../../app/screens/FamilyMemberSignUp";
 import TodoList from "../../app/screens/TodoList";
-import CommonDBDoctor from "../../app/screens/CommonDBDoctor";
+import { CommonDBDoctor, NotesUpdate } from '../../app/screens/CommonDBDoctor';
 import CommonDBCaretaker from '../../app/screens/CommonDBCaretaker';
 import CommonDBFamilyMem from '../../app/screens/CommonDBFamilyMem';
 import WelcomeScreen from "../../app/screens/WelcomeScreen";
@@ -100,6 +100,8 @@ function AppNavigation() {
                 <Stack.Screen name="Call" component={CallContacts} />
                 <Stack.Screen name="ToDo" component={TodoList} />
 
+
+                <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
                 <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
                 <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
