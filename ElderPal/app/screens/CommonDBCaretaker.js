@@ -1,11 +1,45 @@
-import React from 'react';
-import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Image, TextInput, Alert } from 'react-native';
 
-const App = () => {
+const CommonDBDCaretaker = ({ navigation }) => {
+  const [notes, setNotes] = useState([]);
+
+  const handleAddNote = (note) => {
+    const date = new Date().toLocaleDateString();
+    const time = new Date().toLocaleTimeString();
+    const noteWithDateTime = { note, date, time };
+    setNotes([...notes, noteWithDateTime]);
+  };
+
+  const openNotesUpdateScreen = () => {
+    navigation.navigate("CTNotesUpdate", { onSave: handleAddNote });
+  };
+
+  const handleDeleteNote = (index) => {
+    Alert.alert(
+      "Delete Note",
+      "Are you sure you want to delete this note?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel"
+        },
+        {
+          text: "Delete",
+          onPress: () => {
+            const updatedNotes = [...notes];
+            updatedNotes.splice(index, 1);
+            setNotes(updatedNotes);
+          },
+          style: "destructive"
+        }
+      ]
+    );
+  };
+
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <View style={styles.blueSection}>
-
         <View style={styles.userInfoContainer}>
           <TouchableOpacity style={styles.userProfileButton} onPress={() => navigation.navigate("CareTakerPF")}>
             <Image source={require('../assets/doc.png')} style={styles.profileImage} />
@@ -35,35 +69,48 @@ const App = () => {
           </TouchableOpacity>
         </ScrollView>
 
-        {/* Gray Section for  Notes */}
+        {/* Gray Section for Notes */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.graySection}>
-          {/* Note 1 */}
-          <View style={styles.noteContainer}>
-            <Text style={styles.noteText}>
-              The note 1 : Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </Text>
-          </View>
-
-          {/* Note 2 */}
-          <View style={styles.noteContainer}>
-            <Text style={styles.noteText}>
-              This is Note 2 content.
-            </Text>
-          </View>
-
-          {/* Note 3 */}
-          <View style={styles.noteContainer}>
-            <Text style={styles.noteText}>
-              This is Note 3 content.
-            </Text>
-          </View>
-          {/* to Add more notes  */}
+          {notes.map((note, index) => (
+            <View key={index} style={styles.noteContainer}>
+              <View style={styles.noteHeader}>
+                <Text style={styles.noteDate}>{note.date} {note.time}</Text>
+                <TouchableOpacity onPress={() => handleDeleteNote(index)}>
+                  <Text style={styles.deleteButton}>Delete</Text>
+                </TouchableOpacity>
+              </View>
+              <Text style={styles.noteText}>{note.note}</Text>
+            </View>
+          ))}
         </ScrollView>
-        <TouchableOpacity style={styles.cornerButton}>
+        <TouchableOpacity style={styles.cornerButton} onPress={openNotesUpdateScreen}>
           <Image source={require('../assets/editIcon.png')} style={styles.buttonImage} />
         </TouchableOpacity>
       </View>
     </ScrollView>
+  );
+};
+
+const CTNotesUpdate = ({ route, navigation }) => {
+  const [note, setNote] = useState('');
+
+  const handleSaveNote = () => {
+    route.params.onSave(note);
+    navigation.goBack();
+  };
+
+  return (
+    <View style={styles.updateContainer}>
+      <TextInput
+        style={styles.input}
+        onChangeText={setNote}
+        placeholder="Enter your note"
+        multiline
+      />
+      <TouchableOpacity style={styles.saveButton} onPress={handleSaveNote}>
+        <Text style={styles.saveButtonText}>Save</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -135,13 +182,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#EDEDED',
     width: 250,
     padding: 15,
-    height: 400,
+    height: 380, // Adjust height according to your preference
     marginRight: 20,
     borderRadius: 10,
     marginBottom: 1,
   },
+  noteHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 10,
+  },
+  noteDate: {
+    color: 'gray',
+  },
+  deleteButton: {
+    color: 'gray',
+  },
   noteText: {
-    fontSize: 26,
+    fontSize: 16,
   },
   cornerButton: {
     position: 'absolute',
@@ -153,6 +211,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  updateContainer: {
+    flex: 1,
+    backgroundColor: 'white',
+    padding: 20,
+  },
+  input: {
+    borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 5,
+    marginBottom: 10,
+    padding: 10,
+  },
+  saveButton: {
+    backgroundColor: '#29CF9D',
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  saveButtonText: {
+    color: 'white',
+    fontSize: 16,
+  },
 });
 
-export default App;
+export { CommonDBDCaretaker, CTNotesUpdate };

@@ -4,7 +4,7 @@ import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 
-const SignInScreen = ({  }) => {
+const SignInScreen = ({ }) => {
   const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -54,7 +54,7 @@ const SignInScreen = ({  }) => {
 
         } else if (role === 'caretaker' && userEmail === username) {
           // Navigate to CaretakerHomeScreen
-          navigation.navigate('CaretakerDB');
+          navigation.navigate('CareTakerDB');
           console.log("Successfully signed in as a caretaker!");
           Alert.alert('User logged in');
 

@@ -1,6 +1,10 @@
-
-import { name as appName } from '../../app.json';
 import { ThemeProvider } from "../../app/screens/Settings/ThemeContext";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import firestore from '@react-native-firebase/firestore';
+import auth from '@react-native-firebase/auth';
+import { useState } from 'react';
+import React, { useEffect } from 'react';
 
 import LogInScreen from "../../app/screens/LogInScreeen";
 import ChooseRoleScreen from "../../app/screens/ChooseRoleScreen";
@@ -9,14 +13,13 @@ import DoctorSignUp from "../../app/screens/DoctorSignUp";
 import CareTakerSignUp from "../../app/screens/CareTakerSignUp";
 import FamilyMemberSignUp from "../../app/screens/FamilyMemberSignUp";
 import TodoList from "../../app/screens/TodoList";
-import CommonDBDoctor from "../../app/screens/CommonDBDoctor";
-import CommonDBCaretaker from '../../app/screens/CommonDBCaretaker';
+import { CommonDBDoctor, NotesUpdate } from '../../app/screens/CommonDBDoctor';
+import { CommonDBDCaretaker, CTNotesUpdate } from '../../app/screens/CommonDBCaretaker';
 import CommonDBFamilyMem from '../../app/screens/CommonDBFamilyMem';
 import WelcomeScreen from "../../app/screens/WelcomeScreen";
 import ElderDashboardScreen from "../../app/screens/ElderDashboardScreen";
 import CallContacts from "../../app/screens/CallContacts";
 import SignInScreen from "../../app/screens/SignInScreen";
-import SignUpScreen from "../../app/screens/ElderSignUp";
 import ElderProfileScreen from "../../app/screens/Profile_Section/ElderProfileScreen";
 import DoctorProfileScreen from "../../app/screens/Profile_Section/DoctorProfileScreen";
 import CareTakerProfileScreen from "../../app/screens/Profile_Section/CareTakerProfileScreen";
@@ -32,13 +35,6 @@ import SignUpMessage from "../../app/screens/Messages/SignUpMessage";
 import AssistantHome from "../../app/screens/assistanthome";
 import CallingUIScreen from "../../app/screens/CallingUIScreen";
 
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import firestore from '@react-native-firebase/firestore';
-import auth from '@react-native-firebase/auth';
-import { useState } from 'react';
-import React, { useEffect } from 'react';
-
 const Stack = createNativeStackNavigator();
 
 function AppNavigation() {
@@ -46,7 +42,7 @@ function AppNavigation() {
     firestore();
     auth();
 
-    const [initialRouteName, setInitialRouteName] = useState('SignIn');
+    const [initialRouteName, setInitialRouteName] = useState('Welcome');
 
     useEffect(() => {
         const unsubscribe = auth().onAuthStateChanged(user => {
@@ -67,12 +63,12 @@ function AppNavigation() {
                         setInitialRouteName('CareTakerDB');
                         break;
                     default:
-                        setInitialRouteName('SignIn'); // Default route
+                        setInitialRouteName('Welcome'); // Default route
                         break;
                 }
             } else {
                 // No user is signed in, set default initial route
-                setInitialRouteName('SignIn');
+                setInitialRouteName('Welcome');
             }
         });
 
@@ -80,46 +76,46 @@ function AppNavigation() {
     }, []);
 
     return (
-        // <NavigationContainer>
-        //     <Stack.Navigator initialRouteName={initialRouteName}>
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName={initialRouteName}>
+                <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
 
-        //         <Stack.Screen name="Welcome" component={WelcomeScreen} />
-        //         <Stack.Screen name="SignIn" component={SignInScreen} />
-        //         <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
+                {/* Conditional rendering of signup screens based on the chosen role */}
+                <Stack.Screen name="ElderSignUp" component={ElderSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="DoctorSignUp" component={DoctorSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerSignUp" component={CareTakerSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="FamilyMemberSignUp" component={FamilyMemberSignUp} options={{ headerShown: false }} />
 
-        //         <Stack.Screen name="SignUpElder" component={ElderSignUp} />
-        //         <Stack.Screen name="SignUpDoctor" component={DoctorSignUp} />
-        //         <Stack.Screen name="SignUpCareTaker" component={CareTakerSignUp} />
-        //         <Stack.Screen name="SignUpFamilyMember" component={FamilyMemberSignUp} />
+                <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
+                <Stack.Screen name="DoctorDB" component={CommonDBDoctor} />
+                <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} />
+                <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
+                <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} />
 
-        //         <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
-        //         <Stack.Screen name="DoctorDB" component={CommonDBDoctor} />
-        //         <Stack.Screen name="CareTakerDB" component={CommonDBCaretaker} />
-        //         <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} />
-
-
-        //         {/* elder dashboard buttons */}
-        //         <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
-        //         <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
-        //         <Stack.Screen name="AIassistant" component={AssistantHome} />
-        //         <Stack.Screen name="Call" component={CallContacts} />
-        //         <Stack.Screen name="ToDo" component={TodoList} />
+                {/* Other screens  */}
+                <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
+                <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
+                <Stack.Screen name="AIassistant" component={AssistantHome} />
+                <Stack.Screen name="Call" component={CallContacts} />
+                <Stack.Screen name="ToDo" component={TodoList} />
 
 
-        //         <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
-        //         <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
+                <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
+                <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
+                <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
-        //         <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} />
-        //         <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} />
+                <Stack.Screen name="Settings" component={SettingScreen} />
+                <Stack.Screen name="Logout" component={Logout} />
+                <Stack.Screen name="SignInMessage" component={SignInMessage} />
+                <Stack.Screen name="SignUpMessage" component={SignUpMessage} />
+                <Stack.Screen name="AssistantHome" component={AssistantHome} />
+                <Stack.Screen name="CallingUIScreen" component={CallingUIScreen} />
 
-        //         <Stack.Screen name="FamilyMemberPF" component={FamilyMemberProfileScreen} />
-        //         <Stack.Screen name="FamilyMemberEdit" component={FamilyEditScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
 
-        //         <Stack.Screen name="Settings" component={SettingScreen} />
-        //     </Stack.Navigator>
-        // </NavigationContainer>
-
-        <LogInScreen/>
     );
 }
 export default AppNavigation;

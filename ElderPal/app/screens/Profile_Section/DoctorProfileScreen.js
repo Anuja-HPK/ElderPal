@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
@@ -49,7 +49,7 @@ const DoctorProfileScreen = () => {
 
       navigation.reset({
         index: 0,
-        routes: [{ name: 'SignInScreen' }],
+        routes: [{ name: 'SignIn' }],
       });
     } catch (error) {
       console.error('Logout Error:', error);
