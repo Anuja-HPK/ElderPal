@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default function CallContacts() {
   const [contacts, setContacts] = useState([]);
@@ -70,7 +74,7 @@ export default function CallContacts() {
 
       <ScrollView contentContainerStyle={contactStyle.scrollView} ref={scrollViewRef}>
         {contacts.length === 0 && !showAddContactFields && (
-          <Text style={{ textAlign: 'center', fontSize: 24, marginTop: "80%" }}>No contacts to display!</Text>
+          <Text style={{ textAlign: 'center', fontSize: hp('3%'), marginTop: "80%" }}>No contacts to display!</Text>
         )}
 
         {contacts.map(contact => (
@@ -87,7 +91,7 @@ export default function CallContacts() {
               <TouchableOpacity onPress={() => deleteContact(contact.id)}>
                 <Image
                   source={require('../assets/delete.png')}
-                  style={{ width: 30, height: 30, marginRight: 10 }}
+                  style={{ width: wp('8%'), height: hp('4%'), marginRight: wp('2%') }}
                 />
               </TouchableOpacity>
             </View>
@@ -97,12 +101,12 @@ export default function CallContacts() {
 
       {!showAddContactFields && (
         <TouchableOpacity style={contactStyle.addButton} onPress={toggleAddContactFields}>
-          <Text style={{ fontSize: 24, color: '#fff', fontWeight: '600' }}>Add Contact</Text>
+          <Text style={{ fontSize: hp('3%'), color: '#fff', fontWeight: '600' }}>Add Contact</Text>
         </TouchableOpacity>
       )}
 
       {showAddContactFields && (
-        <View style={{ alignItems: 'center', marginTop: 20 }}>
+        <View style={{ alignItems: 'center', marginTop: hp('2%') }}>
           <TextInput
             style={contactStyle.inputField}
             placeholder="Contact Name"
@@ -120,32 +124,32 @@ export default function CallContacts() {
             style={{
               flexDirection: 'row',
               justifyContent: 'space-between',
-              width: '80%',
-              marginTop: 20,
-              marginBottom: 50,
+              width: wp('80%'),
+              marginTop: hp('2%'),
+              marginBottom: hp('5%'),
             }}>
             <TouchableOpacity
-              style={[contactStyle.addButton, { marginLeft: 20 }]}
+              style={[contactStyle.addButton, { marginLeft: wp('2%') }]}
               onPress={addContact}>
               <Text
                 style={{
-                  fontSize: 22,
+                  fontSize: hp('2.5%'),
                   color: '#fff',
-                  paddingVertical: 2,
-                  paddingHorizontal: 5,
+                  paddingVertical: hp('0.5%'),
+                  paddingHorizontal: wp('1%'),
                 }}>
                 Add Contact
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[contactStyle.cancelButton, { marginRight: 10 }]}
+              style={[contactStyle.cancelButton, { marginRight: wp('2%') }]}
               onPress={toggleAddContactFields}>
               <Text
                 style={{
-                  fontSize: 22,
+                  fontSize: hp('2.5%'),
                   color: '#fff',
-                  paddingVertical: 2,
-                  paddingHorizontal: 5,
+                  paddingVertical: hp('0.5%'),
+                  paddingHorizontal: wp('1%'),
                 }}>
                 Cancel
               </Text>
@@ -163,71 +167,72 @@ const contactStyle = {
     backgroundColor: '#fff',
   },
   title: {
-    fontSize: 28,
-    marginLeft: 20,
-    marginVertical: 50,
+    fontSize: hp('3.5%'),
+    marginLeft: wp('4%'),
+    marginVertical: hp('4%'),
     color: 'black',
     fontWeight: '600',
-    marginBottom: 40,
+    marginBottom: hp('3%'),
   },
   scrollView: {
-    paddingBottom: 20, // Add padding to the bottom of the ScrollView
+    paddingBottom: hp('2%'), // Add padding to the bottom of the ScrollView
   },
   card: {
     borderColor: '#258e25',
-    borderWidth: 2,
-    margin: 10,
-    marginBottom: -5, // Reduce marginBottom to allow space for the next card
+    borderWidth: wp('0.5%'),
+    margin: wp('2%'),
+    marginBottom: -wp('0.2%'), // Reduce marginBottom to allow space for the next card
     flexDirection: 'row',
-
-    borderRadius: 8,
-    borderTopLeftRadius: 30,
-    borderBottomRightRadius: 30,
+    borderRadius: wp('4%'),
+    borderTopLeftRadius: wp('10%'),
+    borderBottomRightRadius: wp('10%'),
     alignItems: 'center',
   },
   pic: {
-    width: 35,
-    height: 45,
-    marginLeft: 20,
-    marginRight: 20,
+    width: wp('10%'),
+    height: hp('5%'),
+    marginLeft: wp('4%'),
+    marginRight: wp('4%'),
   },
   conName: {
-    fontSize: 30,
-    marginVertical: 10,
+    fontSize: hp('3.5%'),
+    marginVertical: hp('2%'),
     fontWeight: '600',
     color: '#454545',
   },
   conNum: {
-    fontSize: 20,
-    marginRight: 20,
-    marginVertical: -12,
+    fontSize: hp('2.5%'),
+    marginRight: wp('4%'),
+    marginVertical: -hp('1%'),
     fontWeight: '600',
     color: '#454545',
-    paddingBottom: 15
+    paddingBottom: hp('2%')
   },
   inputField: {
-    height: 50,
-    width: 300,
-    marginBottom: 10,
-    borderRadius: 10,
+    height: hp('6%'),
+    width: wp('70%'),
+    marginBottom: hp('1%'),
+    borderRadius: wp('3%'),
     backgroundColor: '#f2f2f2',
-    paddingHorizontal: 10,
-    fontSize: 22,
+    paddingHorizontal: wp('3%'),
+    fontSize: hp('2.5%'),
   },
   addButton: {
     backgroundColor: '#258e25',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    margin: 10,
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('4%'),
+    borderRadius: wp('3%'),
+    margin: wp('2%'),
     alignItems: 'center',
   },
   cancelButton: {
     backgroundColor: '#c62828',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 10,
-    marginTop: 10,
-    marginBottom: 10,
+    paddingVertical: hp('1.5%'),
+    paddingHorizontal: wp('4%'),
+    borderRadius: wp('3%'),
+    marginTop: hp('1%'),
+    marginBottom: hp('2%'),
   },
 };
+
+

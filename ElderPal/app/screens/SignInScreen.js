@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
+import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert, Dimensions } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+
+const wp = percentage => {
+  return (percentage * screenWidth) / 100;
+};
+
+const hp = percentage => {
+  return (percentage * screenHeight) / 100;
+};
 
 const SignInScreen = ({ }) => {
   const navigation = useNavigation();
@@ -90,10 +100,10 @@ const SignInScreen = ({ }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
-        <View style={styles.upperHalfBackground}></View>
+        <View style={[styles.upperHalfBackground, { height: hp(58) }]}></View>
 
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>Sign In</Text>
+          <Text style={styles.headerTitle}>Log In</Text>
         </View>
 
         <TextInput
@@ -119,12 +129,12 @@ const SignInScreen = ({ }) => {
         />
         {passwordError ? <Text style={styles.errorText}>{passwordError}</Text> : null}
 
-        <TouchableOpacity onPress={() => {/* Handle forgot password */ }} style={{ width: '90%', alignItems: 'flex-end' }}>
+        <TouchableOpacity onPress={() => {/* Handle forgot password */ }} style={{ width: wp(90), alignItems: 'flex-end' }}>
           <Text style={styles.forgotPasswordText}>Forgot password?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button} onPress={handleSignIn}>
-          <Text style={styles.buttonText}>Sign In</Text>
+          <Text style={styles.buttonText}>Log In</Text>
         </TouchableOpacity>
 
         <Text style={styles.signupText}>
@@ -140,7 +150,7 @@ const SignInScreen = ({ }) => {
         <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Google sign-in */ }}>
           <Image
             source={require('../assets/GoogleIcon.jpg')}
-            style={{ width: 20, height: 20, marginRight: 8 }}
+            style={{ width: wp(5), height: wp(5), marginRight: wp(1.5) }}
           />
           <Text style={styles.socialButtonText}>SignIn with Google</Text>
         </TouchableOpacity>
@@ -148,7 +158,7 @@ const SignInScreen = ({ }) => {
         <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Apple sign-in */ }}>
           <Image
             source={require('../assets/Instagram.jpg')}
-            style={{ width: 20, height: 20, marginRight: 8 }}
+            style={{ width: wp(5), height: wp(5), marginRight: wp(1.5) }}
           />
           <Text style={styles.socialButtonText}>SignIn with Instagram</Text>
         </TouchableOpacity>
@@ -156,7 +166,7 @@ const SignInScreen = ({ }) => {
         <TouchableOpacity style={styles.socialButton} onPress={() => {/* Handle Facebook sign-in */ }}>
           <Image
             source={require('../assets/facebook.jpg')}
-            style={{ width: 25, height: 20, marginRight: 8 }}
+            style={{ width: wp(6.25), height: wp(5), marginRight: wp(1.5) }}
           />
           <Text style={styles.socialButtonText}>SignIn with Facebook</Text>
         </TouchableOpacity>
@@ -174,7 +184,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: hp(2.5),
   },
 
   upperHalfBackground: {
@@ -183,14 +193,15 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '60%',
     width: '100%',
-    borderBottomRightRadius: 500,
+    borderBottomRightRadius: wp(450),
+
+
   },
 
   errorText: {
     color: 'red',
-    width: '90%',
+    width: wp(90),
     textAlign: 'left',
   },
 
@@ -200,37 +211,37 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: 60,
+    fontSize: hp(6.5),
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 60,
+    marginTop: hp(5),
+    marginBottom: hp(7),
   },
 
   input: {
-    height: 50,
-    marginTop: 20,
-    borderWidth: 1,
+    height: hp(6),
+    marginTop: hp(4),
+    borderWidth: wp(0.5),
     borderColor: '#258e25',
-    padding: 10,
-    borderRadius: 15,
+    padding: wp(2),
+    borderRadius: wp(3),
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: 20,
-    width: '90%',
+    paddingHorizontal: wp(5),
+    width: wp(90),
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    padding: 10,
-    borderRadius: 15,
-    marginTop: 12,
-    borderWidth: 2,
+    padding: hp(1.5),
+    borderRadius: wp(3),
+    marginTop: hp(2),
+    borderWidth: wp(0.5),
     borderColor: '#ffffff',
-    marginHorizontal: 20,
-    width: '90%',
+    marginHorizontal: wp(5),
+    width: wp(90),
   },
 
   buttonText: {
@@ -240,12 +251,12 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     color: '#49d049',
     alignSelf: 'flex-end',
-    marginBottom: 12,
+    marginBottom: hp(1.5),
     fontWeight: 'bold',
   },
 
   signupText: {
-    marginTop: 12,
+    marginTop: hp(2),
     textAlign: 'center',
     color: '#000000',
   },
@@ -257,7 +268,7 @@ const styles = StyleSheet.create({
 
   orText: {
     textAlign: 'center',
-    marginVertical: 12,
+    marginVertical: hp(1.5),
     color: '#000000',
     fontWeight: 'bold',
   },
@@ -267,16 +278,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
-    padding: 15,
-    borderRadius: 15,
-    marginBottom: 10,
-    borderWidth: 1,
+    padding: hp(1.5),
+    borderRadius: wp(3),
+    marginBottom: hp(2),
+    borderWidth: wp(0.5),
     borderColor: '#258e25',
-    width: '90%',
+    width: wp(90),
   },
 
   socialButtonText: {
-    marginLeft: 10,
+    marginLeft: wp(4),
     color: '#000000',
   },
 });

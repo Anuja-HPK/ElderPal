@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const DoctorSignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: hp('2%'), // Adjust according to your needs
   },
 
   upperHalfBackground: {
@@ -187,9 +188,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '60%',
+    height: hp('60%'), // Adjust according to your needs
     width: '100%',
-    borderBottomRightRadius: 600,
+    borderBottomRightRadius: wp('100%'), // Adjust according to your needs
   },
 
   headerContainer: {
@@ -198,38 +199,38 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: 30,
+    fontSize: hp('3%'), //
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: 40,
-    marginBottom: 60,
+    marginTop: hp('5%'), // Adjust according to your needs
+    marginBottom: hp('5%'), // Adjust according to your needs
   },
 
   input: {
-    height: 50,
-    marginTop: 60,
+    height: hp('7%'), // Adjust according to your needs
+    marginTop: hp('5%'), // Adjust according to your needs
     borderWidth: 1,
     borderColor: '#258e25',
-    padding: 10,
-    borderRadius: 15,
+    padding: wp('3%'), // Adjust according to your needs
+    borderRadius: hp('2%'), // Adjust according to your needs
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: 20,
-    width: '90%',
+    paddingHorizontal: wp('5%'), // Adjust according to your needs
+    width: wp('90%'), // Adjust according to your needs
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    padding: 10,
-    borderRadius: 15,
-    marginTop: 12,
-    borderWidth: 2,
+    padding: wp('4%'), // Adjust according to your needs
+    borderRadius: hp('5%'), // Adjust according to your needs
+    marginTop: hp('5%'), // Adjust according to your needs
+    borderWidth: wp('0.5%'), // Adjust according to your needs
     borderColor: '#ffffff',
-    marginHorizontal: 20,
-    width: '90%',
-    marginTop: 50,
+    marginHorizontal: wp('5%'), // Adjust according to your needs
+    width: wp('90%'), // Adjust according to your needs
+    marginTop: hp('8%'), // Adjust according to your needs
   },
 
   buttonText: {
@@ -239,13 +240,13 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     alignSelf: 'flex-start', // Align to the start of the text input fields
-    marginLeft: '5%', // Assuming the input fields have a 5% margin from the sides
-    marginTop: 5,
+    marginLeft: wp('5%'), // Assuming the input fields have a 5% margin from the sides
+    marginTop: hp('1%'), // Adjust according to your needs
   },
 
   signupText: {
-    marginTop: 20,
-    fontSize: 16,
+    marginTop: hp('5%'), // Adjust according to your needs
+    fontSize: hp('2%'), // Adjust according to your needs
   },
 
   signupButton: {
@@ -256,45 +257,45 @@ const styles = StyleSheet.create({
   // If you plan to use a toggle for showing/hiding password, you might need styles for that as well:
   togglePasswordVisibility: {
     position: 'absolute',
-    right: 35,
-    height: 50,
-    width: 30,
-    top: 10,
+    right: wp('8%'), // Adjust according to your needs
+    height: hp('7%'), // Adjust according to your needs
+    width: wp('6%'), // Adjust according to your needs
+    top: hp('1.5%'), // Adjust according to your needs
     justifyContent: 'center',
     alignItems: 'center',
   },
 
   // Adjusted styles for input to accommodate the visibility toggle icon
   input: {
-    height: 50,
-    marginTop: 12,
+    height: hp('7%'), // Adjust according to your needs
+    marginTop: hp('5%'), // Adjust according to your needs
     borderWidth: 1,
     borderColor: '#258e25',
-    padding: 10,
-    borderRadius: 15,
+    padding: wp('3%'), // Adjust according to your needs
+    borderRadius: hp('5%'), // Adjust according to your needs
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: 20,
-    width: '90%',
-    paddingRight: 50, // Make room for the visibility toggle icon
+    paddingHorizontal: wp('13%'), // Adjust according to your needs
+    width: wp('90%'), // Adjust according to your needs
+    paddingRight: wp('20%'), // Make room for the visibility toggle icon
   },
 
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
-    width: '75%',
+    marginTop: hp('5%'), // Adjust according to your needs
+    width: wp('75%'), // Adjust according to your needs
   },
 
   checkbox: {
-    height: 24,
-    width: 24,
+    height: hp('3%'), // Adjust according to your needs
+    width: hp('3%'), // Adjust according to your needs
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: 2,
+    borderWidth: wp('0.5%'), // Adjust according to your needs
     borderColor: '#258e25',
-    borderRadius: 5,
-    marginRight: 10,
+    borderRadius: hp('1%'), // Adjust according to your needs
+    marginRight: wp('3%'), // Adjust according to your needs
   },
 
   checkboxChecked: {
@@ -303,9 +304,8 @@ const styles = StyleSheet.create({
 
   checkboxLabel: {
     flex: 1, // Ensure label takes up the remaining space
-    fontSize: 16,
+    fontSize: hp('2%'), // Adjust according to your needs
   },
-
 });
 
 export default DoctorSignUpScreen;

@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
+
+const wp = percentage => {
+  return (percentage * screenWidth) / 100;
+};
+
+const hp = percentage => {
+  return (percentage * screenHeight) / 100;
+};
 
 const App = ({ navigation }) => {
   const [isButtonPressed, setIsButtonPressed] = useState(false);
@@ -9,19 +19,15 @@ const App = ({ navigation }) => {
   };
 
   const handleButtonPressOut = () => {
-
     setIsButtonPressed(false);
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.upperHalfBackground}></View>
+      <View style={[styles.upperHalfBackground, { height: hp(50) }]}></View>
       <Text style={styles.appName}>ElderPal</Text>
       <View style={styles.logoContainer}>
-        <Image
-          source={require('../assets/Logo.png')}
-          style={styles.logo}
-        />
+        <Image source={require('../assets/Logo.png')} style={styles.logo} />
       </View>
 
       <View style={styles.buttonContainer}>
@@ -49,7 +55,6 @@ const App = ({ navigation }) => {
           <Text style={styles.buttonTextup}>Sign Up</Text>
         </TouchableOpacity>
       </View>
-
     </View>
   );
 };
@@ -68,48 +73,47 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '50%',
     width: '100%',
-    borderBottomRightRadius: 800,
+    borderBottomRightRadius: wp(100),
   },
 
   appName: {
-    fontSize: 60,
+    fontSize: hp(5),
     fontWeight: 'bold',
     color: '#fff',
-    marginBottom: 30,
+    marginBottom: hp(3),
     zIndex: 1,
   },
 
   logoContainer: {
     alignItems: 'center',
-    borderWidth: 2,
+    borderWidth: wp(0.5),
     borderColor: '#000000',
-    borderRadius: 100,
-    padding: 10,
+    borderRadius: wp(80),
+    padding: wp(1),
     zIndex: 1,
   },
 
   logo: {
-    width: 220,
-    height: 220,
+    width: wp(60),
+    height: wp(60),
     resizeMode: 'contain',
   },
 
   buttonContainer: {
-    marginTop: 50,
+    marginTop: hp(5),
     flexDirection: 'column',
     zIndex: 1,
   },
 
   button: {
     backgroundColor: '#258e25',
-    borderRadius: 45,
-    paddingVertical: 20,
-    paddingHorizontal: 70,
-    marginBottom: 15,
+    borderRadius: wp(10),
+    paddingVertical: hp(2),
+    paddingHorizontal: wp(15),
+    marginBottom: hp(2),
     opacity: 1,
-    borderWidth: 2,
+    borderWidth: wp(1),
     borderColor: '#ffffff',
   },
 
@@ -119,13 +123,13 @@ const styles = StyleSheet.create({
 
   buttonTextin: {
     color: '#fff',
-    fontSize: 28,
+    fontSize: hp(3.5),
     fontWeight: 'bold',
   },
 
   buttonTextup: {
     color: 'black',
-    fontSize: 28,
+    fontSize: hp(3.5),
     fontWeight: 'bold',
   },
 });
