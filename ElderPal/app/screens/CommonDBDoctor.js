@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Image, TextInput, Alert } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const CommonDBDoctor = ({ navigation }) => {
   const [notes, setNotes] = useState([]);
@@ -120,7 +121,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#199BC3',
   },
   blueSection: {
-    flex: 1.5,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#199BC3',
@@ -131,14 +132,14 @@ const styles = StyleSheet.create({
   },
   userProfileButton: {
     backgroundColor: '#29CF9D',
-    padding: 1,
-    borderRadius: 100,
-    marginRight: 40,
-    marginLeft: 30,
+    padding: wp('1%'),
+    borderRadius: wp('100%') / 2,
+    marginRight: wp('5%'),
+    marginLeft: wp('5%'),
   },
   profileImage: {
-    width: 100,
-    height: 100,
+    width: wp('30%'),
+    height: wp('30%'),
   },
   userInfo: {
     flex: 1,
@@ -146,51 +147,51 @@ const styles = StyleSheet.create({
   },
   userName: {
     color: 'white',
-    fontSize: 32,
-    marginBottom: 5,
+    fontSize: hp('3.5%'),
+    marginBottom: hp('1%'),
   },
   userRole: {
     color: 'white',
-    fontSize: 22,
+    fontSize: hp('2.5%'),
   },
   whiteSection: {
     flex: 5,
     backgroundColor: 'white',
-    padding: 20,
+    padding: wp('5%'),
   },
   circularButton: {
     backgroundColor: '#29CF9D',
-    borderRadius: 60,
-    width: 80,
-    height: 80,
-    marginRight: 30,
+    borderRadius: wp('10%'),
+    width: wp('18%'),
+    height: wp('18%'),
+    marginRight: wp('5%'),
     justifyContent: 'center',
     alignItems: 'center',
   },
   buttonImage1: {
-    width: 50,
-    height: 30,
+    width: wp('10%'),
+    height: wp('6%'),
   },
   buttonImage: {
-    width: 50,
-    height: 50,
+    width: wp('10%'),
+    height: wp('10%'),
   },
   graySection: {
-    marginTop: 10,
+    marginTop: hp('1%'),
   },
   noteContainer: {
     backgroundColor: '#EDEDED',
-    width: 250,
-    padding: 15,
-    height: 380, // Adjust height according to your preference
-    marginRight: 20,
-    borderRadius: 10,
-    marginBottom: 1,
+    width: wp('65%'),
+    padding: wp('5%'),
+    height: hp('45%'),
+    marginRight: wp('5%'),
+    borderRadius: wp('2%'),
+    marginBottom: hp('0.5%'),
   },
   noteHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    marginBottom: hp('1%'),
   },
   noteDate: {
     color: 'gray',
@@ -199,40 +200,44 @@ const styles = StyleSheet.create({
     color: 'gray',
   },
   noteText: {
-    fontSize: 16,
+    fontSize: hp('2%'),
   },
   cornerButton: {
     position: 'absolute',
-    bottom: 10,
-    right: 10,
+    bottom: hp('3%'),
+    right: wp('4%'),
+    width: wp('18%'),
+    height: wp('18%'),
     backgroundColor: '#29CF9D',
-    borderRadius: 25,
-    padding: 10,
+    borderRadius: wp('15%'),
+    padding: wp('2%'),
     justifyContent: 'center',
     alignItems: 'center',
   },
   updateContainer: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 20,
+    padding: wp('5%'),
   },
   input: {
     borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    marginBottom: 10,
-    padding: 10,
+    borderWidth: wp('0.3%'),
+    borderRadius: wp('5%'),
+    marginBottom: hp('2%'),
+    padding: wp('3%'),
   },
   saveButton: {
     backgroundColor: '#29CF9D',
-    padding: 10,
-    borderRadius: 5,
+    padding: wp('3%'),
+    borderRadius: wp('1%'),
     alignItems: 'center',
   },
   saveButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: hp('2%'),
   },
 });
 
 export { CommonDBDoctor, NotesUpdate };
+
+

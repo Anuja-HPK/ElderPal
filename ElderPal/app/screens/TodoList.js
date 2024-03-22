@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
   Text,
@@ -13,7 +13,8 @@ import {
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from 'react-native-push-notification';
-import {request, PERMISSIONS} from 'react-native-permissions';
+import { request, PERMISSIONS } from 'react-native-permissions';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default function TodoList() {
   const [tasks, setTasks] = useState([]);
@@ -27,43 +28,6 @@ export default function TodoList() {
 
   // Ref for ScrollView
   const scrollViewRef = useRef();
-
-  // const requestPermission = async () => {
-  //   try {
-  //     const permission =
-  //       Platform.OS === 'android'
-  //         ? PERMISSIONS.ANDROID.SCHEDULE_EXACT_ALARM
-  //         : PERMISSIONS.IOS.NOTIFICATIONS;
-  //     const result = await request(permission);
-  //     console.log(result);
-
-  //     if (result === 'granted') {
-  //       console.log('Permission granted');
-  //       // Add tasks or perform actions that require permission here
-  //     } else if (result === 'blocked') {
-  //       console.log('Permission request blocked');
-  //       // Inform the user and provide instructions to grant permission manually
-  //     } else {
-  //       // Inform the user and provide instructions to grant permission manually
-  //       Alert.alert(
-  //         'Permission Required',
-  //         'This app needs permission to schedule reminders for your tasks. Please grant permission in app settings.',
-  //         [
-  //           {
-  //             text: 'Go to Settings',
-  //             onPress: () => {
-  //               Linking.openSettings(); // Open app settings on Android
-  //             },
-  //           },
-  //           {text: 'Cancel', onPress: () => {}}, // Handle cancel button
-  //         ],
-  //         {cancelable: false}, // Prevent user from dismissing without action
-  //       );
-  //     }
-  //   } catch (error) {
-  //     console.error('Error requesting permission:', error);
-  //   }
-  // };
 
   // Load tasks from AsyncStorage on component mount
   useEffect(() => {
@@ -94,8 +58,8 @@ export default function TodoList() {
           .filter(task => task.time instanceof Date && !isNaN(task.time))
           .map(task => ({
             ...task,
-            time: task.time.toISOString(), 
-            date: task.date.toISOString(), 
+            time: task.time.toISOString(),
+            date: task.date.toISOString(),
           }));
         await AsyncStorage.setItem('tasks', JSON.stringify(tasksToSave));
       } catch (error) {
@@ -113,17 +77,6 @@ export default function TodoList() {
         date: taskDate,
       };
 
-      // Schedule notification for the task's time
-      // const notificationDate = new Date(taskDate);
-      // notificationDate.setHours(taskTime.getHours());
-      // notificationDate.setMinutes(taskTime.getMinutes());
-
-      // PushNotification.localNotificationSchedule({
-      //   message: newTask, // Notification message
-      //   date: notificationDate, // Date and time to fire the notification
-      // });
-
-      // Add the task to the tasks list
       setTasks([...tasks, newTaskObject]);
       setNewTask('');
       setTaskTime(new Date());
@@ -132,7 +85,7 @@ export default function TodoList() {
       setShowDatePicker(false);
       setShowTimePicker(false);
     }
-    scrollViewRef.current.scrollTo({y: 0, animated: true});
+    scrollViewRef.current.scrollTo({ y: 0, animated: true });
   };
 
   const cancelAddTask = () => {
@@ -164,45 +117,31 @@ export default function TodoList() {
   };
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text
-          style={{
-            marginVertical: 60,
-            fontSize: 50,
-            fontWeight: '800',
-            color: '#393939',
-          }}>
-          TodoList
-        </Text>
+        <Text style={styles.title}>TodoList</Text>
       </View>
 
-      <View style={{flex: 1}}>
+      <View style={{ flex: 1 }}>
         {!showAddTaskField && (
           <TouchableOpacity
             style={styles.addButton}
             onPress={() => {
               setShowAddTaskField(true);
-              // Scroll to the top
-              scrollViewRef.current.scrollTo({y: 0, animated: true});
+              scrollViewRef.current.scrollTo({ y: 0, animated: true });
             }}>
-            <Text style={{fontSize: 25, fontWeight: '400', color: '#393939'}}>
-              + Add Task
-            </Text>
+            <Text style={styles.addButtonText}>+ Add Task</Text>
           </TouchableOpacity>
         )}
 
         <ScrollView
           ref={scrollViewRef}
-          style={{flex: 1}}
-          contentContainerStyle={{flexGrow: 1}}>
+          style={{ flex: 1 }}
+          contentContainerStyle={{ flexGrow: 1 }}>
           {showAddTaskField && (
             <View style={styles.addTaskField}>
               <TextInput
-                style={[
-                  styles.inputField,
-                  {fontSize: 24, fontWeight: '600', color: '#3A3A3A'},
-                ]}
+                style={styles.inputField}
                 placeholder="Task"
                 value={newTask}
                 onChangeText={text => setNewTask(text)}
@@ -213,28 +152,12 @@ export default function TodoList() {
                   setShowTimePicker(true);
                   setSelectedAM(true);
                 }}>
-                <Text
-                  style={{
-                    fontSize: 24,
-                    marginTop: 10,
-                    fontWeight: '600',
-                    color: '#3A3A3A',
-                  }}>
-                  {taskTime.toLocaleTimeString()}
-                </Text>
+                <Text style={styles.inputText}>{taskTime.toLocaleTimeString()}</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.inputField}
                 onPress={() => setShowDatePicker(true)}>
-                <Text
-                  style={{
-                    fontSize: 24,
-                    marginTop: 10,
-                    fontWeight: '600',
-                    color: '#3A3A3A',
-                  }}>
-                  {taskDate.toLocaleDateString()}
-                </Text>
+                <Text style={styles.inputText}>{taskDate.toLocaleDateString()}</Text>
               </TouchableOpacity>
               {showTimePicker && (
                 <View style={styles.dateTimePickerWrapper}>
@@ -258,99 +181,40 @@ export default function TodoList() {
                   />
                 </View>
               )}
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignContent: 'center',
-                  justifyContent: 'space-between',
-                  marginTop: 20,
-                }}>
+              <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                  style={[
-                    styles.addTaskButton,
-                    {marginRight: 10, marginLeft: '30%'},
-                  ]}
-                  // onPress={() => {
-                  //   requestPermission().then(granted => {
-                  //     if (granted) {
-                  //       handleAddTask();
-                  //     } else {
-                  //       // Handle case when permission is not granted
-                  //       console.log('Permission not granted');
-                  //       // Optionally, you can show a message to the user informing them that the task cannot be added without permission
-                  //     }
-                  //   });
-                  // }}>
+                  style={styles.addTaskButton}
                   onPress={handleAddTask}>
-                  <Text
-                    style={{
-                      fontSize: 25,
-                      fontWeight: '500',
-                      color: '#393939',
-                    }}>
-                    Add
-                  </Text>
+                  <Text style={styles.addButtonText}>Add</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
                   style={styles.addTaskButton}
                   onPress={cancelAddTask}>
-                  <Text
-                    style={{
-                      fontSize: 25,
-                      fontWeight: '500',
-                      color: '#393939',
-                    }}>
-                    Cancel
-                  </Text>
+                  <Text style={styles.addButtonText}>Cancel</Text>
                 </TouchableOpacity>
               </View>
             </View>
           )}
 
-          <View style={{marginLeft: 15, marginRight: 15, marginTop: 10}}>
+          <View style={styles.taskContainer}>
             {tasks.map((task, index) => (
               <View
                 key={index}
-                style={{
-                  backgroundColor: 'rgba(73,208,73, 0.4)',
-                  padding: 10,
-                  marginBottom: 10,
-                  borderRadius: 10,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between', 
-                }}>
-                <View style={{flex: 1}}>
-                  <Text
-                    style={{fontSize: 25, fontWeight: '800', color: '#393939'}}>
-                    {task.task}
-                  </Text>
+                style={styles.taskItem}>
+                <View style={styles.taskContent}>
+                  <Text style={styles.taskText}>{task.task}</Text>
                   {task.time && typeof task.time === 'object' && (
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        fontWeight: '500',
-                        color: '#393939',
-                      }}>
-                      {task.time.toLocaleTimeString()}
-                    </Text>
+                    <Text style={styles.taskInfo}>{task.time.toLocaleTimeString()}</Text>
                   )}
                   {task.date && typeof task.date === 'object' && (
-                    <Text
-                      style={{
-                        fontSize: 20,
-                        fontWeight: '500',
-                        color: '#393939',
-                      }}>
-                      {task.date.toLocaleDateString()}
-                    </Text>
+                    <Text style={styles.taskInfo}>{task.date.toLocaleDateString()}</Text>
                   )}
                 </View>
                 <TouchableOpacity onPress={() => deleteTask(index)}>
                   <Image
                     source={require('../assets/delete.png')}
-                    style={{width: 30, height: 30}}
+                    style={styles.deleteIcon}
                   />
                 </TouchableOpacity>
               </View>
@@ -358,6 +222,7 @@ export default function TodoList() {
           </View>
         </ScrollView>
       </View>
+
     </View>
   );
 }
@@ -365,48 +230,95 @@ export default function TodoList() {
 const styles = {
   container: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: hp('5%'),
     paddingBottom: -70,
     borderBottomRightRadius: 70,
     borderBottomLeftRadius: 70,
     backgroundColor: 'rgba(37,142,37, 0.6)',
   },
+  title: {
+    marginVertical: hp('5%'),
+    fontSize: hp('5%'),
+    fontWeight: '800',
+    color: '#393939',
+  },
   addButton: {
-    marginLeft: 15,
-    marginRight: 15,
-    marginBottom: 10,
-    paddingLeft: 30,
-    paddingTop: 10,
-    paddingBottom: 10,
+    marginHorizontal: wp('4%'),
+    marginBottom: hp('1%'),
+    paddingHorizontal: wp('7%'),
+    paddingVertical: hp('1.5%'),
     borderRadius: 30,
     backgroundColor: 'rgba(73,208,73, 0.8)',
   },
+  addButtonText: {
+    fontSize: hp('2.5%'),
+    fontWeight: '400',
+    color: '#393939',
+  },
   addTaskField: {
-    marginLeft: 15,
+    marginHorizontal: wp('4%'),
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: hp('2%'),
+  },
   addTaskButton: {
-    marginRight: 120,
-    paddingLeft: 40,
-    paddingRight: 40,
-    paddingTop: 10,
-    paddingBottom: 10,
+    paddingHorizontal: wp('8%'),
+    paddingVertical: hp('1.5%'),
     borderRadius: 30,
     backgroundColor: 'rgba(73,208,73, 0.8)',
   },
   inputField: {
-    height: 50,
-    width: 300,
-    marginBottom: 10,
+    height: hp('7%'),
+    width: wp('80%'),
+    marginBottom: hp('2%'),
     borderRadius: 10,
     backgroundColor: 'rgba(73,208,73, 0.7)',
-    paddingHorizontal: 10,
-    fontSize: 20,
+    paddingHorizontal: wp('2%'),
+    fontSize: hp('2%'),
+  },
+  inputText: {
+    fontSize: hp('2%'),
+    marginTop: hp('1%'),
+    fontWeight: '600',
+    color: '#3A3A3A',
   },
   dateTimePickerWrapper: {
-    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  taskContainer: {
+    marginHorizontal: wp('4%'),
+    marginTop: hp('1%'),
+  },
+  taskItem: {
+    backgroundColor: 'rgba(73,208,73, 0.4)',
+    padding: hp('1%'),
+    marginBottom: hp('1%'),
+    borderRadius: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  taskContent: {
+    flex: 1,
+  },
+  taskText: {
+    fontSize: hp('2.5%'),
+    fontWeight: '800',
+    color: '#393939',
+  },
+  taskInfo: {
+    fontSize: hp('2%'),
+    fontWeight: '500',
+    color: '#393939',
+  },
+  deleteIcon: {
+    width: wp('7%'),
+    height: wp('7%'),
   },
 };

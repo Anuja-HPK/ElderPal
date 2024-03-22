@@ -1,4 +1,5 @@
 import { ThemeProvider } from "../../app/screens/Settings/ThemeContext";
+import { Provider as ResponsiveProvider } from 'react-native-responsive-screen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import firestore from '@react-native-firebase/firestore';
@@ -76,6 +77,7 @@ function AppNavigation() {
     }, []);
 
     return (
+
         <NavigationContainer>
             <Stack.Navigator initialRouteName={initialRouteName}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />

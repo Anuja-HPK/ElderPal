@@ -1,5 +1,9 @@
 import React from "react";
 import { View, Text, Image, TouchableOpacity, ScrollView, StyleSheet } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 export default function ChooseRoleScreen({ navigation }) {
   return (
@@ -60,40 +64,40 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 50,
-    borderWidth: 3,
+    marginTop: hp('5%'), // Adjusted to 5% of the screen height
+    borderWidth: wp('0.5%'), // Adjusted to 3% of the screen width
     borderColor: '#000000',
-    borderRadius: 100,
+    borderRadius: wp('20%'), // Adjusted to 20% of the screen width
   },
 
   logo: {
-    width: 170,
-    height: 165,
+    width: wp('45%'), // Adjusted to 45% of the screen width
+    height: wp('43%'), // Adjusted to 43% of the screen width
   },
 
   titleContainer: {
-    marginBottom: 20,
+    marginBottom: hp('2%'), // Adjusted to 2% of the screen height
   },
 
   title: {
-    fontSize: 36,
+    fontSize: hp('4%'), // Adjusted to 4% of the screen height
     fontWeight: "600",
     color: "black",
   },
 
   buttonContainer: {
     alignItems: "center",
-    borderRadius: 40,
-    padding: 20,
+    borderRadius: wp('10%'), // Adjusted to 10% of the screen width
+    padding: wp('5%'), // Adjusted to 5% of the screen width
     backgroundColor: "#90EE90",
-    marginBottom: 20,
-    width: 250,
-    borderWidth: 2,
+    marginBottom: hp('2%'), // Adjusted to 2% of the screen height
+    width: wp('70%'), // Adjusted to 70% of the screen width
+    borderWidth: wp('0.5%'), // Adjusted to 2% of the screen width
   },
 
   buttonText: {
     color: "black",
-    fontSize: 24,
+    fontSize: hp('3%'), // Adjusted to 3% of the screen height
     fontWeight: "500",
   },
 });

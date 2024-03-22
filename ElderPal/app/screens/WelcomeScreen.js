@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, Image, Animated } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const WelcomeScreen = ({ navigation }) => {
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -48,25 +49,25 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: hp('4%'),
   },
   logo: {
-    width: 180,
-    height: 180,
-    marginBottom: 20,
+    width: wp('45%'),
+    height: wp('45%'),
+    marginBottom: hp('2%'),
   },
   title: {
-    fontSize: 32,
+    fontSize: hp('3.5%'),
     fontWeight: 'bold',
     color: '#000',
     textAlign: 'center',
-    marginBottom: 40,
+    marginBottom: hp('5%'),
   },
   description: {
-    fontSize: 16,
+    fontSize: hp('2%'),
     color: '#000',
     textAlign: 'center',
-    paddingHorizontal: 20,
+    paddingHorizontal: wp('5%'),
     fontWeight: 'bold',
   },
 
@@ -77,8 +78,8 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: '55%',
-    borderBottomRightRadius: 200,
-    borderBottomLeftRadius: 200,
+    borderBottomRightRadius: wp('100%'),
+    borderBottomLeftRadius: wp('100%'),
     zIndex: -1,
   },
 });

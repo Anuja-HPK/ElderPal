@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView, Dimensions } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+
+const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const FamilyMemberSignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -179,7 +181,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: 20,
+    paddingTop: screenHeight * 0.05, // Adjust according to screen height
   },
 
   upperHalfBackground: {
@@ -190,7 +192,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: '60%',
     width: '100%',
-    borderBottomRightRadius: 600,
+    borderBottomRightRadius: screenHeight * 3, // Adjust according to screen height
   },
 
   headerContainer: {
@@ -203,13 +205,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: 40,
-    marginBottom: 60,
+    marginTop: screenHeight * 0
   },
 
   input: {
-    height: 50,
-    marginTop: 60,
+    height: screenHeight * 0.065, // Adjust according to screen height
+    marginTop: screenHeight * 0.06, // Adjust according to screen height
     borderWidth: 1,
     borderColor: '#258e25',
     padding: 10,
@@ -223,14 +224,14 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    padding: 10,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     borderRadius: 15,
-    marginTop: 12,
+    marginTop: screenHeight * 0.05, // Adjust according to screen height
     borderWidth: 2,
     borderColor: '#ffffff',
-    marginHorizontal: 20,
+    marginHorizontal: screenWidth * 0.05, // Adjust according to screen width
     width: '90%',
-    marginTop: 50,
   },
 
   buttonText: {
@@ -241,11 +242,11 @@ const styles = StyleSheet.create({
     color: 'red',
     alignSelf: 'flex-start', // Align to the start of the text input fields
     marginLeft: '5%', // Assuming the input fields have a 5% margin from the sides
-    marginTop: 5,
+    marginTop: screenHeight * 0.01, // Adjust according to screen height
   },
 
   signupText: {
-    marginTop: 20,
+    marginTop: screenHeight * 0.02, // Adjust according to screen height
     fontSize: 16,
   },
 
@@ -254,36 +255,19 @@ const styles = StyleSheet.create({
     color: '#258e25',
   },
 
-  // If you plan to use a toggle for showing/hiding password, you might need styles for that as well:
   togglePasswordVisibility: {
     position: 'absolute',
-    right: 35,
-    height: 50,
-    width: 30,
-    top: 10,
+    right: 0,
+    top: 0,
+    bottom: 0,
     justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  // Adjusted styles for input to accommodate the visibility toggle icon
-  input: {
-    height: 50,
-    marginTop: 12,
-    borderWidth: 1,
-    borderColor: '#258e25',
-    padding: 10,
-    borderRadius: 15,
-    backgroundColor: '#ffffff',
-    color: '#000000',
-    paddingHorizontal: 20,
-    width: '90%',
-    paddingRight: 50, // Make room for the visibility toggle icon
+    paddingHorizontal: screenWidth * 0.03, // Adjust according to screen width
   },
 
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: screenHeight * 0.025, // Adjust according to screen height
     width: '75%',
   },
 
@@ -306,7 +290,6 @@ const styles = StyleSheet.create({
     flex: 1, // Ensure label takes up the remaining space
     fontSize: 16,
   },
-
 });
 
 export default FamilyMemberSignUpScreen;
