@@ -201,7 +201,7 @@ const AssistantHome = () => {
             ) :
               recording ? (
                 <TouchableOpacity onPress={stopRecording}>
-                  <Image source={require('../../app/assets/vaimages/voiceLoading.gif')} style={styles.buttonImage} />
+                  <Image source={require('../../app/assets/vaimages/voiceLoading.gif')} style={styles.buttonImagegif} />
                 </TouchableOpacity>
               ) : (
                 <TouchableOpacity onPress={startRecording}>
@@ -317,9 +317,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonImage: {
-    height: hp(10),
-    width: hp(10),
+    height: hp(12),
+    width: hp(12),
     borderRadius: hp(5),
+  },
+  buttonImagegif: {
+    height: hp(12),
+    width: hp(12),
+    borderRadius: hp(8),
   },
   clearButton: {
     backgroundColor: '#8B5CF6',

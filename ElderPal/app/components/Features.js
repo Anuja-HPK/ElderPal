@@ -1,49 +1,70 @@
-import React from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { View, Text, Image, StyleSheet, Animated } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const Features = () => {
+  const animatedValues = useRef(Array.from({ length: 21 }, () => new Animated.Value(0))).current;
+  const fadeOutAnimation = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    animateText();
+  }, []);
+
+  const animateText = () => {
+    const animations = animatedValues.map((value, index) => (
+      Animated.timing(value, {
+        toValue: 1,
+        duration: 300,
+        delay: index * 100, // Delay each letter's animation
+        useNativeDriver: true,
+      })
+    ));
+
+    const sequence = Animated.sequence([
+      Animated.stagger(100, animations),
+      Animated.delay(2000), // Delay after fully appearing
+      Animated.timing(fadeOutAnimation, {
+        toValue: 0,
+        duration: 500, // Fade out duration
+        useNativeDriver: true,
+      }),
+      Animated.timing(fadeOutAnimation, {
+        toValue: 1,
+        duration: 1, // Reset fade out animation duration
+        useNativeDriver: true,
+      })
+    ]);
+
+    Animated.loop(
+      Animated.sequence([
+        sequence,
+        Animated.delay(3000) // Delay before restarting loop
+      ])
+    ).start();
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>What's on your mind?</Text>
+      <Text style={styles.title}>Hi, I'm your AI Pal!</Text>
 
-      <View style={styles.featureContainer1}>
-        <View style={styles.featureItem}>
-          <Image
-            source={require('../assets/vaimages/chatgptIcon.png')}
-            style={styles.featureIcon}
-          />
-          <Text style={styles.featureText}>ChatGPT</Text>
-        </View>
-        <Text style={styles.featureDescription}>
-          ChatGPT can provide you with instant and knowledgeable responses, assist you with creative ideas on a wide range of topics.
-        </Text>
-      </View>
-
-      <View style={styles.featureContainer2}>
-        <View style={styles.featureItem}>
-          <Image
-            source={require('../assets/vaimages/dalleIcon.png')}
-            style={styles.featureIcon}
-          />
-          <Text style={styles.featureText}>DALL-E</Text>
-        </View>
-        <Text style={styles.featureDescription}>
-          DALL-E can generate imaginative and diverse images from textual descriptions, expanding the boundaries of visual creativity.
-        </Text>
-      </View>
-
-      <View style={styles.featureContainer3}>
+      <View style={styles.featureContainer}>
         <View style={styles.featureItem}>
           <Image
             source={require('../assets/vaimages/smartaiIcon.png')}
             style={styles.featureIcon}
           />
-          <Text style={styles.featureText}>SMART AI</Text>
+          <Text style={styles.featureText}>ElderPal AI Assistant</Text>
         </View>
         <Text style={styles.featureDescription}>
-          A powerful voice assistant with the abilities of ChatGPT and DALL-E, providing you the best of both worlds.
+          A powerful voice assistant with the ability to assist you with anything!!
         </Text>
+      </View>
+      <View style={styles.textMove}>
+        {Array.from("What's on your mind?").map((letter, index) => (
+          <Animated.Text key={index} style={[styles.text, { opacity: animatedValues[index] }]}>
+            {letter}
+          </Animated.Text>
+        ))}
       </View>
     </View>
   );
@@ -55,27 +76,17 @@ const styles = StyleSheet.create({
     paddingVertical: hp(2),
   },
   title: {
+    textAlign: 'center',
     fontSize: wp(6.5),
     fontWeight: 'bold',
     color: 'gray',
     marginBottom: hp(2),
   },
-  featureContainer1: {
+  featureContainer: {
     backgroundColor: 'rgba(46, 204, 113, 0.2)',
     padding: wp(4),
     borderRadius: wp(2),
-    marginBottom: hp(2),
-  },
-  featureContainer2: {
-    backgroundColor: 'rgba(173, 216, 230, 0.5)',
-    padding: wp(4),
-    borderRadius: wp(2),
-    marginBottom: hp(2),
-  },
-  featureContainer3: {
-    backgroundColor: 'rgba(216, 191, 216, 1)',
-    padding: wp(4),
-    borderRadius: wp(2),
+    marginTop: hp(2),
     marginBottom: hp(2),
   },
   featureItem: {
@@ -97,6 +108,17 @@ const styles = StyleSheet.create({
     fontSize: wp(3.8),
     color: 'gray',
     fontWeight: '500',
+  },
+  textMove: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: hp(20),
+    marginBottom: hp(2),
+  },
+  text: {
+    fontSize: wp(6.5),
+    fontWeight: 'bold',
+    color: 'gray',
   },
 });
 
