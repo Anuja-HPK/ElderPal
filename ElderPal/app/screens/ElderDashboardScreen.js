@@ -1,8 +1,37 @@
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import React from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth from '@react-native-firebase/auth';
+import { useState, useEffect } from 'react';
 
-export default function ElderDashboardScreen({ navigation }) {
+export default function ElderDashboardScreen({ navigation, userName }) {
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const currentUser = auth().currentUser;
+        if (currentUser) {
+          setName(currentUser.displayName);
+
+          const userKey = `elder_${currentUser.uid}`;
+          const elderName = await AsyncStorage.getItem(`${userKey}_name`);
+
+          if (elderName !== null) {
+            setName(elderName);
+          } else {
+            console.log('Elder name not found in AsyncStorage');
+          }
+        }
+      } catch (error) {
+        console.error('Error retrieving elder data from AsyncStorage:', error.message);
+      }
+    };
+
+    getUserData();
+  }, []);
+
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("ElderPF")}>
@@ -11,8 +40,8 @@ export default function ElderDashboardScreen({ navigation }) {
             source={require('../assets/profImage.png')} // add prof image
             style={styles.pic}
           />
-          {/* name tag */}
-          <Text style={styles.profText}>Welcome! John Aiya</Text>
+          {/* Displaying user's name */}
+          <Text style={styles.welcomeText}> Welcome, <Text style={styles.nameText}>{name}</Text>!</Text>
         </View>
       </TouchableOpacity>
 
@@ -80,5 +109,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: hp('1%'),
+  },
+  welcomeText: {
+    fontSize: 20, // You can adjust the font size as needed
+    fontWeight: 'bold',
+    color: 'black', // You can adjust the color as needed
+  },
+  nameText: {
+    fontWeight: 'bold',
+    fontSize: 30, // You can adjust the font size as needed
   },
 });

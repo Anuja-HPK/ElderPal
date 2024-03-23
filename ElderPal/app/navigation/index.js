@@ -98,7 +98,7 @@ function AppNavigation() {
                 <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} options={{ headerShown: false }} />
 
                 {/* Other screens  */}
-                <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
+                <Stack.Screen name="ElderPF" component={ElderProfileScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
                 <Stack.Screen name="AIassistant" component={AssistantHome} />
                 <Stack.Screen name="Call" component={CallContacts} />
@@ -109,7 +109,7 @@ function AppNavigation() {
                 <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
                 <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
-                <Stack.Screen name="Settings" component={SettingScreen} />
+                <Stack.Screen name="Setting" component={SettingScreen} />
                 <Stack.Screen name="Logout" component={Logout} />
                 <Stack.Screen name="SignInMessage" component={SignInMessage} />
                 <Stack.Screen name="SignUpMessage" component={SignUpMessage} />
