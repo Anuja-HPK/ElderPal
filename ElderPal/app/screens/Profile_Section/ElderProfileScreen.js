@@ -29,7 +29,7 @@ const ElderProfileScreen = () => {
           const elderEmail = await AsyncStorage.getItem(`${userKey}_email`);
           const elderUid = await AsyncStorage.getItem(`${userKey}_uid`);
 
-          if (elderName !== null && elderEmail !== null) {
+          if (elderName !== null && elderEmail !== null && elderUid !== null) {
             setName(elderName);
             setEmail(elderEmail);
             setUid(elderUid);

@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: hp('60%'),
     width: '100%',
-    borderBottomRightRadius: wp('100%'),
+    borderBottomRightRadius: 600,
   },
 
   headerContainer: {
@@ -211,21 +211,21 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: hp('3%'), //
+    fontSize: hp('3%'),
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: hp('2%'),
+    marginTop: hp('5%'),
     marginBottom: hp('2%'),
   },
 
   input: {
     height: hp('6%'),
-    marginTop: hp('4%'),
+    marginTop: hp('5%'),
     borderWidth: 1,
     borderColor: '#258e25',
-    padding: wp('3%'),
-    borderRadius: hp('2%'),
+    padding: hp('1%'),
+    borderRadius: hp('4%'),
     backgroundColor: '#ffffff',
     color: '#000000',
     paddingHorizontal: wp('5%'),
@@ -235,29 +235,21 @@ const styles = StyleSheet.create({
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    padding: wp('4%'),
-    borderRadius: hp('5%'),
+    padding: hp('1.5%'),
+    borderRadius: hp('4%'),
     marginTop: hp('4%'),
-    borderWidth: wp('0.5%'),
+    borderWidth: 2,
     borderColor: '#ffffff',
     marginHorizontal: wp('5%'),
     width: wp('90%'),
-    marginBottom: hp('1%'),
   },
 
   buttonText: {
     color: '#ffffff',
   },
 
-  errorText: {
-    color: 'red',
-    alignSelf: 'flex-start', // Align to the start of the text input fields
-    marginLeft: wp('5%'), // Assuming the input fields have a 5% margin from the sides
-    marginTop: hp('1%'),
-  },
-
   signupText: {
-    marginTop: hp('5%'),
+    marginTop: hp('4%'),
     fontSize: hp('2%'),
   },
 
@@ -266,47 +258,21 @@ const styles = StyleSheet.create({
     color: '#258e25',
   },
 
-  // If you plan to use a toggle for showing/hiding password, you might need styles for that as well:
-  togglePasswordVisibility: {
-    position: 'absolute',
-    right: wp('8%'),
-    height: hp('7%'),
-    width: wp('6%'),
-    top: hp('1.5%'),
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
-  // Adjusted styles for input to accommodate the visibility toggle icon
-  input: {
-    height: hp('7%'),
-    marginTop: hp('5%'),
-    borderWidth: 1,
-    borderColor: '#258e25',
-    padding: wp('3%'),
-    borderRadius: hp('5%'),
-    backgroundColor: '#ffffff',
-    color: '#000000',
-    paddingHorizontal: wp('13%'),
-    width: wp('90%'),
-    paddingRight: wp('20%'), // Make room for the visibility toggle icon
-  },
-
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: hp('5%'),
+    marginTop: hp('3%'),
     width: wp('75%'),
   },
 
   checkbox: {
-    height: hp('3%'),
-    width: hp('3%'),
+    height: hp('2.5%'),
+    width: hp('2.5%'),
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: wp('0.5%'),
+    borderWidth: 2,
     borderColor: '#258e25',
-    borderRadius: hp('1%'),
+    borderRadius: hp('0.5%'),
     marginRight: wp('3%'),
   },
 
@@ -315,7 +281,7 @@ const styles = StyleSheet.create({
   },
 
   checkboxLabel: {
-    flex: 1, // Ensure label takes up the remaining space
+    flex: 1,
     fontSize: hp('2%'),
   },
   backButton: {
@@ -328,7 +294,7 @@ const styles = StyleSheet.create({
   backIcon: {
     width: wp('8%'),
     height: wp('8%'),
-    tintColor: 'black',
+    tintColor: 'white',
   },
 });
 

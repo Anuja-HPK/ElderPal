@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: hp('5%'), // Adjusted to 5% of the screen height
+    paddingTop: hp('2%'),
   },
 
   upperHalfBackground: {
@@ -188,9 +188,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '60%',
+    height: hp('60%'),
     width: '100%',
-    borderBottomRightRadius: wp('30%'), // Adjusted to 30% of the screen width
+    borderBottomRightRadius: 600,
   },
 
   headerContainer: {
@@ -199,55 +199,46 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: hp('4%'), // Adjusted to 4% of the screen height
+    fontSize: hp('4%'),
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: hp('3%'), // Adjusted to 7% of the screen height
-    marginBottom: hp('1%'), // Adjusted to 10% of the screen height
+    marginTop: hp('8%'),
+    marginBottom: hp('2%'),
   },
 
   input: {
-    height: hp('7%'), // Adjusted to 7% of the screen height
-    marginTop: hp('4%'), // Adjusted to 6% of the screen height
+    height: hp('6%'),
+    marginTop: hp('5%'),
     borderWidth: 1,
     borderColor: '#258e25',
-    padding: wp('4%'),
-    borderRadius: wp('10%'), // Adjusted to 10% of the screen width
+    padding: hp('1%'),
+    borderRadius: hp('4%'),
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: wp('5%'), // Adjusted to 5% of the screen width
-    width: '90%',
-    paddingRight: wp('15%'), // Adjusted to 15% of the screen width for the visibility toggle icon
+    paddingHorizontal: wp('5%'),
+    width: wp('90%'),
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    padding: hp('2%'), // Adjusted to 2% of the screen height
-    borderRadius: wp('10%'), // Adjusted to 10% of the screen width
-    marginTop: hp('2%'), // Adjusted to 2% of the screen height
-    borderWidth: wp('1%'), // Adjusted to 1% of the screen width
+    padding: hp('1.5%'),
+    borderRadius: hp('4%'),
+    marginTop: hp('4%'),
+    borderWidth: 2,
     borderColor: '#ffffff',
-    marginHorizontal: wp('2%'), // Adjusted to 4% of the screen width
-    width: '90%',
-    marginTop: hp('4%'), // Adjusted to 6% of the screen height
+    marginHorizontal: wp('5%'),
+    width: wp('90%'),
   },
 
   buttonText: {
     color: '#ffffff',
   },
 
-  errorText: {
-    color: 'red',
-    alignSelf: 'flex-start',
-    marginLeft: wp('5%'), // Adjusted to 5% of the screen width
-    marginTop: hp('1%'), // Adjusted to 1% of the screen height
-  },
-
   signupText: {
-    marginTop: hp('2%'), // Adjusted to 3% of the screen height
-    fontSize: hp('2%'), // Adjusted to 2% of the screen height
+    marginTop: hp('4%'),
+    fontSize: hp('2%'),
   },
 
   signupButton: {
@@ -255,32 +246,22 @@ const styles = StyleSheet.create({
     color: '#258e25',
   },
 
-  togglePasswordVisibility: {
-    position: 'absolute',
-    right: wp('7%'), // Adjusted to 7% of the screen width
-    height: hp('7%'), // Adjusted to 7% of the screen height
-    width: wp('5%'), // Adjusted to 5% of the screen width
-    top: hp('4%'), // Adjusted to 4% of the screen height
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: hp('2%'), // Adjusted to 4% of the screen height
-    width: '75%',
+    marginTop: hp('3%'),
+    width: wp('75%'),
   },
 
   checkbox: {
-    height: hp('3%'), // Adjusted to 3% of the screen height
-    width: hp('3%'), // Adjusted to 3% of the screen height
+    height: hp('2.5%'),
+    width: hp('2.5%'),
     justifyContent: 'center',
     alignItems: 'center',
-    borderWidth: wp('0.5%'), // Adjusted to 0.5% of the screen width
+    borderWidth: 2,
     borderColor: '#258e25',
-    borderRadius: wp('2%'), // Adjusted to 2% of the screen width
-    marginRight: wp('4%'), // Adjusted to 4% of the screen width
+    borderRadius: hp('0.5%'),
+    marginRight: wp('3%'),
   },
 
   checkboxChecked: {
@@ -289,7 +270,7 @@ const styles = StyleSheet.create({
 
   checkboxLabel: {
     flex: 1,
-    fontSize: hp('2%'), // Adjusted to 2% of the screen height
+    fontSize: hp('2%'),
   },
   backButton: {
     position: 'absolute',
@@ -299,9 +280,9 @@ const styles = StyleSheet.create({
   },
 
   backIcon: {
-    width: wp('8%'), // Adjust according to your icon size preference
-    height: wp('8%'), // Adjust according to your icon size preference
-    tintColor: 'white', // Assuming your icon color is black
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'white',
   },
 });
 

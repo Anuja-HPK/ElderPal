@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: hp('5%'), // Adjust according to screen height
+    paddingTop: hp('2%'),
   },
 
   upperHalfBackground: {
@@ -195,9 +195,9 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '60%',
+    height: hp('60%'),
     width: '100%',
-    borderBottomRightRadius: hp('18%'), // Adjust according to screen height
+    borderBottomRightRadius: 600,
   },
 
   headerContainer: {
@@ -206,53 +206,46 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: hp('3.5%'), // Adjust according to screen height
+    fontSize: hp('4%'),
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: hp('0%')
+    marginTop: hp('5%'),
+    marginBottom: hp('2%'),
   },
 
   input: {
-    height: hp('6.5%'), // Adjust according to screen height
-    marginTop: hp('4%'), // Adjust according to screen height
+    height: hp('6%'),
+    marginTop: hp('5%'),
     borderWidth: 1,
     borderColor: '#258e25',
-    padding: 10,
-    borderRadius: 25,
+    padding: hp('1%'),
+    borderRadius: hp('4%'),
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: wp('4%'), // Adjust according to screen width
-    width: wp('90%'), // Adjust according to screen width
+    paddingHorizontal: wp('5%'),
+    width: wp('90%'),
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    paddingVertical: hp('2%'), // Adjust according to screen height
-    paddingHorizontal: wp('5%'), // Adjust according to screen width
-    borderRadius: 25,
-    marginTop: hp('5%'), // Adjust according to screen height
+    padding: hp('1.5%'),
+    borderRadius: hp('4%'),
+    marginTop: hp('4%'),
     borderWidth: 2,
     borderColor: '#ffffff',
-    marginHorizontal: wp('5%'), // Adjust according to screen width
-    width: wp('90%'), // Adjust according to screen width
+    marginHorizontal: wp('5%'),
+    width: wp('90%'),
   },
 
   buttonText: {
     color: '#ffffff',
   },
 
-  errorText: {
-    color: 'red',
-    alignSelf: 'flex-start', // Align to the start of the text input fields
-    marginLeft: '5%', // Assuming the input fields have a 5% margin from the sides
-    marginTop: hp('1%'), // Adjust according to screen height
-  },
-
   signupText: {
-    marginTop: hp('2%'), // Adjust according to screen height
-    fontSize: hp('2%'), // Adjust according to screen height
+    marginTop: hp('4%'),
+    fontSize: hp('2%'),
   },
 
   signupButton: {
@@ -260,31 +253,22 @@ const styles = StyleSheet.create({
     color: '#258e25',
   },
 
-  togglePasswordVisibility: {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-    bottom: 0,
-    justifyContent: 'center',
-    paddingHorizontal: wp('3%'), // Adjust according to screen width
-  },
-
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: hp('2.5%'), // Adjust according to screen height
-    width: wp('75%'), // Adjust according to screen width
+    marginTop: hp('3%'),
+    width: wp('75%'),
   },
 
   checkbox: {
-    height: wp('6%'), // Adjust according to screen width
-    width: wp('6%'), // Adjust according to screen width
+    height: hp('2.5%'),
+    width: hp('2.5%'),
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#258e25',
-    borderRadius: 5,
-    marginRight: wp('2%'), // Adjust according to screen width
+    borderRadius: hp('0.5%'),
+    marginRight: wp('3%'),
   },
 
   checkboxChecked: {
@@ -292,8 +276,8 @@ const styles = StyleSheet.create({
   },
 
   checkboxLabel: {
-    flex: 1, // Ensure label takes up the remaining space
-    fontSize: hp('2%'), // Adjust according to screen height
+    flex: 1,
+    fontSize: hp('2%'),
   },
   backButton: {
     position: 'absolute',
@@ -303,9 +287,9 @@ const styles = StyleSheet.create({
   },
 
   backIcon: {
-    width: wp('8%'), // Adjust according to your icon size preference
-    height: wp('8%'), // Adjust according to your icon size preference
-    tintColor: 'white', // Assuming your icon color is black
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'white',
   },
 });
 
