@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet, Alert, ScrollView, Modal } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
@@ -131,8 +132,11 @@ const ElderProfileScreen = () => {
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
         <View style={styles.upperHalfBackground}>
-          <TouchableOpacity onPress={() => navigation.navigate("ElderDB")} style={styles.backButtonStyle}>
-            <Text style={styles.backButtonText}>Back</Text>
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <Image
+              source={require("../../assets/back.png")} // Changed to back.png
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
           <Text style={styles.title}>Elder Profile</Text>
 
@@ -347,6 +351,18 @@ const styles = StyleSheet.create({
   },
   cancelButtonText: {
     color: 'red',
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'black',
   },
 });
 

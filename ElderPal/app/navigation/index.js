@@ -94,6 +94,8 @@ function AppNavigation() {
                 <Stack.Screen name="ElderDB" component={ElderDashboardScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="DoctorDB" component={CommonDBDoctor} options={{ headerShown: false }} />
                 <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
                 <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} options={{ headerShown: false }} />
 

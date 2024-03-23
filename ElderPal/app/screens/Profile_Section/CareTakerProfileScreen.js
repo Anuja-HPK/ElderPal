@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet, Dimensions } from 'rea
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native'; // Import useNavigation
 import auth from '@react-native-firebase/auth';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 const CareTakerProfileScreen = () => {
   const [name, setName] = useState('');
@@ -61,8 +62,11 @@ const CareTakerProfileScreen = () => {
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}>
 
-        <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
-          <Text style={styles.backButtonText}>Back</Text>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../../assets/back.png")} // Changed to back.png
+            style={styles.backIcon}
+          />
         </TouchableOpacity>
 
         <Text style={styles.title}>CareTaker Profile</Text>
@@ -201,6 +205,18 @@ const styles = StyleSheet.create({
 
   logoutButtonText: {
     color: 'red',
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'),
+    left: wp('2%'),
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'white',
   },
 });
 
