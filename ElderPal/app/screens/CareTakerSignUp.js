@@ -64,6 +64,11 @@ const CareTakerSignUpScreen = ({ navigation }) => {
     try {
       const userCredential = await auth().createUserWithEmailAndPassword(email, password);
 
+      // Set display name for the user
+      await userCredential.user.updateProfile({
+        displayName: name,
+      });
+
       await firestore().collection('users').doc(userCredential.user.uid).set({
         uid: userCredential.user.uid,
         name: name,
@@ -101,7 +106,7 @@ const CareTakerSignUpScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
         <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
           <Image
-            source={require("../assets/back.png")} // Changed to back.png
+            source={require("../assets/back.png")}
             style={styles.backIcon}
           />
         </TouchableOpacity>

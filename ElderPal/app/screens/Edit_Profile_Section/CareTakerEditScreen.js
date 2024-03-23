@@ -4,8 +4,11 @@ import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, Styl
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const CareTakerEditScreen = () => {
+  const navigation = useNavigation();
+
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [age, setAge] = useState('');
@@ -13,6 +16,11 @@ const CareTakerEditScreen = () => {
   const [selectedGender, setSelectedGender] = useState();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [uid, setUid] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
 
   useEffect(() => {
     // Fetch elder's profile data when component mounts
@@ -34,6 +42,10 @@ const CareTakerEditScreen = () => {
           setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
           setAge(data.age);
           setSelectedGender(data.gender);
+          setAddress1(data.address1 || ''); // Set default value if undefined
+          setAddress2(data.address2 || ''); // Set default value if undefined
+          setCity(data.city || ''); // Set default value if undefined
+          setCountry(data.country || ''); // Set default value if undefined
         }
       }
     } catch (error) {
@@ -53,6 +65,7 @@ const CareTakerEditScreen = () => {
       console.error('Error fetching user UID:', error);
     }
   };
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === 'ios');
@@ -108,7 +121,7 @@ const CareTakerEditScreen = () => {
         <View style={styles.upperHalfBackground}></View>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         
-      <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
+      <TouchableOpacity onPress={() => navigation.navigate("CareTakerPF")} style={styles.backButtonStyle}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
 
