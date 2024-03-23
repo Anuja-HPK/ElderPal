@@ -34,11 +34,11 @@ const DoctorEditScreen = () => {
         const userProfile = await firestore().collection('users').doc(userId).get();
         const data = userProfile.data();
         if (data) {
-          setFirstName(data.firstName || '');
-          setLastName(data.lastName || '');
+          setFirstName(data.firstName);
+          setLastName(data.lastName);
           setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
-          setAge(data.age || '');
-          setSelectedGender(data.gender || '');
+          setAge(data.age);
+          setSelectedGender(data.gender);
           setAddress1(data.address1 || ''); // Set default value if undefined
           setAddress2(data.address2 || ''); // Set default value if undefined
           setCity(data.city || ''); // Set default value if undefined
@@ -91,17 +91,20 @@ const DoctorEditScreen = () => {
       const user = auth().currentUser;
       if (user) {
         const userId = user.uid;
-        await firestore().collection('users').doc(userId).update({
+        const updateData = {
           firstName,
           lastName,
-          dateOfBirth: date.toISOString(), // Convert date to ISO string format
+          dateOfBirth: date ? date.toISOString() : null,
           age,
           gender: selectedGender,
           address1,
           address2,
           city,
           country,
-        });
+        };
+        // Remove undefined fields from updateData
+        Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
+        await firestore().collection('users').doc(userId).update(updateData);
         Alert.alert('Success', 'Profile updated successfully!');
       } else {
         Alert.alert('Error', 'User not found. Please login again.');
@@ -172,10 +175,37 @@ const DoctorEditScreen = () => {
 
 
         <Text style={styles.sectionTitle}>Address</Text>
-        <TextInput style={styles.input} placeholder="Address 1" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Address 2" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="City" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Country" placeholderTextColor="#999" />
+        <TextInput
+          style={styles.input}
+          placeholder="Address 1"
+          placeholderTextColor="#999"
+          value={address1}
+          onChangeText={setAddress1}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Address 2"
+          placeholderTextColor="#999"
+          value={address2}
+          onChangeText={setAddress2}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="City"
+          placeholderTextColor="#999"
+          value={city}
+          onChangeText={setCity}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Country"
+          placeholderTextColor="#999"
+          value={country}
+          onChangeText={setCountry}
+        />
 
         {/* Medical Information Section */}
         <Text style={styles.sectionTitle}>Professional Information</Text>

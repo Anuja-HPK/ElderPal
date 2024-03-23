@@ -111,6 +111,9 @@ function AppNavigation() {
                 <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
+                <Stack.Screen name="FamilyMemberPF" component={FamilyMemberProfileScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="FamilyEdit" component={FamilyEditScreen} />
+
                 <Stack.Screen name="Setting" component={SettingScreen} />
                 <Stack.Screen name="Logout" component={Logout} />
                 <Stack.Screen name="SignInMessage" component={SignInMessage} />

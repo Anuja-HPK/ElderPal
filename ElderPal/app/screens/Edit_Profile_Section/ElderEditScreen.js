@@ -35,11 +35,11 @@ const EditProfileScreen = ({ navigation }) => {
         const userProfile = await firestore().collection('users').doc(userId).get();
         const data = userProfile.data();
         if (data) {
-          setFirstName(data.firstName || '');
-          setLastName(data.lastName || '');
+          setFirstName(data.firstName);
+          setLastName(data.lastName);
           setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
-          setAge(data.age || '');
-          setSelectedGender(data.gender || '');
+          setAge(data.age);
+          setSelectedGender(data.gender);
           setSelectedBloodGroup(data.bloodGroup || '');
           setAllergies(data.allergies || '');
           setAddress1(data.address1 || '');
@@ -94,19 +94,21 @@ const EditProfileScreen = ({ navigation }) => {
       const user = auth().currentUser;
       if (user) {
         const userId = user.uid;
-        await firestore().collection('users').doc(userId).update({
+        const updateData = {
           firstName,
           lastName,
-          dateOfBirth: date.toISOString(),
+          dateOfBirth: date ? date.toISOString() : null,
           age,
           gender: selectedGender,
-          bloodGroup: selectedBloodGroup,
           allergies,
           address1,
           address2,
           city,
           country,
-        });
+        };
+        // Remove undefined fields from updateData
+        Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
+        await firestore().collection('users').doc(userId).update(updateData);
         Alert.alert('Success', 'Profile updated successfully!');
       } else {
         Alert.alert('Error', 'User not found. Please login again.');
@@ -170,11 +172,40 @@ const EditProfileScreen = ({ navigation }) => {
             <Picker.Item label="Prefer not to say" value="preferNotToSay" />
           </Picker>
         </View>
+
         <Text style={styles.sectionTitle}>Address</Text>
-        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Address 1" placeholderTextColor="#ccc" />
-        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Address 2" placeholderTextColor="#ccc" />
-        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="City" placeholderTextColor="#ccc" />
-        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Country" placeholderTextColor="#ccc" />
+        <TextInput
+          style={styles.input}
+          placeholder="Address 1"
+          placeholderTextColor="#999"
+          value={address1}
+          onChangeText={setAddress1}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Address 2"
+          placeholderTextColor="#999"
+          value={address2}
+          onChangeText={setAddress2}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="City"
+          placeholderTextColor="#999"
+          value={city}
+          onChangeText={setCity}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Country"
+          placeholderTextColor="#999"
+          value={country}
+          onChangeText={setCountry}
+        />
+
         <Text style={styles.sectionTitle}>Medical Information</Text>
         <View style={[styles.pickerContainer, { height: hp('5%') }]}>
           <Picker
