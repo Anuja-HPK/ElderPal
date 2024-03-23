@@ -108,7 +108,7 @@ function AppNavigation() {
 
 
                 <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
-                <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} />
+                <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
                 <Stack.Screen name="Setting" component={SettingScreen} />

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, ScrollView, StyleSheet, TouchableOpacity, Text, Image, TextInput, Alert } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-const CommonDBDoctor = ({ navigation }) => {
+const CommonDBDoctor = ({ navigation, userName }) => {
   const [notes, setNotes] = useState([]);
 
   const handleAddNote = (note) => {
@@ -46,7 +46,7 @@ const CommonDBDoctor = ({ navigation }) => {
             <Image source={require('../assets/doc.png')} style={styles.profileImage} />
           </TouchableOpacity>
           <View style={styles.userInfo}>
-            <Text style={styles.userName}>Dr. John Doe</Text>
+            <Text style={styles.userName}>Welcome, Doctor!</Text>
             <Text style={styles.userRole}>Neurologist</Text>
           </View>
         </View>

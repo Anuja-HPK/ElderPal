@@ -67,6 +67,11 @@ const DoctorSignUpScreen = ({ navigation }) => {
       // Create user in Firebase authentication
       const userCredential = await auth().createUserWithEmailAndPassword(email, password);
 
+      // Set display name for the user
+      await userCredential.user.updateProfile({
+        displayName: name,
+      });
+
       // Save additional user data to Firestore
       await firestore().collection('users').doc(userCredential.user.uid).set({
         uid: userCredential.user.uid,

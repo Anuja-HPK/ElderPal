@@ -13,9 +13,14 @@ const DoctorEditScreen = () => {
   const [selectedGender, setSelectedGender] = useState();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [uid, setUid] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
 
   useEffect(() => {
-    // Fetch elder's profile data when component mounts
+    // Fetch doctor's profile data when component mounts
     fetchProfileData();
     // Fetch user's UID
     fetchUserUid();
@@ -29,11 +34,15 @@ const DoctorEditScreen = () => {
         const userProfile = await firestore().collection('users').doc(userId).get();
         const data = userProfile.data();
         if (data) {
-          setFirstName(data.firstName);
-          setLastName(data.lastName);
+          setFirstName(data.firstName || '');
+          setLastName(data.lastName || '');
           setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
-          setAge(data.age);
-          setSelectedGender(data.gender);
+          setAge(data.age || '');
+          setSelectedGender(data.gender || '');
+          setAddress1(data.address1 || ''); // Set default value if undefined
+          setAddress2(data.address2 || ''); // Set default value if undefined
+          setCity(data.city || ''); // Set default value if undefined
+          setCountry(data.country || ''); // Set default value if undefined
         }
       }
     } catch (error) {
@@ -88,7 +97,6 @@ const DoctorEditScreen = () => {
           dateOfBirth: date.toISOString(), // Convert date to ISO string format
           age,
           gender: selectedGender,
-          allergies,
           address1,
           address2,
           city,
