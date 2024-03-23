@@ -38,7 +38,7 @@ const CareTakerProfileScreen = () => {
           }
         }
       } catch (error) {
-        console.error('Error retrieving elder data from AsyncStorage:', error.message);
+        console.error('Error retrieving care taker data from AsyncStorage:', error.message);
       }
       fetchUserUid();
     };

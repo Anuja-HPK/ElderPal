@@ -86,7 +86,7 @@ const FamilyMemberSignUpScreen = ({ navigation }) => {
 
       console.log('User account created & signed in!');
 
-      navigation.navigate('familyMemberDB');
+      navigation.navigate('FamilyMemberDB');
 
       // Handle navigation to the appropriate screen here
     } catch (error) {

@@ -4,8 +4,11 @@ import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, Styl
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { useNavigation } from '@react-navigation/native';
 
 const FamilyEditScreen = () => {
+  const navigation = useNavigation();
+
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [age, setAge] = useState('');
@@ -13,6 +16,11 @@ const FamilyEditScreen = () => {
   const [selectedGender, setSelectedGender] = useState();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [uid, setUid] = useState('');
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [city, setCity] = useState('');
+  const [country, setCountry] = useState('');
 
   useEffect(() => {
     // Fetch elder's profile data when component mounts
@@ -34,6 +42,10 @@ const FamilyEditScreen = () => {
           setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
           setAge(data.age);
           setSelectedGender(data.gender);
+          setAddress1(data.address1 || ''); // Set default value if undefined
+          setAddress2(data.address2 || ''); // Set default value if undefined
+          setCity(data.city || ''); // Set default value if undefined
+          setCountry(data.country || ''); // Set default value if undefined
         }
       }
     } catch (error) {
@@ -81,18 +93,20 @@ const FamilyEditScreen = () => {
       const user = auth().currentUser;
       if (user) {
         const userId = user.uid;
-        await firestore().collection('users').doc(userId).update({
+        const updateData = {
           firstName,
           lastName,
-          dateOfBirth: date.toISOString(), // Convert date to ISO string format
+          dateOfBirth: date ? date.toISOString() : null,
           age,
           gender: selectedGender,
-          allergies,
           address1,
           address2,
           city,
           country,
-        });
+        };
+        // Remove undefined fields from updateData
+        Object.keys(updateData).forEach(key => updateData[key] === undefined && delete updateData[key]);
+        await firestore().collection('users').doc(userId).update(updateData);
         Alert.alert('Success', 'Profile updated successfully!');
       } else {
         Alert.alert('Error', 'User not found. Please login again.');
@@ -102,13 +116,14 @@ const FamilyEditScreen = () => {
       Alert.alert('Error', 'Failed to update profile. Please try again.');
     }
   };
+  
 
   return (
     <SafeAreaView style={{ flex: 1}}>
         <View style={styles.upperHalfBackground}></View>
       <ScrollView contentContainerStyle={{ padding: 20 }}>
         
-      <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
+      <TouchableOpacity onPress={() => navigation.navigate("FamilyMemberPF")} style={styles.backButtonStyle}>
           <Text style={styles.backButtonText}>Back</Text>
         </TouchableOpacity>
 
@@ -164,11 +179,38 @@ const FamilyEditScreen = () => {
 
 
         <Text style={styles.sectionTitle}>Address</Text>
-        <TextInput style={styles.input} placeholder="Address 1" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Address 2" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="City" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Country" placeholderTextColor="#999" />
+        <TextInput
+          style={styles.input}
+          placeholder="Address 1"
+          placeholderTextColor="#999"
+          value={address1}
+          onChangeText={setAddress1}
+        />
 
+        <TextInput
+          style={styles.input}
+          placeholder="Address 2"
+          placeholderTextColor="#999"
+          value={address2}
+          onChangeText={setAddress2}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="City"
+          placeholderTextColor="#999"
+          value={city}
+          onChangeText={setCity}
+        />
+
+        <TextInput
+          style={styles.input}
+          placeholder="Country"
+          placeholderTextColor="#999"
+          value={country}
+          onChangeText={setCountry}
+        />
+        
         {/* Save Button */}
         <TouchableOpacity style={styles.button} onPress={saveChanges}>
           <Text style={styles.buttonText}>Save Changes</Text>
