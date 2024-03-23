@@ -8,6 +8,13 @@ import {
 export default function ChooseRoleScreen({ navigation }) {
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Image
+          source={require("../assets/back.png")} // Assuming you have a back arrow icon
+          style={styles.backIcon}
+        />
+      </TouchableOpacity>
+
       <View style={styles.background} />
       <View style={styles.logoContainer}>
         <Image
@@ -44,6 +51,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'), // Adjust according to your icon size preference
+    height: wp('8%'), // Adjust according to your icon size preference
+    tintColor: 'black', // Assuming your icon color is black
   },
 
   background: {

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView, Dimensions } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView, Dimensions, Image } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
 import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
-
-const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
 const FamilyMemberSignUpScreen = ({ navigation }) => {
   const [name, setName] = useState('');
@@ -111,6 +110,12 @@ const FamilyMemberSignUpScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../assets/back.png")} // Changed to back.png
+            style={styles.backIcon}
+          />
+        </TouchableOpacity>
 
         <View style={styles.upperHalfBackground}></View>
         <View style={styles.headerContainer}>
@@ -118,21 +123,21 @@ const FamilyMemberSignUpScreen = ({ navigation }) => {
         </View>
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { height: hp('6.5%'), marginTop: hp('6%') }]}
           placeholder="Enter your name"
           value={name}
           onChangeText={txt => setName(txt)} // Assuming you have a setName function to handle this
         />
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { height: hp('6.5%'), marginTop: hp('6%') }]}
           placeholder="Enter your email"
           value={email}
           onChangeText={txt => setEmail(txt)} // Assuming you have a setEmail function to handle this
         />
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { height: hp('6.5%'), marginTop: hp('6%') }]}
           placeholder="Create password"
           value={password}
           secureTextEntry={true}
@@ -140,7 +145,7 @@ const FamilyMemberSignUpScreen = ({ navigation }) => {
         />
 
         <TextInput
-          style={styles.input}
+          style={[styles.input, { height: hp('6.5%'), marginTop: hp('6%') }]}
           placeholder="Confirm password"
           value={confirmPassword}
           secureTextEntry={true}
@@ -181,7 +186,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: screenHeight * 0.05, // Adjust according to screen height
+    paddingTop: hp('5%'), // Adjust according to screen height
   },
 
   upperHalfBackground: {
@@ -192,7 +197,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: '60%',
     width: '100%',
-    borderBottomRightRadius: screenHeight * 3, // Adjust according to screen height
+    borderBottomRightRadius: hp('18%'), // Adjust according to screen height
   },
 
   headerContainer: {
@@ -201,37 +206,37 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: 30,
+    fontSize: hp('3.5%'), // Adjust according to screen height
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: screenHeight * 0
+    marginTop: hp('0%')
   },
 
   input: {
-    height: screenHeight * 0.065, // Adjust according to screen height
-    marginTop: screenHeight * 0.06, // Adjust according to screen height
+    height: hp('6.5%'), // Adjust according to screen height
+    marginTop: hp('4%'), // Adjust according to screen height
     borderWidth: 1,
     borderColor: '#258e25',
     padding: 10,
-    borderRadius: 15,
+    borderRadius: 25,
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: 20,
-    width: '90%',
+    paddingHorizontal: wp('4%'), // Adjust according to screen width
+    width: wp('90%'), // Adjust according to screen width
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 15,
-    marginTop: screenHeight * 0.05, // Adjust according to screen height
+    paddingVertical: hp('2%'), // Adjust according to screen height
+    paddingHorizontal: wp('5%'), // Adjust according to screen width
+    borderRadius: 25,
+    marginTop: hp('5%'), // Adjust according to screen height
     borderWidth: 2,
     borderColor: '#ffffff',
-    marginHorizontal: screenWidth * 0.05, // Adjust according to screen width
-    width: '90%',
+    marginHorizontal: wp('5%'), // Adjust according to screen width
+    width: wp('90%'), // Adjust according to screen width
   },
 
   buttonText: {
@@ -242,12 +247,12 @@ const styles = StyleSheet.create({
     color: 'red',
     alignSelf: 'flex-start', // Align to the start of the text input fields
     marginLeft: '5%', // Assuming the input fields have a 5% margin from the sides
-    marginTop: screenHeight * 0.01, // Adjust according to screen height
+    marginTop: hp('1%'), // Adjust according to screen height
   },
 
   signupText: {
-    marginTop: screenHeight * 0.02, // Adjust according to screen height
-    fontSize: 16,
+    marginTop: hp('2%'), // Adjust according to screen height
+    fontSize: hp('2%'), // Adjust according to screen height
   },
 
   signupButton: {
@@ -261,25 +266,25 @@ const styles = StyleSheet.create({
     top: 0,
     bottom: 0,
     justifyContent: 'center',
-    paddingHorizontal: screenWidth * 0.03, // Adjust according to screen width
+    paddingHorizontal: wp('3%'), // Adjust according to screen width
   },
 
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: screenHeight * 0.025, // Adjust according to screen height
-    width: '75%',
+    marginTop: hp('2.5%'), // Adjust according to screen height
+    width: wp('75%'), // Adjust according to screen width
   },
 
   checkbox: {
-    height: 24,
-    width: 24,
+    height: wp('6%'), // Adjust according to screen width
+    width: wp('6%'), // Adjust according to screen width
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#258e25',
     borderRadius: 5,
-    marginRight: 10,
+    marginRight: wp('2%'), // Adjust according to screen width
   },
 
   checkboxChecked: {
@@ -288,8 +293,21 @@ const styles = StyleSheet.create({
 
   checkboxLabel: {
     flex: 1, // Ensure label takes up the remaining space
-    fontSize: 16,
+    fontSize: hp('2%'), // Adjust according to screen height
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'), // Adjust according to your icon size preference
+    height: wp('8%'), // Adjust according to your icon size preference
+    tintColor: 'white', // Assuming your icon color is black
   },
 });
 
 export default FamilyMemberSignUpScreen;
+

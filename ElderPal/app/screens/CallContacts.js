@@ -6,7 +6,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export default function CallContacts() {
+export default function CallContacts({ navigation }) {
   const [contacts, setContacts] = useState([]);
   const [newContactName, setNewContactName] = useState('');
   const [newContactNumber, setNewContactNumber] = useState('');
@@ -67,7 +67,16 @@ export default function CallContacts() {
   };
 
   return (
+
+
     <View style={contactStyle.mainView}>
+      <TouchableOpacity style={contactStyle.backButton} onPress={() => navigation.goBack()}>
+        <Image
+          source={require("../assets/back.png")} // Changed to back.png
+          style={contactStyle.backIcon}
+        />
+      </TouchableOpacity>
+
       {contacts.length > 0 && (
         <Text style={contactStyle.title}>Select a Contact To Call</Text>
       )}
@@ -173,6 +182,7 @@ const contactStyle = {
     color: 'black',
     fontWeight: '600',
     marginBottom: hp('3%'),
+    marginTop: hp('7%'),
   },
   scrollView: {
     paddingBottom: hp('2%'), // Add padding to the bottom of the ScrollView
@@ -232,6 +242,18 @@ const contactStyle = {
     borderRadius: wp('3%'),
     marginTop: hp('1%'),
     marginBottom: hp('2%'),
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'black',
   },
 };
 

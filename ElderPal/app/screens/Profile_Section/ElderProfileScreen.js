@@ -1,23 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation } from '@react-navigation/native'; // Import useNavigation
+import { useNavigation } from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen'; // Importing hp and wp
 
 const ElderProfileScreen = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [uid, setUid] = useState('');
-  const navigation = useNavigation(); // Get navigation object
+  const navigation = useNavigation();
 
-  // Inside useEffect hook in ElderProfileScreen
   useEffect(() => {
     const getData = async () => {
       try {
-        // Retrieve the unique key for the current user (e.g., using email)
         const userKey = `elder_${userCredential.user.uid}`;
-
-        // Retrieve user details using the unique key
         const elderName = await AsyncStorage.getItem(`${userKey}_name`);
         const elderEmail = await AsyncStorage.getItem(`${userKey}_email`);
         const elderUid = await AsyncStorage.getItem(`${userKey}_uid`);
@@ -37,18 +34,9 @@ const ElderProfileScreen = () => {
     getData();
   }, []);
 
-
   const handleLogout = async () => {
     try {
-      // Proceed with sign out
       await auth().signOut();
-
-      // Clear user details only upon explicit sign-out
-      // (Do not clear user details here if you want them to persist across sessions)
-      // await AsyncStorage.removeItem(`${userKey}_name`);
-      // await AsyncStorage.removeItem(`${userKey}_email`);
-      // await AsyncStorage.removeItem(`${userKey}_uid`);
-
       navigation.reset({
         index: 0,
         routes: [{ name: 'SignInScreen' }],
@@ -59,12 +47,14 @@ const ElderProfileScreen = () => {
     }
   };
 
-
   return (
     <View style={styles.container}>
       <View style={styles.upperHalfBackground}>
-        <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
-          <Text style={styles.backButtonText}>Back</Text>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../../assets/back.png")}
+            style={styles.backIcon}
+          />
         </TouchableOpacity>
         <Text style={styles.title}>Elder Profile</Text>
         <Image
@@ -80,8 +70,7 @@ const ElderProfileScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ElderEdit')} // Navigate to EditProfileScreen
-        >
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ElderEdit')}>
           <Text style={styles.buttonText}>Edit Profile</Text>
           <Text style={styles.buttonArrow}>→</Text>
         </TouchableOpacity>
@@ -118,67 +107,64 @@ const styles = StyleSheet.create({
   },
 
   upperHalfBackground: {
-    height: '30%',
+    height: hp('30%'),
     width: '100%',
     backgroundColor: '#258e25',
     alignItems: 'center',
-    justifyContent: 'flex-end', // Aligns children to the bottom of the container
-    borderBottomRightRadius: 130,
-    borderBottomLeftRadius: 130,
+    justifyContent: 'flex-end',
+    borderBottomRightRadius: wp('20%'), // Adjusted radius
+    borderBottomLeftRadius: wp('20%'), // Adjusted radius
   },
 
-  backButtonStyle: {
-    marginBottom: 80,
-    marginLeft: 10,
-    padding: 10,
-    alignSelf: 'flex-start', // Aligns button to the left
-    backgroundColor: '#ffffff',
-    borderRadius: 15,
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'),
+    left: wp('2%'),
+    zIndex: 1,
   },
 
-  backButtonText: {
-    color: '#49d049',
-    fontSize: 20,
-    fontWeight: 'bold',
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'white',
   },
 
   title: {
-    fontSize: 35,
+    fontSize: hp('3.5%'), // Adjusted fontSize
     fontWeight: 'bold',
     color: '#fff',
     position: 'absolute',
-    top: 80,
+    top: hp('10%'), // Adjusted top position
   },
-
   avatar: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
-    marginBottom: -70,
-    borderWidth: 4,
-    borderColor: '#fff', // Makes the avatar stand out
+    width: wp('30%'), // Adjusted width
+    height: wp('30%'), // Adjusted height
+    borderRadius: wp('15%'), // Adjusted borderRadius
+    marginBottom: -hp('4%'), // Adjusted marginBottom
+    borderWidth: wp('2%'), // Adjusted borderWidth
+    borderColor: '#fff',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
-    shadowRadius: 8,
+    shadowRadius: wp('4%'), // Adjusted shadowRadius
   },
 
   infoContainer: {
-    marginTop: 85, // Adjust based on avatar size and desired spacing
-    alignItems: 'center', // This centers the text vertically in the container
+    marginTop: hp('8%'), // Adjusted marginTop
+    alignItems: 'center',
   },
 
   infoText: {
-    fontSize: 18,
-    marginTop: -15,
-    marginBottom: 20,
+    fontSize: hp('2.2%'), // Adjusted fontSize
+    marginTop: -hp('2%'), // Adjusted marginTop
+    marginBottom: hp('2%'), // Adjusted marginBottom
     color: '#000000',
     fontWeight: 'bold',
   },
 
   buttonContainer: {
-    width: '90%', // Adjust the width of the buttons container
-    alignItems: 'center', // This centers the buttons horizontally
+    width: wp('90%'), // Adjusted width
+    alignItems: 'center',
   },
 
   button: {
@@ -186,23 +172,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: '#49d049',
-    padding: 15,
-    width: '100%',
-    borderRadius: 20,
-    marginTop: 10,
-    marginBottom: 5,
+    paddingVertical: hp('2%'), // Adjusted paddingVertical
+    paddingHorizontal: wp('5%'), // Adjusted paddingHorizontal
+    width: wp('90%'), // Adjusted width
+    borderRadius: wp('5%'), // Adjusted borderRadius
+    marginTop: hp('2%'), // Adjusted marginTop
+    marginBottom: hp('1%'), // Adjusted marginBottom
   },
 
   buttonText: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 16,
+    fontSize: hp('2%'), // Adjusted fontSize
   },
 
   buttonArrow: {
     color: '#000000',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: hp('2.5%'), // Adjusted fontSize
   },
 
   logoutButton: {
@@ -215,3 +202,4 @@ const styles = StyleSheet.create({
 });
 
 export default ElderProfileScreen;
+

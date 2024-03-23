@@ -7,7 +7,7 @@ import Voice from '@react-native-community/voice';
 import { apiCall } from '../api/openAI';
 import Tts from 'react-native-tts';
 
-const AssistantHome = () => {
+const AssistantHome = ({ navigation }) => {
   const [messages, setMessages] = useState([]);
   const [recording, setRecording] = useState(false);
   const [speaking, setSpeaking] = useState(false);
@@ -17,10 +17,10 @@ const AssistantHome = () => {
 
   const speechStartHandler = () => {
     console.log('speech start handler');
+    setRecording(true);
   };
 
   const speechEndHandler = () => {
-    setRecording(false);
     console.log('speech end handler');
   };
 
@@ -28,6 +28,7 @@ const AssistantHome = () => {
     console.log('voice event: ', e);
     const text = e.value[0];
     setResult(text);
+    fetchResponse(text);
   };
 
   const speechErrorHandler = (e) => {
@@ -48,25 +49,21 @@ const AssistantHome = () => {
     try {
       await Voice.stop();
       setRecording(false);
-      // Fetch response after stopping recording
-      fetchResponse();
     } catch (e) {
       console.log('Recording Stop Error:', e);
       // Handle error appropriately, e.g., show an error message.
     }
   };
 
-  const fetchResponse = () => {
-    if (result.trim().length > 0) {
-
+  const fetchResponse = (text) => {
+    if (text.trim().length > 0) {
       let newMessages = [...messages];
-      newMessages.push({ role: 'user', content: result.trim() });
+      newMessages.push({ role: 'user', content: text.trim() });
       setMessages([...newMessages]);
       updateScrollView();
       setLoading(true);
 
-      apiCall(result.trim(), newMessages).then(res => {
-        //console.log('Got API Data:', res);
+      apiCall(text.trim(), newMessages).then(res => {
         setLoading(false);
         if (res.success) {
           setMessages([...res.data]);
@@ -76,7 +73,6 @@ const AssistantHome = () => {
         } else {
           Alert.alert('Error', res.msg);
         }
-
       });
     } else {
       console.log('Empty result. Skipping fetch.');
@@ -84,6 +80,7 @@ const AssistantHome = () => {
   };
 
   const startTextToSpeech = message => {
+    stopRecording();
     if (!message.content.includes('https')) {
       setSpeaking(true);
       Tts.speak(message.content, {
@@ -94,18 +91,17 @@ const AssistantHome = () => {
         },
       });
     }
-  }
+  };
 
   const updateScrollView = () => {
     setTimeout(() => {
       ScrollViewRef?.current?.scrollToEnd({ animated: true })
     }, 200)
-  }
+  };
 
   const clear = () => {
     setMessages([]);
     Tts.stop();
-
   };
 
   const stopSpeaking = () => {
@@ -114,43 +110,42 @@ const AssistantHome = () => {
   };
 
   useEffect(() => {
-    // voice handler events
     Voice.onSpeechStart = speechStartHandler;
     Voice.onSpeechEnd = speechEndHandler;
     Voice.onSpeechResults = speechResultsHandler;
     Voice.onSpeechError = speechErrorHandler;
 
-    //tts handlers
     Tts.addEventListener('tts-start', (event) => console.log("start", event));
     Tts.addEventListener('tts-progress', (event) => console.log("progress", event));
     Tts.addEventListener('tts-finish', (event) => { console.log("finish", event); setSpeaking(false) });
     Tts.addEventListener('tts-cancel', (event) => console.log("cancel", event));
 
     return () => {
-      // voice instant remover
       Voice.destroy().then(Voice.removeAllListeners);
     };
   }, []);
 
-  //console.log('result: ', result);
-
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../assets/back.png")} // Changed to back.png
+            style={styles.backIcon}
+          />
+        </TouchableOpacity>
+
         <View style={styles.imageContainer}>
           <Image source={require('../../app/assets/vaimages/bot.png')} style={styles.image} />
         </View>
-        {/* features and messages */}
         {messages.length > 0 ? (
           <View style={styles.messageContainer}>
             <Text style={styles.messageTitle}>Assistant</Text>
             <View style={styles.messageContent}>
-
               <ScrollView ref={ScrollViewRef} bounces={false} style={styles.scrollView} showsVerticalScrollIndicator={false}>
                 {messages.map((message, index) => {
                   if (message.role === 'assistant') {
                     if (message.content.includes('https')) {
-                      // dall e image response 
                       return (
                         <View key={index} style={styles.imgResBox}>
                           <View style={styles.imgResContainer}>
@@ -163,7 +158,6 @@ const AssistantHome = () => {
                         </View>
                       )
                     } else {
-                      //text response chatgpt
                       return (
                         <View style={styles.assistantMessage} key={index}>
                           <View style={styles.assistantMsgBox}>
@@ -172,9 +166,7 @@ const AssistantHome = () => {
                         </View>
                       );
                     }
-
                   } else {
-                    //user Input
                     return (
                       <View style={styles.userInput} key={index}>
                         <View style={styles.userInputBox}>
@@ -190,28 +182,22 @@ const AssistantHome = () => {
         ) : (
           <Features />
         )}
-        {/* 3 buttons for recording, clear, and stop */}
         <View style={styles.buttonsContainer}>
-          {
-            loading ? (
-              <Image
-                source={require('../../app/assets/vaimages/loading.gif')}
-                style={styles.loadingImage} />
-
-            ) :
-              recording ? (
-                <TouchableOpacity onPress={stopRecording}>
-                  <Image source={require('../../app/assets/vaimages/voiceLoading.gif')} style={styles.buttonImagegif} />
-                </TouchableOpacity>
-              ) : (
-                <TouchableOpacity onPress={startRecording}>
-                  <Image source={require('../../app/assets/vaimages/recordingIcon.png')} style={styles.buttonImage} />
-                </TouchableOpacity>
-              )
-
-
-          }
-
+          {loading ? (
+            <Image
+              source={require('../../app/assets/vaimages/loading.gif')}
+              style={styles.loadingImage} />
+          ) : (
+            recording ? (
+              <TouchableOpacity onPress={stopRecording}>
+                <Image source={require('../../app/assets/vaimages/voiceLoading.gif')} style={styles.buttonImagegif} />
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity onPress={startRecording}>
+                <Image source={require('../../app/assets/vaimages/recordingIcon.png')} style={styles.buttonImage} />
+              </TouchableOpacity>
+            )
+          )}
           {messages.length > 0 && (
             <TouchableOpacity onPress={clear} style={styles.clearButton}>
               <Text style={styles.buttonText}>Clear</Text>
@@ -291,17 +277,17 @@ const styles = StyleSheet.create({
     padding: wp(2),
     marginTop: hp(1.5),
   },
-  imgResBox: {     // for dalle image response 
+  imgResBox: {
     flexDirection: 'row',
     justifyContent: 'start',
   },
-  imgResContainer: { // for dalle image response 
+  imgResContainer: {
     marginTop: hp(1),
     padding: 0,
     backgroundColor: 'white',
     borderRadius: 20,
   },
-  imgResStyle: {  // for dalle  image response 
+  imgResStyle: {
     borderRadius: 20,
     height: wp(60),
     width: wp(60),
@@ -343,6 +329,18 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontWeight: 'bold',
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'green',
   },
 });
 

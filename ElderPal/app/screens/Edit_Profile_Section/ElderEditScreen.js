@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Picker } from '@react-native-picker/picker';
-import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet, Alert } from 'react-native';
+import { SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View, StyleSheet, Alert, Image } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import firestore from '@react-native-firebase/firestore';
 import auth from '@react-native-firebase/auth';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
-const EditProfileScreen = () => {
+const EditProfileScreen = ({ navigation }) => {
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [selectedBloodGroup, setSelectedBloodGroup] = useState('unknown');
@@ -16,16 +17,13 @@ const EditProfileScreen = () => {
   const [lastName, setLastName] = useState('');
   const [allergies, setAllergies] = useState('');
   const [uid, setUid] = useState('');
-  // Add state variables for address
   const [address1, setAddress1] = useState('');
   const [address2, setAddress2] = useState('');
   const [city, setCity] = useState('');
   const [country, setCountry] = useState('');
 
   useEffect(() => {
-    // Fetch elder's profile data when component mounts
     fetchProfileData();
-    // Fetch user's UID
     fetchUserUid();
   }, []);
 
@@ -37,17 +35,17 @@ const EditProfileScreen = () => {
         const userProfile = await firestore().collection('users').doc(userId).get();
         const data = userProfile.data();
         if (data) {
-          setFirstName(data.firstName || ''); // Set default value if undefined
-          setLastName(data.lastName || ''); // Set default value if undefined
+          setFirstName(data.firstName || '');
+          setLastName(data.lastName || '');
           setDate(data.dateOfBirth ? new Date(data.dateOfBirth) : new Date());
-          setAge(data.age || ''); // Set default value if undefined
-          setSelectedGender(data.gender || ''); // Set default value if undefined
-          setSelectedBloodGroup(data.bloodGroup || ''); // Set default value if undefined
-          setAllergies(data.allergies || ''); // Set default value if undefined
-          setAddress1(data.address1 || ''); // Set default value if undefined
-          setAddress2(data.address2 || ''); // Set default value if undefined
-          setCity(data.city || ''); // Set default value if undefined
-          setCountry(data.country || ''); // Set default value if undefined
+          setAge(data.age || '');
+          setSelectedGender(data.gender || '');
+          setSelectedBloodGroup(data.bloodGroup || '');
+          setAllergies(data.allergies || '');
+          setAddress1(data.address1 || '');
+          setAddress2(data.address2 || '');
+          setCity(data.city || '');
+          setCountry(data.country || '');
         }
       }
     } catch (error) {
@@ -83,7 +81,7 @@ const EditProfileScreen = () => {
     const num = parseInt(filteredText, 10);
 
     if (num > 100) {
-      filteredText = '100'; // Set to 100 if the entered number is greater
+      filteredText = '100';
       setAgeError('Age cannot be more than 100');
     } else {
       setAgeError('');
@@ -99,7 +97,7 @@ const EditProfileScreen = () => {
         await firestore().collection('users').doc(userId).update({
           firstName,
           lastName,
-          dateOfBirth: date.toISOString(), // Convert date to ISO string format
+          dateOfBirth: date.toISOString(),
           age,
           gender: selectedGender,
           bloodGroup: selectedBloodGroup,
@@ -120,25 +118,22 @@ const EditProfileScreen = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1}}>
-        <View style={styles.upperHalfBackground}></View>
-      <ScrollView contentContainerStyle={{ padding: 20 }}>
-
-      <TouchableOpacity /*onPress={() => navigation.goBack()}*/ style={styles.backButtonStyle}>
-          <Text style={styles.backButtonText}>Back</Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={styles.upperHalfBackground}></View>
+      <ScrollView contentContainerStyle={{ padding: wp('5%') }}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../../assets/back.png")}
+            style={[styles.backIcon, { width: wp('8%'), height: wp('8%') }]}
+          />
         </TouchableOpacity>
-
-        <Text style={styles.title}>Elder Edit Profile</Text>
-
-        {/* Personal Information Section */}
+        <Text style={[styles.title, { marginBottom: hp('5%') }]}>Elder Edit Profile</Text>
         <Text style={styles.userInfoText}>User ID: {uid}</Text>
-
         <Text style={styles.sectionTitle}>Personal Information</Text>
-        <TextInput style={styles.input} placeholder="First Name" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Last Name" placeholderTextColor="#999" />
-
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="First Name" placeholderTextColor="#ccc" />
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Last Name" placeholderTextColor="#ccc" />
         <View>
-          <TouchableOpacity onPress={showDatepicker} style={styles.datePicker}>
+          <TouchableOpacity onPress={showDatepicker} style={[styles.datePicker, { height: hp('5%') }]}>
             <Text style={styles.datePickerText}>{date.toLocaleDateString()}</Text>
           </TouchableOpacity>
           {show && (
@@ -152,42 +147,36 @@ const EditProfileScreen = () => {
             />
           )}
         </View>
-
         <TextInput
-          style={styles.input}
+          style={[styles.input, { height: hp('5%') }]}
           placeholder="Age"
-          placeholderTextColor="#999"
+          placeholderTextColor="#ccc"
           keyboardType="numeric"
           value={age}
           onChangeText={handleAgeChange}
         />
         {ageError ? <Text style={styles.errorText}>{ageError}</Text> : null}
-
-        <View style={styles.pickerContainer}>
-        <Picker
+        <View style={[styles.pickerContainer, { height: hp('5%') }]}>
+          <Picker
             selectedValue={selectedGender}
             onValueChange={(itemValue) => setSelectedGender(itemValue)}
             style={styles.picker}
-            mode="dropdown" // This prop is Android-only
-        >
+            mode="dropdown"
+          >
             <Picker.Item label="Select your gender" value="unknown" />
             <Picker.Item label="Male" value="male" />
             <Picker.Item label="Female" value="female" />
             <Picker.Item label="Other" value="other" />
             <Picker.Item label="Prefer not to say" value="preferNotToSay" />
-        </Picker>
+          </Picker>
         </View>
-
-        {/* Address Section */}
         <Text style={styles.sectionTitle}>Address</Text>
-        <TextInput style={styles.input} placeholder="Address 1" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Address 2" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="City" placeholderTextColor="#999" />
-        <TextInput style={styles.input} placeholder="Country" placeholderTextColor="#999" />
-
-        {/* Medical Information Section */}
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Address 1" placeholderTextColor="#ccc" />
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Address 2" placeholderTextColor="#ccc" />
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="City" placeholderTextColor="#ccc" />
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Country" placeholderTextColor="#ccc" />
         <Text style={styles.sectionTitle}>Medical Information</Text>
-        <View style={styles.pickerContainer}>
+        <View style={[styles.pickerContainer, { height: hp('5%') }]}>
           <Picker
             selectedValue={selectedBloodGroup}
             onValueChange={(itemValue) => setSelectedBloodGroup(itemValue)}
@@ -205,12 +194,9 @@ const EditProfileScreen = () => {
             <Picker.Item label="O-" value="O-" />
           </Picker>
         </View>
-
-        <TextInput style={styles.input} placeholder="Allergies" placeholderTextColor="#999" />
-
-        {/* Save Button */}
+        <TextInput style={[styles.input, { height: hp('5%') }]} placeholder="Allergies" placeholderTextColor="#ccc" />
         <TouchableOpacity style={styles.button} onPress={saveChanges}>
-        <Text style={styles.buttonText}>Save Changes</Text>
+          <Text style={styles.buttonText}>Save Changes</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -218,102 +204,107 @@ const EditProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
-    upperHalfBackground: {
-        backgroundColor: '#258e25',
-        position: 'absolute',
-        left: 0,
-        right: 0,
-        top: 0,
-        height: '20%',
-        width: '100%',
-        borderBottomRightRadius: 500,
-      },
-    
-    input: {
-      height: 40,
-      marginBottom: 12,
-      borderWidth: 1,
-      padding: 10,
-      borderColor: '#258e25',
-      backgroundColor: 'white',
-      color: 'black',
-      borderRadius: 15,
-      fontWeight: 'bold',
-    },
+  upperHalfBackground: {
+    backgroundColor: '#258e25',
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    height: hp('40%'), // Adjusted height
+    width: wp('100%'),
+    borderBottomRightRadius: 500,
+  },
 
-    datePicker: {
-      height: 40,
-      marginBottom: 12,
-      borderWidth: 1,
-      borderColor: '#258e25',
-      padding: 10,
-      justifyContent: 'center',
-      borderRadius: 15,
-    },
+  input: {
+    height: hp('4%'), // Adjusted height
+    marginBottom: hp('1.5%'), // Adjusted marginBottom
+    borderWidth: 1,
+    padding: wp('2%'), // Adjusted padding
+    borderColor: '#258e25',
+    backgroundColor: 'white',
+    color: 'black',
+    borderRadius: wp('4%'), // Adjusted borderRadius
+    fontWeight: 'bold',
+  },
 
-    datePickerText: {
-      color: 'black',
-    },
+  datePicker: {
+    height: hp('10%'), // Adjusted height
+    marginBottom: hp('1.5%'), // Adjusted marginBottom
+    borderWidth: 1,
+    backgroundColor: "white",
+    borderColor: '#258e25',
+    padding: wp('5%'), // Adjusted padding
+    justifyContent: 'center',
+    borderRadius: wp('4%'), // Adjusted borderRadius
 
-    button: {
-      backgroundColor: '#49d049',
-      padding: 6,
-      alignItems: 'center',
-      borderRadius: 15,
-    },
-    
-    buttonText: {
-      color: 'white',
-      fontSize: 18,
-      fontWeight: 'bold',
-    },
+  },
 
-    backButtonStyle: {
-      marginBottom: 20,
-      padding: 10,
-      alignSelf: 'flex-start', // Aligns button to the left
-      backgroundColor: '#ffffff',
-      borderRadius: 15,
-    },
-  
-    backButtonText: {
-      color: '#49d049',
-      fontSize: 20,
-      fontWeight: 'bold',
-    },
+  datePickerText: {
+    color: 'black',
+    fontSize: hp('1.5%'),
+    fontWeight: 'bold',
+    height: hp('2.5%'),
+  },
 
-    title: {
-      fontSize: 30,
-      fontWeight: 'bold',
-      color: '#ffffff', // Adjust the color to fit your design
-      marginBottom: 50,
-      textAlign: 'center',
-    },
+  button: {
+    backgroundColor: '#49d049',
+    padding: wp('3%'), // Adjusted padding
+    alignItems: 'center',
+    borderRadius: wp('4%'), // Adjusted borderRadius
+    marginTop: hp('3%'), // Adjusted marginTop
+  },
 
-    sectionTitle: {
-      fontSize: 20,
-      color: '#258e25',
-      marginBottom: 20,
-      marginTop: 20,
-      fontWeight: 'bold',
-    },
-    
-    pickerContainer: {
-      borderWidth: 1,
-      borderColor: '#258e25',
-      marginBottom: 12,
-      borderRadius: 15, // Optional: for rounded corners
-    },
+  buttonText: {
+    color: 'white',
+    fontSize: hp('2.2%'), // Adjusted fontSize
+    fontWeight: 'bold',
+  },
 
-    picker: {
-      height: 40,
-      color: 'black',
-    },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'),
+    left: wp('2%'),
+    zIndex: 1,
+  },
 
-    errorText: {
-        color: 'red', // Example error text style
-        marginBottom: 10,
-    },
-  });
-  
+  backIcon: {
+    tintColor: 'white',
+  },
+
+  title: {
+    fontSize: hp('3.5%'), // Adjusted fontSize
+    fontWeight: 'bold',
+    color: '#ffffff',
+    marginBottom: hp('5%'), // Adjusted marginBottom
+    textAlign: 'center',
+  },
+
+  sectionTitle: {
+    fontSize: hp('2.5%'), // Adjusted fontSize
+    color: 'black',
+    marginBottom: hp('2.5%'), // Adjusted marginBottom
+    marginTop: hp('2.5%'), // Adjusted marginTop
+    fontWeight: 'bold',
+  },
+
+  pickerContainer: {
+    borderWidth: 1,
+    backgroundColor: "white",
+    borderColor: '#258e25',
+    marginBottom: hp('1.5%'), // Adjusted marginBottom
+    borderRadius: wp('4%'), // Adjusted borderRadius
+  },
+
+  picker: {
+    height: hp('6%'), // Adjusted height
+    color: 'black',
+  },
+
+  errorText: {
+    color: 'red',
+    marginBottom: hp('2%'), // Adjusted marginBottom
+  },
+});
+
 export default EditProfileScreen;
+

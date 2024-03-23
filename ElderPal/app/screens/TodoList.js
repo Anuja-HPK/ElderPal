@@ -1,22 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  TextInput,
-  Platform,
-  Alert,
-  Linking,
-} from 'react-native';
+import { View, Text, Image, TouchableOpacity, ScrollView, TextInput, Platform, Alert, Linking, } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from 'react-native-push-notification';
 import { request, PERMISSIONS } from 'react-native-permissions';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
-export default function TodoList() {
+export default function TodoList({ navigation }) {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
   const [taskTime, setTaskTime] = useState(new Date());
@@ -118,6 +108,14 @@ export default function TodoList() {
 
   return (
     <View style={{ flex: 1 }}>
+
+      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+        <Image
+          source={require("../assets/back.png")} // Changed to back.png
+          style={styles.backIcon}
+        />
+      </TouchableOpacity>
+
       <View style={styles.container}>
         <Text style={styles.title}>TodoList</Text>
       </View>
@@ -320,5 +318,17 @@ const styles = {
   deleteIcon: {
     width: wp('7%'),
     height: wp('7%'),
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'black',
   },
 };

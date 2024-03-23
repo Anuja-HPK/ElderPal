@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore'; // Import Firestore
@@ -113,6 +113,13 @@ const ElderSignUpScreen = () => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../assets/back.png")} // Changed to back.png
+            style={styles.backIcon}
+          />
+        </TouchableOpacity>
+
 
         <View style={styles.upperHalfBackground}></View>
         <View style={styles.headerContainer}>
@@ -183,7 +190,7 @@ const styles = StyleSheet.create({
 
   scrollViewContent: {
     alignItems: 'center',
-    paddingTop: hp('2%'), // Adjust according to your needs
+    paddingTop: hp('2%'),
   },
 
   upperHalfBackground: {
@@ -192,7 +199,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: hp('60%'), // Adjust according to your needs
+    height: hp('60%'),
     width: '100%',
     borderBottomRightRadius: 600,
   },
@@ -203,37 +210,37 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: hp('3%'), // Adjust according to your needs
+    fontSize: hp('3%'),
     fontWeight: 'bold',
     color: '#ffffff',
     textAlign: 'center',
-    marginTop: hp('5%'), // Adjust according to your needs
-    marginBottom: hp('7%'), // Adjust according to your needs
+    marginTop: hp('5%'),
+    marginBottom: hp('2%'),
   },
 
   input: {
-    height: hp('6%'), // Adjust according to your needs
-    marginTop: hp('5%'), // Adjust according to your needs
+    height: hp('6%'),
+    marginTop: hp('5%'),
     borderWidth: 1,
     borderColor: '#258e25',
-    padding: hp('1%'), // Adjust according to your needs
-    borderRadius: hp('2%'), // Adjust according to your needs
+    padding: hp('1%'),
+    borderRadius: hp('4%'),
     backgroundColor: '#ffffff',
     color: '#000000',
-    paddingHorizontal: wp('5%'), // Adjust according to your needs
-    width: wp('90%'), // Adjust according to your needs
+    paddingHorizontal: wp('5%'),
+    width: wp('90%'),
   },
 
   button: {
     alignItems: 'center',
     backgroundColor: '#258e25',
-    padding: hp('1.5%'), // Adjust according to your needs
-    borderRadius: hp('2%'), // Adjust according to your needs
-    marginTop: hp('4%'), // Adjust according to your needs
+    padding: hp('1.5%'),
+    borderRadius: hp('4%'),
+    marginTop: hp('4%'),
     borderWidth: 2,
     borderColor: '#ffffff',
-    marginHorizontal: wp('5%'), // Adjust according to your needs
-    width: wp('90%'), // Adjust according to your needs
+    marginHorizontal: wp('5%'),
+    width: wp('90%'),
   },
 
   buttonText: {
@@ -241,8 +248,8 @@ const styles = StyleSheet.create({
   },
 
   signupText: {
-    marginTop: hp('4%'), // Adjust according to your needs
-    fontSize: hp('2%'), // Adjust according to your needs
+    marginTop: hp('4%'),
+    fontSize: hp('2%'),
   },
 
   signupButton: {
@@ -253,19 +260,19 @@ const styles = StyleSheet.create({
   checkboxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: hp('3%'), // Adjust according to your needs
-    width: wp('75%'), // Adjust according to your needs
+    marginTop: hp('3%'),
+    width: wp('75%'),
   },
 
   checkbox: {
-    height: hp('2.5%'), // Adjust according to your needs
-    width: hp('2.5%'), // Adjust according to your needs
+    height: hp('2.5%'),
+    width: hp('2.5%'),
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#258e25',
-    borderRadius: hp('0.5%'), // Adjust according to your needs
-    marginRight: wp('3%'), // Adjust according to your needs
+    borderRadius: hp('0.5%'),
+    marginRight: wp('3%'),
   },
 
   checkboxChecked: {
@@ -274,8 +281,21 @@ const styles = StyleSheet.create({
 
   checkboxLabel: {
     flex: 1,
-    fontSize: hp('2%'), // Adjust according to your needs
+    fontSize: hp('2%'),
   },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'),
+    height: wp('8%'),
+    tintColor: 'white',
+  },
+
 
 });
 

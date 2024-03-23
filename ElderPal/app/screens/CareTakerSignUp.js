@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { View, TextInput, StyleSheet, Text, TouchableOpacity, Alert, ScrollView, Image } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -99,6 +99,12 @@ const CareTakerSignUpScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
+        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+          <Image
+            source={require("../assets/back.png")} // Changed to back.png
+            style={styles.backIcon}
+          />
+        </TouchableOpacity>
 
         <View style={styles.upperHalfBackground}></View>
         <View style={styles.headerContainer}>
@@ -193,12 +199,12 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textAlign: 'center',
     marginTop: hp('3%'), // Adjusted to 7% of the screen height
-    marginBottom: hp('3%'), // Adjusted to 10% of the screen height
+    marginBottom: hp('1%'), // Adjusted to 10% of the screen height
   },
 
   input: {
     height: hp('7%'), // Adjusted to 7% of the screen height
-    marginTop: hp('6%'), // Adjusted to 6% of the screen height
+    marginTop: hp('4%'), // Adjusted to 6% of the screen height
     borderWidth: 1,
     borderColor: '#258e25',
     padding: wp('4%'),
@@ -279,6 +285,18 @@ const styles = StyleSheet.create({
   checkboxLabel: {
     flex: 1,
     fontSize: hp('2%'), // Adjusted to 2% of the screen height
+  },
+  backButton: {
+    position: 'absolute',
+    top: hp('2%'), // Adjusted to 2% of the screen height
+    left: wp('2%'), // Adjusted to 2% of the screen width
+    zIndex: 1,
+  },
+
+  backIcon: {
+    width: wp('8%'), // Adjust according to your icon size preference
+    height: wp('8%'), // Adjust according to your icon size preference
+    tintColor: 'white', // Assuming your icon color is black
   },
 });
 

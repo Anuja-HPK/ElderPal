@@ -83,7 +83,7 @@ function AppNavigation() {
                 <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="login" component={LogInScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} />
+                <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} options={{ headerShown: false }} />
 
                 {/* Conditional rendering of signup screens based on the chosen role */}
                 <Stack.Screen name="ElderSignUp" component={ElderSignUp} options={{ headerShown: false }} />
@@ -91,18 +91,18 @@ function AppNavigation() {
                 <Stack.Screen name="CareTakerSignUp" component={CareTakerSignUp} options={{ headerShown: false }} />
                 <Stack.Screen name="FamilyMemberSignUp" component={FamilyMemberSignUp} options={{ headerShown: false }} />
 
-                <Stack.Screen name="ElderDB" component={ElderDashboardScreen} />
+                <Stack.Screen name="ElderDB" component={ElderDashboardScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="DoctorDB" component={CommonDBDoctor} options={{ headerShown: false }} />
                 <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} options={{ headerShown: false }} />
                 <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
                 <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} options={{ headerShown: false }} />
 
                 {/* Other screens  */}
-                <Stack.Screen name="ElderPF" component={ElderProfileScreen} />
-                <Stack.Screen name="ElderEdit" component={ElderEditScreen} />
-                <Stack.Screen name="AIassistant" component={AssistantHome} />
-                <Stack.Screen name="Call" component={CallContacts} />
-                <Stack.Screen name="ToDo" component={TodoList} />
+                <Stack.Screen name="ElderPF" component={ElderProfileScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="ElderEdit" component={ElderEditScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="AIassistant" component={AssistantHome} options={{ headerShown: false }} />
+                <Stack.Screen name="Call" component={CallContacts} options={{ headerShown: false }} />
+                <Stack.Screen name="ToDo" component={TodoList} options={{ headerShown: false }} />
 
 
                 <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
