@@ -70,7 +70,9 @@ export default function ElderDashboardScreen({ navigation, userName }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#99e699',
   },
+  
   actionContainer: {
     marginHorizontal: wp('8%'),
     marginBottom: hp('2%'),
