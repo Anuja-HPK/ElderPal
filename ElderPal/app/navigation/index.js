@@ -35,6 +35,7 @@ import SignInMessage from "../../app/screens/Messages/SignInMessage";
 import SignUpMessage from "../../app/screens/Messages/SignUpMessage";
 import AssistantHome from "../../app/screens/assistanthome";
 import CallingUIScreen from "../../app/screens/CallingUIScreen";
+import VideoCall from "../../app/screens/VideoCall";
 
 const Stack = createNativeStackNavigator();
 
@@ -77,7 +78,6 @@ function AppNavigation() {
     }, []);
 
     return (
-
         <NavigationContainer>
             <Stack.Navigator initialRouteName={initialRouteName}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
