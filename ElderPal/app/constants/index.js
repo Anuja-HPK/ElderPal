@@ -1,4 +1,4 @@
-export const apiKey = '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';
+export const apiKey = 'openAI api key';
 export const dummyMessages = [ // used these dummy messages to build the frame of the chat interface
     {
         role: 'user',
