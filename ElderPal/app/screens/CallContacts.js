@@ -1,12 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, TouchableOpacity, Image, ScrollView, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  ScrollView,
+  TextInput,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native'; // Import useNavigation hook
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export default function CallContacts({ navigation }) {
+export default function CallContacts() {
+  const navigation = useNavigation(); // Initialize navigation
   const [contacts, setContacts] = useState([]);
   const [newContactName, setNewContactName] = useState('');
   const [newContactNumber, setNewContactNumber] = useState('');
@@ -47,7 +56,7 @@ export default function CallContacts({ navigation }) {
         {
           id: contacts.length + 1,
           name: newContactName,
-          phoneNumber: newContactNumber,
+          IDNumber: newContactNumber,
         },
       ]);
       setNewContactName('');
@@ -67,12 +76,12 @@ export default function CallContacts({ navigation }) {
   };
 
   return (
-
-
     <View style={contactStyle.mainView}>
-      <TouchableOpacity style={contactStyle.backButton} onPress={() => navigation.goBack()}>
+      <TouchableOpacity
+        style={contactStyle.backButton}
+        onPress={() => navigation.goBack()}>
         <Image
-          source={require("../assets/back.png")} // Changed to back.png
+          source={require('../assets/back.png')}
           style={contactStyle.backIcon}
         />
       </TouchableOpacity>
@@ -83,11 +92,16 @@ export default function CallContacts({ navigation }) {
 
       <ScrollView contentContainerStyle={contactStyle.scrollView} ref={scrollViewRef}>
         {contacts.length === 0 && !showAddContactFields && (
-          <Text style={{ textAlign: 'center', fontSize: hp('3%'), marginTop: "80%" }}>No contacts to display!</Text>
+          <Text
+            style={{ textAlign: 'center', fontSize: hp('3%'), marginTop: '80%', color: 'grey' }}>
+            No contacts to display!
+          </Text>
         )}
 
         {contacts.map(contact => (
-          <TouchableOpacity key={contact.id} onPress={() => console.log('Calling', contact.name)}>
+          <TouchableOpacity
+            key={contact.id}
+            onPress={() => navigation.navigate('VideoCall', { InviteeID: contact.IDNumber, userName: contact.name })}>
             <View style={contactStyle.card}>
               <Image
                 source={require('../assets/callicon.png')}
@@ -95,12 +109,16 @@ export default function CallContacts({ navigation }) {
               />
               <View style={{ flex: 1 }}>
                 <Text style={contactStyle.conName}>{contact.name}</Text>
-                <Text style={contactStyle.conNum}>{contact.phoneNumber}</Text>
+                <Text style={contactStyle.conNum}>{contact.IDNumber}</Text>
               </View>
               <TouchableOpacity onPress={() => deleteContact(contact.id)}>
                 <Image
                   source={require('../assets/delete.png')}
-                  style={{ width: wp('8%'), height: hp('4%'), marginRight: wp('2%') }}
+                  style={{
+                    width: wp('8%'),
+                    height: hp('4%'),
+                    marginRight: wp('2%'),
+                  }}
                 />
               </TouchableOpacity>
             </View>
@@ -109,8 +127,12 @@ export default function CallContacts({ navigation }) {
       </ScrollView>
 
       {!showAddContactFields && (
-        <TouchableOpacity style={contactStyle.addButton} onPress={toggleAddContactFields}>
-          <Text style={{ fontSize: hp('3%'), color: '#fff', fontWeight: '600' }}>Add Contact</Text>
+        <TouchableOpacity
+          style={contactStyle.addButton}
+          onPress={toggleAddContactFields}>
+          <Text style={{ fontSize: hp('3%'), color: '#fff', fontWeight: '600' }}>
+            Add Contact
+          </Text>
         </TouchableOpacity>
       )}
 
@@ -119,12 +141,14 @@ export default function CallContacts({ navigation }) {
           <TextInput
             style={contactStyle.inputField}
             placeholder="Contact Name"
+            placeholderTextColor="grey"
             value={newContactName}
             onChangeText={text => setNewContactName(text)}
           />
           <TextInput
             style={contactStyle.inputField}
             placeholder="ID Number"
+            placeholderTextColor="grey"
             keyboardType="numeric"
             value={newContactNumber}
             onChangeText={text => setNewContactNumber(text)}
@@ -138,7 +162,7 @@ export default function CallContacts({ navigation }) {
               marginBottom: hp('5%'),
             }}>
             <TouchableOpacity
-              style={[contactStyle.addButton, { marginLeft: wp('2%') }]}
+              style={[contactStyle.addButton, { marginLeft: wp('6%') }]}
               onPress={addContact}>
               <Text
                 style={{
@@ -146,12 +170,13 @@ export default function CallContacts({ navigation }) {
                   color: '#fff',
                   paddingVertical: hp('0.5%'),
                   paddingHorizontal: wp('1%'),
+
                 }}>
                 Add Contact
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[contactStyle.cancelButton, { marginRight: wp('2%') }]}
+              style={[contactStyle.cancelButton, { marginRight: wp('3%') }]}
               onPress={toggleAddContactFields}>
               <Text
                 style={{
@@ -185,13 +210,13 @@ const contactStyle = {
     marginTop: hp('7%'),
   },
   scrollView: {
-    paddingBottom: hp('2%'), // Add padding to the bottom of the ScrollView
+    paddingBottom: hp('2%'),
   },
   card: {
     borderColor: '#258e25',
     borderWidth: wp('0.5%'),
     margin: wp('2%'),
-    marginBottom: -wp('0.2%'), // Reduce marginBottom to allow space for the next card
+    marginBottom: -wp('0.2%'),
     flexDirection: 'row',
     borderRadius: wp('4%'),
     borderTopLeftRadius: wp('10%'),
@@ -216,7 +241,7 @@ const contactStyle = {
     marginVertical: -hp('1%'),
     fontWeight: '600',
     color: '#454545',
-    paddingBottom: hp('2%')
+    paddingBottom: hp('2%'),
   },
   inputField: {
     height: hp('6%'),
@@ -226,14 +251,19 @@ const contactStyle = {
     backgroundColor: '#f2f2f2',
     paddingHorizontal: wp('3%'),
     fontSize: hp('2.5%'),
+    color: 'black'
   },
   addButton: {
+    marginLeft: hp('2%'),
+    marginTop: hp('1%'),
     backgroundColor: '#258e25',
-    paddingVertical: hp('1.5%'),
-    paddingHorizontal: wp('4%'),
+    paddingVertical: hp('1.2%'),
+    paddingHorizontal: wp('3%'),
     borderRadius: wp('3%'),
-    margin: wp('2%'),
+    margin: wp('1%'),
     alignItems: 'center',
+    marginBottom: hp('2%'),
+    marginRight: hp('2%'),
   },
   cancelButton: {
     backgroundColor: '#c62828',
@@ -256,5 +286,3 @@ const contactStyle = {
     tintColor: 'black',
   },
 };
-
-

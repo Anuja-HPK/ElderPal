@@ -78,52 +78,48 @@ function AppNavigation() {
     }, []);
 
     return (
-        <>
-        <VideoCall/>
-        </>
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName={initialRouteName}>
+                <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="login" component={LogInScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} options={{ headerShown: false }} />
 
-        // <NavigationContainer>
-        //     <Stack.Navigator initialRouteName={initialRouteName}>
-        //         <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="login" component={LogInScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="SignIn" component={SignInScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="ChooseRole" component={ChooseRoleScreen} options={{ headerShown: false }} />
+                {/* Conditional rendering of signup screens based on the chosen role */}
+                <Stack.Screen name="ElderSignUp" component={ElderSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="DoctorSignUp" component={DoctorSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerSignUp" component={CareTakerSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="FamilyMemberSignUp" component={FamilyMemberSignUp} options={{ headerShown: false }} />
 
-        //         {/* Conditional rendering of signup screens based on the chosen role */}
-        //         <Stack.Screen name="ElderSignUp" component={ElderSignUp} options={{ headerShown: false }} />
-        //         <Stack.Screen name="DoctorSignUp" component={DoctorSignUp} options={{ headerShown: false }} />
-        //         <Stack.Screen name="CareTakerSignUp" component={CareTakerSignUp} options={{ headerShown: false }} />
-        //         <Stack.Screen name="FamilyMemberSignUp" component={FamilyMemberSignUp} options={{ headerShown: false }} />
+                <Stack.Screen name="ElderDB" component={ElderDashboardScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="DoctorDB" component={CommonDBDoctor} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
+                <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} options={{ headerShown: false }} />
 
-        //         <Stack.Screen name="ElderDB" component={ElderDashboardScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="DoctorDB" component={CommonDBDoctor} options={{ headerShown: false }} />
-        //         <Stack.Screen name="CareTakerDB" component={CommonDBDCaretaker} options={{ headerShown: false }} />
-        //         <Stack.Screen name="CareTakerPF" component={CareTakerProfileScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="CareTakerEdit" component={CareTakerEditScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="CTNotesUpdate" component={CTNotesUpdate} />
-        //         <Stack.Screen name="FamilyMemberDB" component={CommonDBFamilyMem} options={{ headerShown: false }} />
-
-        //         {/* Other screens  */}
-        //         <Stack.Screen name="ElderPF" component={ElderProfileScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="ElderEdit" component={ElderEditScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="AIassistant" component={AssistantHome} options={{ headerShown: false }} />
-        //         <Stack.Screen name="Call" component={CallContacts} options={{ headerShown: false }} />
-        //         <Stack.Screen name="ToDo" component={TodoList} options={{ headerShown: false }} />
+                {/* Other screens  */}
+                <Stack.Screen name="ElderPF" component={ElderProfileScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="ElderEdit" component={ElderEditScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="AIassistant" component={AssistantHome} options={{ headerShown: false }} />
+                <Stack.Screen name="Call" component={CallContacts} options={{ headerShown: false }} />
+                <Stack.Screen name="ToDo" component={TodoList} options={{ headerShown: false }} />
 
 
-        //         <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
-        //         <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} options={{ headerShown: false }} />
-        //         <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
+                <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
+                <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
 
-        //         <Stack.Screen name="Setting" component={SettingScreen} />
-        //         <Stack.Screen name="Logout" component={Logout} />
-        //         <Stack.Screen name="SignInMessage" component={SignInMessage} />
-        //         <Stack.Screen name="SignUpMessage" component={SignUpMessage} />
-        //         <Stack.Screen name="AssistantHome" component={AssistantHome} />
-        //         <Stack.Screen name="CallingUIScreen" component={CallingUIScreen} />
+                <Stack.Screen name="Setting" component={SettingScreen} />
+                <Stack.Screen name="Logout" component={Logout} />
+                <Stack.Screen name="SignInMessage" component={SignInMessage} />
+                <Stack.Screen name="SignUpMessage" component={SignUpMessage} />
+                <Stack.Screen name="AssistantHome" component={AssistantHome} />
+                <Stack.Screen name="CallingUIScreen" component={CallingUIScreen} />
 
-        //     </Stack.Navigator>
-        // </NavigationContainer>
+            </Stack.Navigator>
+        </NavigationContainer>
 
     );
 }
