@@ -25,7 +25,7 @@ const App = () => {
       <View style={styles.whiteSection}>
         {/* Circular Buttons */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          <TouchableOpacity style={styles.circularButton}>
+          <TouchableOpacity style={styles.circularButton} onPress={() => navigation.navigate("Call")}>
             <Image source={require('../assets/VidCall.png')} style={styles.buttonImage1} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.circularButton}>
