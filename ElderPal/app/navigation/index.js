@@ -19,7 +19,6 @@ import { CommonDBDCaretaker, CTNotesUpdate } from '../../app/screens/CommonDBCar
 import CommonDBFamilyMem from '../../app/screens/CommonDBFamilyMem';
 import WelcomeScreen from "../../app/screens/WelcomeScreen";
 import ElderDashboardScreen from "../../app/screens/ElderDashboardScreen";
-import CallContacts from "../../app/screens/CallContacts";
 import SignInScreen from "../../app/screens/SignInScreen";
 import ElderProfileScreen from "../../app/screens/Profile_Section/ElderProfileScreen";
 import DoctorProfileScreen from "../../app/screens/Profile_Section/DoctorProfileScreen";
@@ -36,6 +35,12 @@ import SignUpMessage from "../../app/screens/Messages/SignUpMessage";
 import AssistantHome from "../../app/screens/assistanthome";
 import CallingUIScreen from "../../app/screens/CallingUIScreen";
 import VideoCall from "../../app/screens/VideoCall";
+import StartCall from "../../app/screens/StartCall";
+import {
+    ZegoCallInvitationDialog,
+    ZegoUIKitPrebuiltCallWaitingScreen,
+    ZegoUIKitPrebuiltCallInCallScreen,
+  } from '@zegocloud/zego-uikit-prebuilt-call-rn';
 
 const Stack = createNativeStackNavigator();
 
@@ -79,6 +84,8 @@ function AppNavigation() {
 
     return (
         <NavigationContainer>
+            <ZegoCallInvitationDialog />
+            
             <Stack.Navigator initialRouteName={initialRouteName}>
                 <Stack.Screen name="Welcome" component={WelcomeScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="login" component={LogInScreen} options={{ headerShown: false }} />
@@ -103,10 +110,13 @@ function AppNavigation() {
                 <Stack.Screen name="ElderPF" component={ElderProfileScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="ElderEdit" component={ElderEditScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="AIassistant" component={AssistantHome} options={{ headerShown: false }} />
-                <Stack.Screen name="Call" component={CallContacts} options={{ headerShown: false }} />
+                <Stack.Screen name="Call" component={VideoCall} options={{ headerShown: false }} />
                 <Stack.Screen name="ToDo" component={TodoList} options={{ headerShown: false }} />
 
-
+                <Stack.Screen name="ZegoUIKitPrebuiltCallWaitingScreen" component={ZegoUIKitPrebuiltCallWaitingScreen} options={{headerShown: false}} />
+                <Stack.Screen name="ZegoUIKitPrebuiltCallInCallScreen" component={ZegoUIKitPrebuiltCallInCallScreen} options={{headerShown: false}} />
+                <Stack.Screen name="StartCall" component={StartCall} options={{ headerShown: false }} />
+          
                 <Stack.Screen name="NotesUpdate" component={NotesUpdate} />
                 <Stack.Screen name="DoctorPF" component={DoctorProfileScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="DoctorEdit" component={DoctorEditScreen} />
@@ -123,7 +133,6 @@ function AppNavigation() {
 
             </Stack.Navigator>
         </NavigationContainer>
-
     );
 }
 export default AppNavigation;
