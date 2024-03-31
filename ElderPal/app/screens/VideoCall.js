@@ -186,10 +186,14 @@ export default function CallContacts({navigation}) {
         contentContainerStyle={contactStyle.scrollView}
         ref={scrollViewRef}>
         {contacts.length === 0 && !showAddContactFields && (
-          <Text
+          <View style={{alignItems:'center'}}>
+            <Text
             style={{textAlign: 'center', fontSize: hp('3%'), marginTop: '80%'}}>
-            No contacts to display!
+            No contacts to display! 
           </Text>
+          <Text style={{fontSize:20, color:'black', fontWeight:700}}>My Contact Id: {userID}</Text>
+          </View>
+          
         )}
 
         {contacts.map(contact => (
@@ -257,7 +261,7 @@ export default function CallContacts({navigation}) {
               marginBottom: hp('5%'),
             }}>
             <TouchableOpacity
-              style={[contactStyle.addButton, {marginLeft: wp('2%')}]}
+              style={[contactStyle.addButton, {marginLeft: wp('7%')}]}
               onPress={addContact}>
               <Text
                 style={{
@@ -270,7 +274,7 @@ export default function CallContacts({navigation}) {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[contactStyle.cancelButton, {marginRight: wp('2%')}]}
+              style={[contactStyle.cancelButton, {marginRight: wp('5%')}]}
               onPress={toggleAddContactFields}>
               <Text
                 style={{
@@ -353,6 +357,7 @@ const contactStyle = {
     borderRadius: wp('3%'),
     margin: wp('2%'),
     alignItems: 'center',
+    marginBottom: hp('2%'),
   },
   cancelButton: {
     backgroundColor: '#c62828',

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, StyleSheet, Alert } from 'react-native';
+import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, StyleSheet, Alert,LogBox } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Features from '../components/Features';
 import { dummyMessages } from '../constants/index';
@@ -213,6 +213,7 @@ const AssistantHome = ({ navigation }) => {
     </View>
   );
 };
+LogBox.ignoreAllLogs();
 
 const styles = StyleSheet.create({
   container: {
