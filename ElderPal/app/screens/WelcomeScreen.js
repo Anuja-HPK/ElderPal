@@ -17,7 +17,7 @@ const WelcomeScreen = ({ navigation }) => {
 
     const timer = setTimeout(() => {
       navigation.navigate('login'); // Make sure this matches the name you've given the SignInScreen in your navigation stack
-    }, 3000); // Navigate after 3 seconds
+    }, 5000); // Navigate after 3 seconds
 
     return () => clearTimeout(timer);
   }, [fadeAnim, navigation]);
