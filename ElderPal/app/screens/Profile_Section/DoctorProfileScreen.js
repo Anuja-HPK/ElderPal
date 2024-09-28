@@ -192,7 +192,7 @@ const DoctorProfileScreen = () => {
             <Text style={styles.buttonArrow}>→</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={signOut}>
+          <TouchableOpacity style={[styles.button, styles.logoutButton]} onPress={() => navigation.navigate("SignIn")}>
             <Text style={[styles.buttonText, styles.logoutButtonText]}>Logout</Text>
             <Text style={[styles.buttonArrow, styles.logoutButtonText]}>→</Text>
           </TouchableOpacity>

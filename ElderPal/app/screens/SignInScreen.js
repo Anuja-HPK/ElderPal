@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, ScrollView, Image, Alert, Dimensions } from 'react-native';
-import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 import { useNavigation } from '@react-navigation/native';
 
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
@@ -22,80 +20,35 @@ const SignInScreen = ({ }) => {
   const [passwordError, setPasswordError] = useState('');
 
   const handleSignIn = () => {
-    // Reset errors
-    setUsernameError('');
-    setPasswordError('');
-
-    if (!username.trim()) {
-      setUsernameError('Email/username is required');
-      return;
-    }
-    if (!password.trim()) {
-      setPasswordError('Password is required');
-      return;
-    }
-
-    auth()
-      .signInWithEmailAndPassword(username, password)
-      .then(async (userCredential) => {
-        // Get user data from firestore based on their UID
-        const userData = await firestore().collection('users').doc(userCredential.user.uid).get();
-        const role = userData.data().role;
-        const userEmail = userData.data().email;
-
         //compare user role and email
-        if (role === 'elder' && userEmail === username) {
+        if (password === 'elder' ) {
           // Navigate to ElderHomeScreen
           navigation.navigate('ElderDB');
-          console.log("Successfully signed in as an elder!");
-          Alert.alert('User logged in');
 
-        } else if (role === 'doctor' && userEmail === username) {
+
+        } else if (password === 'doctor' ) {
           // Navigate to DoctorHomeScreen
           navigation.navigate('DoctorDB');
-          console.log("Successfully signed in as a doctor!");
-          Alert.alert('User logged in');
 
-        } else if (role === 'familyMember' && userEmail === username) {
+
+        } else if (password === 'family' ) {
           // Navigate to FamilyMemberHomeScreen
           navigation.navigate('FamilyMemberDB');
-          console.log("Successfully signed in as a family member!");
-          Alert.alert('User logged in');
 
-        } else if (role === 'caretaker' && userEmail === username) {
+
+        } else if (password === 'care' ) {
           // Navigate to CaretakerHomeScreen
           navigation.navigate('CareTakerDB');
-          console.log("Successfully signed in as a caretaker!");
-          Alert.alert('User logged in');
+
 
         } else {
           // Navigate to a default screen if role or email doesn't match
           navigation.navigate('SignIn');
-          console.log("Unknown user role or invalid email!");
           Alert.alert('Error', 'Unknown user role or invalid email');
         }
-      })
-
-      .catch(error => {
-        console.log(error.code);
-        switch (error.code) {
-          case 'auth/user-not-found':
-          case 'auth/wrong-password':
-            // Handle incorrect username/email or password
-            setUsernameError('Invalid username/email or password');
-            setPasswordError('Invalid username/email or password');
-            break;
-          case 'auth/invalid-email':
-            // Handle invalid email
-            setUsernameError('Invalid email');
-            break;
-          default:
-            // Handle other errors
-            Alert.alert('Error', 'An error occurred. Please try again later.');
-            console.error(error);
-        }
-      });
-  };
+        // use these as password => elder , doctor,  care , family
+      
+  }
 
   return (
     <View style={styles.container}>

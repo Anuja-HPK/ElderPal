@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View, Text, SafeAreaView, Image, ScrollView, TouchableOpacity, StyleSheet, Alert,LogBox } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Features from '../components/Features';
-import { dummyMessages } from '../constants/index';
 import Voice from '@react-native-community/voice';
 import { apiCall } from '../api/openAI';
 import Tts from 'react-native-tts';

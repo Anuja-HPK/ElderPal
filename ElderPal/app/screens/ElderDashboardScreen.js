@@ -33,6 +33,8 @@ export default function ElderDashboardScreen({ navigation, userName }) {
   }, []);
 
   return (
+    <View style ={styles.main}>
+    <View style={styles.topContainer}> 
     <View style={styles.container}>
       <TouchableOpacity onPress={() => navigation.navigate("ElderPF")}>
         <View style={styles.profTextStyle}>
@@ -41,11 +43,13 @@ export default function ElderDashboardScreen({ navigation, userName }) {
             style={styles.pic}
           />
           {/* Displaying user's name */}
-          <Text style={styles.welcomeText}> Welcome, <Text style={styles.nameText}>{name}</Text>!</Text>
+          <Text style={styles.welcomeText}> Welcome!</Text>
         </View>
       </TouchableOpacity>
+      </View>
 
       {/* action buttons */}
+      <View style={styles.bottomContainer}> 
       <View style={styles.actionContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("AIassistant")}>
           <Text style={styles.text}>AI Assistant</Text>
@@ -64,13 +68,24 @@ export default function ElderDashboardScreen({ navigation, userName }) {
         </TouchableOpacity>
       </View>
     </View>
+    </View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  main:{
+   flex:5
+  },
+  topContainer:{
+    flex:2
+  },
+  bottomContainer:{
+    flex:3
+  },
   container: {
     flex: 1,
-    backgroundColor: '#99e699',
+    backgroundColor: '#D3D3D3',
   },
   
   actionContainer: {
@@ -116,6 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 20, // You can adjust the font size as needed
     fontWeight: 'bold',
     color: 'black', // You can adjust the color as needed
+    marginLeft:20
   },
   nameText: {
     fontWeight: 'bold',
