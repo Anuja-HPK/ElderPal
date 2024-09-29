@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   logoContainer: {
     alignItems: 'center',
     borderWidth: wp(0.5),
-    borderColor: '#000000',
+    borderColor: 'gray',
     borderRadius: wp(80),
     padding: wp(1),
     zIndex: 1,
